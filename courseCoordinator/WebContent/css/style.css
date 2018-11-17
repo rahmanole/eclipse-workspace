@@ -1,0 +1,620 @@
+@font{
+    src:url("../webfonts/Montserrat-Regular.ttf");
+    font-family: montserrat;
+}
+
+@media screen and (min-width: 992px){
+    .trend-lg-height{
+        height:125px
+    }
+    .lg-height{
+        height:300px
+    }
+
+    .hotJob-lg-height{
+        height: 100px;
+    }
+
+    .trend-lg-height{
+        height:180px
+    }
+}
+
+@media screen and (max-width: 991px){
+    .md-text-center{
+        text-align: center;
+    }
+
+    .trend-md-height{
+        height:180px
+    }
+
+    .md-height{
+        height:300px
+    }
+
+    .hotJob-md-height{
+        height: auto;
+    }
+}
+
+.body{
+    font-family: montserrat;
+}
+.mainBody{
+    background-color : #EEEEEE;
+}
+.bg-white{
+    background-color: white;
+}
+a{
+    text-decoration: none;
+}
+.wdth{
+    width: 90%;
+    margin:0 auto;       
+}
+
+.promo{
+    background-image: url('../img/assessment_promo_bg_1.jpg');
+    height: auto;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.promoCls{
+    position: absolute;
+    right: 2%;
+    top: 1%;
+}
+
+.topBarLeft li{
+
+}
+
+.active{
+    background:#2D609D;
+}
+.topBarLeft li a{
+    color: #bdbdbd;
+    font-size: 11px;
+    padding: 12px 16px 11px 16px;
+}
+
+.topBarLeft li a:hover{
+    background: #64A444
+}
+
+.topBarRight li a{
+    color: #bdbdbd;
+    font-size: 11px;
+    padding: 12px 16px 11px 16px;
+}
+
+.menu{
+    background: #374046;
+
+    height: auto;
+    margin:0 auto;
+}
+
+
+.langBtn{
+    float: right;
+    margin: 8px 0 7px 23px;
+}
+
+.langBtn a{
+
+}
+.btnE{
+    border: 1px solid white;
+    cursor: pointer;
+    border-radius: 4px 0 0 4px;
+    font-size: 13px;
+}
+.btnB{
+
+    border: 1px solid white;
+    cursor: pointer;
+    border-radius: 0px 4px 4px 0px;
+    background: #373C41;
+    font-size: 13px;
+}
+
+/*Third Row*/
+.navBarMain{
+    background:white;
+    box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    height: auto;
+    position: relative;
+    z-index: 5;
+    padding: 10px 0 10px 0;
+}
+
+
+.navBarMain li a{
+    padding: 22px 0 22px 0;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin: -8px 0 -8px 0;
+    font-size: 13px;
+}
+
+.mainNav li a:hover{
+    background: #F5F5F5;
+}
+
+
+
+
+.navs ul li a:hover{
+    background: #F5F5F5;
+
+}
+
+
+
+/*CSS codes for slider*/
+
+.slider{
+    height: auto;
+    width: 100%;
+}
+
+
+.slider1{
+    background-image: url("../img/slider_2.jpg");
+    height: auto;
+    width: 100%;
+}
+
+
+
+/*Search panel over sliader*/
+
+.form{
+    background: #2F417D; 
+    border-radius: 5px;
+}
+.formFields{
+    padding: 15px 0 0 15px;
+}
+
+.inputBox{
+    margin-right: -46px;
+}
+.srcPanel{
+    padding: 50px 0 0 0;
+}
+
+.srcPanel h1{
+    font-size: 24px;
+    color: #424242;
+    margin: 0 0 20px;
+}
+
+.srcPanel input[type="text"]{
+    border: none;
+    width: 80%;
+    padding: 6px 0 6px 2px;
+    border-radius: 0 5px 5px 0;
+}
+
+.srcPanel select{
+    border: none;
+    border-radius: 0 5px 5px 0;
+    width: 56%;
+    margin-right: 10px;
+    height:36px;
+}
+
+.srcPanel button{
+    width: 25%;
+    height: 36px;
+}
+
+
+.sliderRightbar{
+    background: #2F417D;
+    padding: 0 0 18px 15px;
+    height:auto;
+}
+
+.divisions h4{
+    font-size: 14px;
+    padding: 15px 0 15px 0;
+    color:white;
+}
+
+.divisions li{
+
+    margin: 0 5px 5px 0px;
+}
+
+
+.divisions li a{
+    color: white;
+    font-size: 12px;
+    border: 1px solid;
+    margin: 3px 0px 5px 0px;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 4px 6px;
+}
+
+.quickLinks h4{
+    font-size: 14px;
+    color: white;
+    padding: 15px 0 0 0;
+}
+
+.quickLinks li a{
+    color: white;
+    font-size: 11px;
+    text-decoration: none;
+    padding: 0 8px 0 0;
+
+}
+
+
+/*Below Slider.Browsing Categiries*/
+
+.browCatgry{
+    margin-top: 15px;
+    background: white;
+}
+
+.browCatgry h4{
+    padding: 11px;
+    font-size: 15px;
+    color:#2F64A3;
+}
+.btnFubnc{
+    padding: 6px 12px 6px 12px;
+    margin: 5px 0 0 0;
+    border: none;
+    border-radius: 5px 0 0 4px;
+    cursor: pointer;
+}
+
+.btnInd{
+    padding: 5px 10px 4px 10px;
+    margin: 5px 0px 0 0;
+    border: none;
+    border-radius: 0px 5px 5px 0px; 
+    cursor: pointer;
+}
+
+.category-list{
+    padding: 0 0 40px 0;
+}
+.category-list li{
+    margin-bottom: -6px;
+}
+
+.category-list li a{
+    color: #424242;
+    font-size: 14px;
+}
+
+.category-list li a:hover{
+
+}
+
+.govtJob{
+    padding: 10px 0 0 14px;
+    background-color: #fffde7;
+}
+
+.govtJob h4{
+    font-size: 17px;
+    color:#2F64A3;
+}
+
+.govtJobName{
+    margin: 10px 0 4px 0;
+}
+
+.govtJobName a{
+    text-decoration: none;
+}
+
+.officeName{
+    font-size: 15px;
+    color:#757575;
+}
+
+.jobTitle{
+    font-size: 12px;
+    color:#757575;
+} 
+
+/*Specialized Skill section*/
+
+.specializedJobs li{
+
+}
+
+.specializedJobs li a{
+    color:#424242;
+    font-size: 14px;
+}
+
+/*Hot jobs*/
+
+
+
+.htJb-card:hover{
+    z-index:1;
+    position:absolute;
+    background: #fff;
+    height: auto;
+    box-shadow:0 4px 6px rgba(0,0,0,.35);
+    width: 300px;  
+}
+
+.hotJob h4{
+    color:#2F64A3;
+    font-size: 16px;
+
+}
+
+.zoom{
+    z-index:10;
+    height:auto;
+    position:absolute;
+    background-color:#000;
+    box-shadow:0 4px 6px rgba(0,0,0,0.35);
+    width:100%; 
+}
+
+.htJb-card{
+    border: 1px solid #f2f2f2;
+    padding: 14px 0px 0px 0;
+}
+
+.htJb-card img{
+    box-shadow: 0px 1px 2px rgba(0,0,0,.35)
+}
+
+.htJb-card:hover img{
+    box-shadow: 0px 2px 3px rgba(0,0,0,.35)
+}
+
+.htJb-card ul{
+    height: 40px;
+    padding-bottom: 5px;
+    overflow: hidden;
+
+}
+
+.htJbContent h5{
+    font-size: 13px;
+    color:#2f64a3;
+}
+
+.htJb-card:hover ul{
+    display: block;
+    height: auto;
+}
+
+.htJb-card h5{
+    font-size: 13px;
+    color:#2f64a3;
+}
+
+.htJb-card li{
+    margin-right:8px;
+    display: block;
+
+}
+
+.htJb-card li a{
+    font-size: 12px;
+    color:#616161;
+    padding:0px;
+    display: block;
+}
+
+
+/*Trend/EOI*/
+
+.trendDiv{
+    background-image: url("../img/trend/tender-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+}
+
+.trend{
+    overflow: hidden;
+    transition: width 0.5s;
+}
+
+
+
+.trend:hover{
+    box-shadow: 0px 3px 4px rgba(0,0,0,.35);
+}
+
+.trend h5{
+    color: #ac016d;
+    margin: 7px 0px 3px 0px;
+    font-size: 15px;
+}
+
+.trend li{
+    margin-right:8px;
+}
+
+.trend li a {
+    font-size: 15px;
+    color:#616161;
+    padding:0px;
+}
+
+.trend img{
+    box-shadow: 0px 2px 3px rgba(0,0,0,.35);
+    height:64px;
+    width: 64px;
+}
+
+/*Bottom Carousal*/
+
+.btmCarosl{
+    height: 300px;
+    width: 100%;
+}
+
+.btmCaroslImg1{
+    background-image: url("../img/bottomCarousal/peoples.jpg");
+    height: 300px;
+    width: 100%;
+}
+
+.btmCaroslImg2{
+    background-image: url("../img/bottomCarousal/android-app-bg.jpg");
+    height: 300px;
+    width: 100%;
+}
+
+.btmCaroslImg3{
+    background-image: url("../img/bottomCarousal/mybdjobs-bg.jpg");
+    height: 300px;
+    width: 100%;
+}
+
+.btmCaroslImg4{
+    background-image: url("../img/bottomCarousal/bdjobs-training-bg.jpg");
+    height: 300px;
+    width: 100%;
+}
+
+.carousel-content{
+    padding-top: 5%;
+}
+
+.carousel-content h2{
+    color:white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.carousel-content p{
+    font-size: 15px;
+    margin: 15px 0 20px;
+    color: #fff;
+    font-weight: 600;
+}
+
+/*Training and certification*/
+
+.training{
+    background-color: #fff;
+    background-image: url(../img/workshop-training-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    padding: 25px 30px;
+    color: #212121;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.35);
+    overflow: hidden;
+}
+
+.training h4{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #2F64A3;
+    margin: 5px 0 25px;
+    font-weight: 700;
+    padding: 26px 0 0 4px;
+}
+
+.training a:link{
+    text-decoration: none;
+}
+
+.training h5{
+    font-size: 15px;
+    margin: 0 0 6px;
+    font-weight: 400;
+    color: #757575;
+}
+
+.training p{
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 25px;
+}
+.icon{
+    height: 48px;
+    width: 48px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    padding: 6px 0 0;
+    float: left;
+    margin: 2px 15px 0 0;
+}
+
+.moreTrain{
+    color: #43a047;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0;
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    text-decoration: none;
+}
+
+.moreTrain:hover{
+    color: #43a047;
+}
+
+
+.certificate{
+    background-image: url("../img/certificate-courses.jpg");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+}
+
+
+
+/*Footer Section*/
+
+.footer h4{
+    font-size: 18px;
+    margin: 23px 0 4px;
+    color:white;
+}
+.footer li{
+    margin: 0 0 -12px 0;
+}
+.footer li a{
+    font-size: 14px;
+    color: #92989b;
+    display: block;
+    font-weight: 600;
+}
+
+.footer li a:hover{
+    color: #fff;
+}
+
+.footer li h5{
+    color: #fff;
+    margin: 20px 0 15px 0;
+    font-size: 16px;
+}
+
+.social-icon{
+    height: 18px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+
+
