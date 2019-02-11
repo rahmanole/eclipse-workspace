@@ -6,14 +6,16 @@ public class Test {
 		Thread t1 = new Thread(r1);
 		Thread t2 = new Thread(r1);
 		t1.start();
-		//t2.start();
-		synchronized (t1) {
-			try {
-				t1.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		System.out.println(r1.total);
+		
+		t2.start();
+		
+//		synchronized (t1) {
+//			try {
+//				t1.wait();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		
 	}
 }
