@@ -11,20 +11,23 @@ public class myRunnable implements Runnable {
 	@Override
 	public void run() {
 		
-		synchronized (this) {
-			notify();
+//		synchronized (this) {
+//			notify();
+//		}
+		if(lock.tryLock()) {
+			xMethod();
 		}
-		xMethod();
+		System.out.println(Thread.currentThread().getName()+" after xMethod");
 	}
 
 	public void xMethod() {
-		// lock.lock();
-		for (int i = 1; i <= 10; i++) {
-			// System.out.println(Thread.currentThread().getName());
-			total += i;
+		 //lock.lock();
+		for (int i = 1; i <= 5; i++) {
+			String name = Thread.currentThread().getName();
+			System.out.println(name);
 
 		}
 
-		// lock.unlock();
+		 //lock.unlock();
 	}
 }
