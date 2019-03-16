@@ -5,17 +5,17 @@
  */
 package pojo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Product {
     private int id;
     private String productName;
     private String productCode;
-    private int cat_id;
     private int qty;
     private double untiPrice;
     private double totalPrice;
     private Date date;
+    private ProductCategory cat;
     
 
     public int getId() {
@@ -33,15 +33,17 @@ public class Product {
     public void setProductName(String productName) {
         this.productName = productName;
     }
-    
-    
-    public int getCat_id() {
-        return cat_id;
+
+    public ProductCategory getCat() {
+        return cat;
     }
 
-    public void setCat_id(int cat_id) {
-        this.cat_id = cat_id;
+    public void setCat(ProductCategory cat) {
+        this.cat = cat;
     }
+    
+    
+
 
     public String getProductCode() {
         return productCode;
@@ -83,7 +85,17 @@ public class Product {
         this.date = date;
     }
 
-    public Product(int id, String productName, String productCode, int qty, double untiPrice, double totalPrice, Date date) {
+    public Product(String productName, String productCode, int qty, double untiPrice, double totalPrice, Date date, ProductCategory cat) {
+        this.productName = productName;
+        this.productCode = productCode;
+        this.qty = qty;
+        this.untiPrice = untiPrice;
+        this.totalPrice = totalPrice;
+        this.date = date;
+        this.cat = cat;
+    }
+
+    public Product(int id, String productName, String productCode, int qty, double untiPrice, double totalPrice, Date date, ProductCategory cat) {
         this.id = id;
         this.productName = productName;
         this.productCode = productCode;
@@ -91,16 +103,10 @@ public class Product {
         this.untiPrice = untiPrice;
         this.totalPrice = totalPrice;
         this.date = date;
+        this.cat = cat;
     }
 
-    public Product(String productName, String productCode, int qty, double untiPrice, double totalPrice, Date date) {
-        this.productName = productName;
-        this.productCode = productCode;
-        this.qty = qty;
-        this.untiPrice = untiPrice;
-        this.totalPrice = totalPrice;
-        this.date = date;
-    }
+
     
     
     

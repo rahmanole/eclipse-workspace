@@ -13,6 +13,15 @@ public class ProductCategory {
     private int id;
     private String catName;
 
+    public ProductCategory(int id, String catName) {
+        this.id = id;
+        this.catName = catName;
+    }
+
+    public ProductCategory() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }
