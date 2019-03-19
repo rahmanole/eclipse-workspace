@@ -263,6 +263,7 @@ public class PurchaseProdut extends javax.swing.JFrame {
         ProductCategory pc = pSCatervice.getProductCatByProductName(catname);
 
         Product product = new Product(pName, pCode, qty, unitPrice, totalPrice, date, pc);
+        
         if(pService.save(product)>0){
             lbl_validation.setText("Data Saved");
             addToTable(product);
@@ -292,8 +293,8 @@ public class PurchaseProdut extends javax.swing.JFrame {
 
     private void btn_show_summaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_show_summaryActionPerformed
         // TODO add your handling code here:
-        PurchaseProdut purchaseProdut = new PurchaseProdut();
-        purchaseProdut.setVisible(false);
+        
+        this.setVisible(false);
         SummarayView summarayView = new SummarayView();
         summarayView.setVisible(true);
     }//GEN-LAST:event_btn_show_summaryActionPerformed

@@ -62,7 +62,7 @@ public class SummaryService {
             
             if(rs.next()){
                 System.out.println("Exists");
-                return new Summary(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), 
+                summary = new Summary(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), 
                         rs.getInt(5),  rs.getInt(6),  rs.getInt(7), pc.getProductCatByCatId(rs.getInt(8)) );
             }
         } catch (SQLException ex) {
@@ -109,6 +109,8 @@ public class SummaryService {
         
         return -1;
     }
+    
+    
     
     public int update(Summary summary,Product product){
         
@@ -163,9 +165,36 @@ public class SummaryService {
             } catch (SQLException ex) {
                 Logger.getLogger(RoleServices.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        
+        }        
         return products;
+    }
+    
+    public Summary getSummaryByProdyctNmae(String productName){
+        ProductCatService pc = new ProductCatService();
+        Summary summary=null;
+        String sql = "select * from summary where productName=?";
+        Connection conn = ConnectionDB.connecet();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, productName);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                System.out.println("Exists");
+                summary = new Summary(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4), 
+                        rs.getInt(5),  rs.getInt(6),  rs.getInt(7), pc.getProductCatByCatId(rs.getInt(8)) );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RoleServices.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(RoleServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return summary;
     }
     
 }

@@ -15,7 +15,7 @@ import pojo.Role;
  *
  * @author ccsl-pc
  */
-public class AdminDashBoard extends javax.swing.JFrame {
+public class SaleHistoryViewAccorToProduct extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminDashBoard
@@ -23,9 +23,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
      */
     RoleServices rSrvc = new RoleServices();
 
-    public AdminDashBoard() {
+    public SaleHistoryViewAccorToProduct() {
         initComponents();
-        jPanel_addRole.setVisible(true);
+        jPanel_saleHistory.setVisible(true);
         pnl_subMenuOfPurchaseHis.setVisible(false);
     }
 
@@ -47,17 +47,23 @@ public class AdminDashBoard extends javax.swing.JFrame {
         btn_checkAvailablity = new javax.swing.JButton();
         btn_addUser1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel_addRole = new javax.swing.JPanel();
+        jPanel_saleHistory = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        t_role = new javax.swing.JTextField();
-        btn_addUser = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_role = new javax.swing.JTable();
         lbl_roleAddmsgs = new javax.swing.JLabel();
-        btn_deleteRole = new javax.swing.JButton();
         btn_viewRoles = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_saleHistory = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        combo_date = new javax.swing.JComboBox<>();
+        combo_month = new javax.swing.JComboBox<>();
+        combo_year = new javax.swing.JComboBox<>();
+        combo_year1 = new javax.swing.JComboBox<>();
+        combo_month1 = new javax.swing.JComboBox<>();
+        combo_date1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         pnl_subMenuOfPurchaseHis = new javax.swing.JPanel();
         btn_dateWise = new javax.swing.JButton();
@@ -181,61 +187,27 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 0, 1410, 90));
 
-        jPanel_addRole.setBackground(new java.awt.Color(30, 40, 50));
-        jPanel_addRole.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel_saleHistory.setBackground(new java.awt.Color(30, 40, 50));
+        jPanel_saleHistory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel_addRoleMouseClicked(evt);
+                jPanel_saleHistoryMouseClicked(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Add Role");
+        jLabel2.setText("Sale History");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Role Name");
-
-        btn_addUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_addUser.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addUser.setText("Add");
-        btn_addUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_addUser.setContentAreaFilled(false);
-        btn_addUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addUserActionPerformed(evt);
-            }
-        });
-
-        tbl_role.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Role ID", "Role Name"
-            }
-        ));
-        jScrollPane1.setViewportView(tbl_role);
+        jLabel3.setText("Product");
 
         lbl_roleAddmsgs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_roleAddmsgs.setForeground(new java.awt.Color(255, 255, 255));
 
-        btn_deleteRole.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_deleteRole.setForeground(new java.awt.Color(255, 255, 255));
-        btn_deleteRole.setText("Delete");
-        btn_deleteRole.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_deleteRole.setContentAreaFilled(false);
-        btn_deleteRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_deleteRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteRoleActionPerformed(evt);
-            }
-        });
-
         btn_viewRoles.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btn_viewRoles.setForeground(new java.awt.Color(255, 255, 255));
-        btn_viewRoles.setText("View Roles");
+        btn_viewRoles.setText("View History");
         btn_viewRoles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         btn_viewRoles.setContentAreaFilled(false);
         btn_viewRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -245,66 +217,161 @@ public class AdminDashBoard extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel_addRoleLayout = new javax.swing.GroupLayout(jPanel_addRole);
-        jPanel_addRole.setLayout(jPanel_addRoleLayout);
-        jPanel_addRoleLayout.setHorizontalGroup(
-            jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                                        .addGap(130, 130, 130)
-                                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                                                .addComponent(btn_addUser, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(23, 23, 23)
-                                                .addComponent(btn_deleteRole, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(btn_viewRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(t_role, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(55, 55, 55))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_addRoleLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lbl_roleAddmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addGap(361, 361, 361)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
-        jPanel_addRoleLayout.setVerticalGroup(
-            jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Product" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        tbl_saleHistory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_saleHistory);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Start Date");
+
+        combo_date.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        combo_date.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "1", "2", "3", "4", "5", "6", "7" }));
+        combo_date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_dateActionPerformed(evt);
+            }
+        });
+
+        combo_month.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        combo_month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month" }));
+        combo_month.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_monthActionPerformed(evt);
+            }
+        });
+
+        combo_year.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        combo_year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year" }));
+        combo_year.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_yearActionPerformed(evt);
+            }
+        });
+
+        combo_year1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        combo_year1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year" }));
+        combo_year1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_year1ActionPerformed(evt);
+            }
+        });
+
+        combo_month1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        combo_month1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month" }));
+        combo_month1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_month1ActionPerformed(evt);
+            }
+        });
+
+        combo_date1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        combo_date1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day" }));
+        combo_date1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_date1ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("End Date");
+
+        javax.swing.GroupLayout jPanel_saleHistoryLayout = new javax.swing.GroupLayout(jPanel_saleHistory);
+        jPanel_saleHistory.setLayout(jPanel_saleHistoryLayout);
+        jPanel_saleHistoryLayout.setHorizontalGroup(
+            jPanel_saleHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(t_role, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lbl_roleAddmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                .addGroup(jPanel_saleHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                        .addGap(396, 396, 396)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_roleAddmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_addUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_deleteRole, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(combo_month1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(combo_date1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(combo_year1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(combo_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(combo_date, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(combo_year, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btn_viewRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                        .addGap(361, 361, 361)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel_saleHistoryLayout.setVerticalGroup(
+            jPanel_saleHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel_saleHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                        .addGroup(jPanel_saleHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo_month, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo_year, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_viewRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo_date, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_saleHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo_month1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo_year1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo_date1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel_saleHistoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(lbl_roleAddmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_saleHistoryLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btn_viewRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(240, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(149, 149, 149))
         );
 
-        getContentPane().add(jPanel_addRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 1000, 540));
+        getContentPane().add(jPanel_saleHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 1020, 540));
 
         jPanel4.setBackground(new java.awt.Color(30, 40, 50));
         jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -353,7 +420,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
             .addGroup(pnl_subMenuOfPurchaseHisLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_subMenuOfPurchaseHisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_dateWise, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(btn_dateWise, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                     .addComponent(btn_saleHistory1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_productWise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -363,29 +430,29 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 .addComponent(btn_productWise, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(btn_dateWise, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_saleHistory1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnl_subMenuOfPurchaseHis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
+                .addGap(112, 112, 112)
                 .addComponent(pnl_subMenuOfPurchaseHis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 170, 540));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 150, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -405,39 +472,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
         showAllRolesInTable();
     }//GEN-LAST:event_btn_viewRolesActionPerformed
 
-    private void btn_deleteRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteRoleActionPerformed
-        // TODO add your handling code here:
-        String roleName = t_role.getText().trim();
-
-        if (rSrvc.isRoleExists(roleName)) {
-            try{
-                rSrvc.deleteRole(roleName);
-                lbl_roleAddmsgs.setText(roleName + " deleted");
-                showAllRolesInTable();
-            }catch(SQLException e){
-                lbl_roleAddmsgs.setText(roleName + " is Usend in other table");
-            }
-
-        } else {
-            lbl_roleAddmsgs.setText(roleName + " doesn't exists");
-        }
-    }//GEN-LAST:event_btn_deleteRoleActionPerformed
-
-    private void btn_addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addUserActionPerformed
-        // TODO add your handling code here:
-        String roleName = t_role.getText().trim();
-        Role role = new Role(roleName);
-
-        RoleServices srvc = new RoleServices();
-        if (!srvc.isRoleExists(roleName)) {
-            srvc.save(role);
-            role = srvc.getRoleByRoleName(roleName);
-            addToRoleTable(role.getId(), roleName);
-        } else {
-            lbl_roleAddmsgs.setText(roleName + " exists");
-        }
-    }//GEN-LAST:event_btn_addUserActionPerformed
-
     private void btn_dateWiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dateWiseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_dateWiseActionPerformed
@@ -452,18 +486,46 @@ public class AdminDashBoard extends javax.swing.JFrame {
         pnl_subMenuOfPurchaseHis.setVisible(true);
     }//GEN-LAST:event_btn_saleHistoryMouseEntered
 
-    private void jPanel_addRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_addRoleMouseClicked
+    private void jPanel_saleHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_saleHistoryMouseClicked
         // TODO add your handling code here:
         pnl_subMenuOfPurchaseHis.setVisible(false);
-    }//GEN-LAST:event_jPanel_addRoleMouseClicked
+    }//GEN-LAST:event_jPanel_saleHistoryMouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         // TODO add your handling code here:
         pnl_subMenuOfPurchaseHis.setVisible(false);
     }//GEN-LAST:event_jPanel4MouseClicked
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void combo_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_dateActionPerformed
+
+    private void combo_monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_monthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_monthActionPerformed
+
+    private void combo_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_yearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_yearActionPerformed
+
+    private void combo_year1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_year1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_year1ActionPerformed
+
+    private void combo_month1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_month1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_month1ActionPerformed
+
+    private void combo_date1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_date1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_date1ActionPerformed
+
     private void addToRoleTable(int id, String roleName) {
-        DefaultTableModel tblModel = (DefaultTableModel) tbl_role.getModel();
+        DefaultTableModel tblModel = (DefaultTableModel) tbl_saleHistory.getModel();
 
         Object[] obj = new Object[2];
         obj[0] = id;
@@ -473,7 +535,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     }
     
     private void showAllRolesInTable(){
-        DefaultTableModel tblModel = (DefaultTableModel) tbl_role.getModel();
+        DefaultTableModel tblModel = (DefaultTableModel) tbl_saleHistory.getModel();
         tblModel.setRowCount(0);
         List<Role> roles = rSrvc.getRoles();
 
@@ -503,49 +565,56 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleHistoryViewAccorToProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleHistoryViewAccorToProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleHistoryViewAccorToProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleHistoryViewAccorToProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminDashBoard().setVisible(true);
+                new SaleHistoryViewAccorToProduct().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addRole;
-    private javax.swing.JButton btn_addUser;
     private javax.swing.JButton btn_addUser1;
     private javax.swing.JButton btn_checkAvailablity;
     private javax.swing.JButton btn_dateWise;
-    private javax.swing.JButton btn_deleteRole;
     private javax.swing.JButton btn_productWise;
     private javax.swing.JButton btn_purchaseHistory;
     private javax.swing.JButton btn_saleHistory;
     private javax.swing.JButton btn_saleHistory1;
     private javax.swing.JButton btn_viewRoles;
+    private javax.swing.JComboBox<String> combo_date;
+    private javax.swing.JComboBox<String> combo_date1;
+    private javax.swing.JComboBox<String> combo_month;
+    private javax.swing.JComboBox<String> combo_month1;
+    private javax.swing.JComboBox<String> combo_year;
+    private javax.swing.JComboBox<String> combo_year1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel_addRole;
+    private javax.swing.JPanel jPanel_saleHistory;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbl_roleAddmsgs;
     private javax.swing.JPanel pnl_subMenuOfPurchaseHis;
-    private javax.swing.JTextField t_role;
-    private javax.swing.JTable tbl_role;
+    private javax.swing.JTable tbl_saleHistory;
     // End of variables declaration//GEN-END:variables
 }

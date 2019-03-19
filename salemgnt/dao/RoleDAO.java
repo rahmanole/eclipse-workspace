@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import pojo.Role;
 
@@ -14,7 +15,7 @@ public interface RoleDAO {
    
    Role getRoleByRoleName(String roleName);
    
-   boolean deleteRole(String roleName);
+   boolean deleteRole (String roleName)throws SQLException;
    
    List<Role> getRoles();
    

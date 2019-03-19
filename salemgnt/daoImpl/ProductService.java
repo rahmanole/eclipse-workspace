@@ -98,4 +98,40 @@ public class ProductService {
         
         return products;
     }
+    
+    public List<String> getDistincitProductNamesByCat(String catName){
+        
+        ProductCatService pCatService = new ProductCatService();
+        ProductCategory pCategory =  pCatService.getProductCatByProductName(catName);
+        
+        List<String> productNames = new ArrayList<>();
+        
+        List<Product> products = new ArrayList();
+        
+        String sql = "Select distinct productName from product where catId=?";
+        Connection conn = ConnectionDB.connecet();
+        
+        
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, pCategory.getId());
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+               productNames.add(rs.getString(1));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(RoleServices.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(RoleServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return productNames;
+    }
 }

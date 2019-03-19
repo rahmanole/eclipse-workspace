@@ -57,12 +57,12 @@ public class LogingPage extends javax.swing.JFrame {
 
         jTextField_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField_username.setBorder(null);
-        jTextField_username.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextField_username.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTextField_pass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField_pass.setForeground(new java.awt.Color(51, 51, 51));
         jTextField_pass.setBorder(null);
-        jTextField_pass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTextField_pass.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));

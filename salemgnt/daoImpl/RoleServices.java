@@ -109,10 +109,10 @@ public class RoleServices implements RoleDAO {
     }
 
     @Override
-    public boolean deleteRole(String roleName) {
+    public boolean deleteRole(String roleName) throws SQLException{
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         boolean flag = true;
-        try {
+       
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             Connection conn = ConnectionDB.connecet();
 
@@ -120,13 +120,10 @@ public class RoleServices implements RoleDAO {
 
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, roleName);
-            if(!isRoleExists(roleName)){
+            if(isRoleExists(roleName)){
                 ps.execute();
             }
-        } catch (SQLException ex) {
-            flag = false;
-            Logger.getLogger(RoleServices.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
         return flag;
     }

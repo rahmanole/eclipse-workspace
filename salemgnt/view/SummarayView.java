@@ -26,12 +26,14 @@ public class SummarayView extends javax.swing.JFrame {
     ProductCatService pSCatervice = new ProductCatService();
     ProductService pService = new ProductService();
     SummaryService sService = new SummaryService();
+    
+    
 
     public SummarayView() {
         initComponents();
         setLocationRelativeTo(null);
         for (Summary summary : sService.getSummaryList()) {
-            jComboBox1.addItem(summary.getProductCode());
+            jComboBox1.addItem(summary.getProductName());
         }
     }
 
@@ -59,11 +61,11 @@ public class SummarayView extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Product Code");
+        jLabel3.setText("Product Name");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product Codes" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Product Name" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -136,7 +138,7 @@ public class SummarayView extends javax.swing.JFrame {
         pnl_purchaseTable.setLayout(pnl_purchaseTableLayout);
         pnl_purchaseTableLayout.setHorizontalGroup(
             pnl_purchaseTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
         );
         pnl_purchaseTableLayout.setVerticalGroup(
             pnl_purchaseTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,20 +167,19 @@ public class SummarayView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btn_purchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_purchaseActionPerformed
         // TODO add your handling code here:
         PurchaseProdut purchaseProdut = new PurchaseProdut();
         purchaseProdut.setVisible(true);
-        SummarayView summarayView = new SummarayView();
-        summarayView.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_purchaseActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
         String productName = jComboBox1.getSelectedItem().toString();
-        if (!productName.equals("Product Codes")) {
-            Summary summary = sService.isProductExistsInSummaryTable(productName);
+        if (!productName.equals("Select Product Name")) {
+            Summary summary = sService.getSummaryByProdyctNmae(productName);
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
             addToTable(summary);
