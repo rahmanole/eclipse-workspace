@@ -18,8 +18,8 @@ public class ProductService {
     public static void createTable() {
         String sql = "create table IF NOT EXISTS product(id int(10) primary key auto_increment,"
                 + "productName varchar(55),productCode varchar(55),qty int(10),"
-                + "unitPrice double,totalPrice double,purchaseDate Date,catId int(5),"
-                + "foreign key (catId) references productCat(id))";
+                + "unitPrice double,totalPrice double,purchaseDate Date,catId int(5),supplierId int,"
+                + "foreign key (catId) references productCat(id),foreign key (supplierId) references supplier(id))";
 
         Connection conn = ConnectionDB.connecet();
 
@@ -38,7 +38,9 @@ public class ProductService {
         }
 
     }
-
+    public static void main(String[] args) {
+        createTable();
+    }
     public int save(Product product) {
         String sql = "insert into product(productName,productCode,qty,unitPrice,totalPrice,purchaseDate,"
                 + "catId) values(?,?,?,?,?,?,?)";

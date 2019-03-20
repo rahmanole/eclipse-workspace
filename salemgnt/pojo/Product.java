@@ -16,6 +16,7 @@ public class Product {
     private double totalPrice;
     private Date date;
     private ProductCategory cat;
+    private Supplier supplier;
     
 
     public int getId() {
@@ -104,6 +105,14 @@ public class Product {
         this.totalPrice = totalPrice;
         this.date = date;
         this.cat = cat;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
 
