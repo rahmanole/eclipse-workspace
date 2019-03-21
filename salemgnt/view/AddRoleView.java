@@ -137,7 +137,7 @@ public class AddRoleView extends javax.swing.JFrame {
         RoleServices srvc = new RoleServices();
         
         if(srvc.isRoleExists(roleName)){
-            srvc.deleteRole(roleName);
+          //  srvc.deleteRole(roleName);
             lbl_roleAddmsgs.setText(roleName+" deleted");
         }else{
             lbl_roleAddmsgs.setText(roleName+" doesn't exists");

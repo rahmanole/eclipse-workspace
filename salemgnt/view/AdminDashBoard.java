@@ -6,28 +6,31 @@
 package view;
 
 import daoImpl.RoleServices;
-import java.sql.SQLException;
-import java.util.List;
+import daoImpl.UserDBServices;
+import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import pojo.Role;
+import pojo.User;
 
 /**
  *
  * @author ccsl-pc
  */
-public class AdminDashBoard extends javax.swing.JFrame {
-
+public class AdminDashboard extends javax.swing.JFrame {
+    
     /**
-     * Creates new form AdminDashBoard
-     *
+     * Creates new form SlaeHistoryView
      */
-    RoleServices rSrvc = new RoleServices();
+    RoleServices srvc = new RoleServices();
+    UserDBServices dbsrvc = new UserDBServices();
 
-    public AdminDashBoard() {
+    public AdminDashboard() {
         initComponents();
-        jPanel_addRole.setVisible(true);
-        pnl_subMenuOfPurchaseHis.setVisible(false);
+        setLocationRelativeTo(null);
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,454 +41,223 @@ public class AdminDashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        btn_addRole = new javax.swing.JButton();
-        btn_saleHistory = new javax.swing.JButton();
-        btn_purchaseHistory = new javax.swing.JButton();
-        btn_checkAvailablity = new javax.swing.JButton();
-        btn_addUser1 = new javax.swing.JButton();
+        pnl_header = new javax.swing.JPanel();
+        lbl_exit = new javax.swing.JLabel();
+        btn_supplier = new javax.swing.JButton();
+        btn_roles = new javax.swing.JButton();
+        btn_purchase = new javax.swing.JButton();
+        btn_analyze = new javax.swing.JButton();
+        btn_sell1 = new javax.swing.JButton();
+        pnl_sideBar = new javax.swing.JPanel();
+        sideBtn_role = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        sideBtn_addUser = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel_addRole = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        t_role = new javax.swing.JTextField();
-        btn_addUser = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_role = new javax.swing.JTable();
-        lbl_roleAddmsgs = new javax.swing.JLabel();
-        btn_deleteRole = new javax.swing.JButton();
-        btn_viewRoles = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        sideBtn_addSupplier = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        pnl_subMenuOfPurchaseHis = new javax.swing.JPanel();
-        btn_dateWise = new javax.swing.JButton();
-        btn_saleHistory1 = new javax.swing.JButton();
-        btn_productWise = new javax.swing.JButton();
-
-        jLabel1.setText("jLabel1");
+        jLabel2 = new javax.swing.JLabel();
+        sideBtn_category = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(20, 30, 40));
+        jPanel1.setBackground(new java.awt.Color(30, 30, 30));
 
-        jPanel2.setBackground(new java.awt.Color(40, 50, 60));
+        pnl_header.setBackground(new java.awt.Color(20, 20, 20));
+        pnl_header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_addRole.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_addRole.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addRole.setText("Add Role");
-        btn_addRole.setBorder(null);
-        btn_addRole.setContentAreaFilled(false);
-        btn_addRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addRoleActionPerformed(evt);
+        lbl_exit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_exit.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_exit.setText("Exit");
+        lbl_exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_exitMouseClicked(evt);
             }
         });
+        pnl_header.add(lbl_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1229, 10, 30, -1));
 
-        btn_saleHistory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_saleHistory.setForeground(new java.awt.Color(255, 255, 255));
-        btn_saleHistory.setText("Sale History");
-        btn_saleHistory.setBorder(null);
-        btn_saleHistory.setContentAreaFilled(false);
-        btn_saleHistory.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_saleHistory.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_saleHistoryMouseEntered(evt);
-            }
-        });
+        btn_supplier.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_supplier.setForeground(new java.awt.Color(255, 255, 255));
+        btn_supplier.setText("Supplier");
+        btn_supplier.setContentAreaFilled(false);
+        pnl_header.add(btn_supplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 50, 110, 30));
 
-        btn_purchaseHistory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_purchaseHistory.setForeground(new java.awt.Color(255, 255, 255));
-        btn_purchaseHistory.setText("Purchase History");
-        btn_purchaseHistory.setBorder(null);
-        btn_purchaseHistory.setContentAreaFilled(false);
-        btn_purchaseHistory.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_roles.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_roles.setForeground(new java.awt.Color(255, 255, 255));
+        btn_roles.setText("Manage Roles");
+        btn_roles.setContentAreaFilled(false);
+        pnl_header.add(btn_roles, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 120, 30));
 
-        btn_checkAvailablity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_checkAvailablity.setForeground(new java.awt.Color(255, 255, 255));
-        btn_checkAvailablity.setText("Check Availablity");
-        btn_checkAvailablity.setBorder(null);
-        btn_checkAvailablity.setContentAreaFilled(false);
-        btn_checkAvailablity.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_purchase.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_purchase.setForeground(new java.awt.Color(255, 255, 255));
+        btn_purchase.setText("Purchase");
+        btn_purchase.setContentAreaFilled(false);
+        pnl_header.add(btn_purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 110, 30));
 
-        btn_addUser1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_addUser1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addUser1.setText("Add User");
-        btn_addUser1.setBorder(null);
-        btn_addUser1.setContentAreaFilled(false);
-        btn_addUser1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addUser1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addUser1ActionPerformed(evt);
-            }
-        });
+        btn_analyze.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_analyze.setForeground(new java.awt.Color(255, 255, 255));
+        btn_analyze.setText("Analyze");
+        btn_analyze.setContentAreaFilled(false);
+        pnl_header.add(btn_analyze, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, 110, 30));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_saleHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_purchaseHistory, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(btn_checkAvailablity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_addUser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        btn_sell1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_sell1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sell1.setText("Sell");
+        btn_sell1.setContentAreaFilled(false);
+        pnl_header.add(btn_sell1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 110, 30));
+
+        pnl_sideBar.setBackground(new java.awt.Color(20, 20, 20));
+        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        sideBtn_role.setBackground(new java.awt.Color(10, 10, 10));
+        sideBtn_role.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_role.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel6.setBackground(new java.awt.Color(30, 30, 30));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btn_addUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_addRole, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_saleHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_purchaseHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_checkAvailablity, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addGap(49, 49, 49))
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 275, Short.MAX_VALUE))
-        );
+        sideBtn_role.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, 540));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Role Managenent");
+        sideBtn_role.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 40));
 
-        jPanel3.setBackground(new java.awt.Color(20, 30, 40));
+        pnl_sideBar.add(sideBtn_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 40));
+
+        sideBtn_addUser.setBackground(new java.awt.Color(10, 10, 10));
+        sideBtn_addUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(30, 30, 30));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1410, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 0, 1410, 90));
+        sideBtn_addUser.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
 
-        jPanel_addRole.setBackground(new java.awt.Color(30, 40, 50));
-        jPanel_addRole.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel_addRoleMouseClicked(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("User Management");
+        sideBtn_addUser.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 40));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Add Role");
+        pnl_sideBar.add(sideBtn_addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 200, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Role Name");
+        sideBtn_addSupplier.setBackground(new java.awt.Color(10, 10, 10));
+        sideBtn_addSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addSupplier.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_addUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_addUser.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addUser.setText("Add");
-        btn_addUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_addUser.setContentAreaFilled(false);
-        btn_addUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addUserActionPerformed(evt);
-            }
-        });
-
-        tbl_role.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Role ID", "Role Name"
-            }
-        ));
-        jScrollPane1.setViewportView(tbl_role);
-
-        lbl_roleAddmsgs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_roleAddmsgs.setForeground(new java.awt.Color(255, 255, 255));
-
-        btn_deleteRole.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_deleteRole.setForeground(new java.awt.Color(255, 255, 255));
-        btn_deleteRole.setText("Delete");
-        btn_deleteRole.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_deleteRole.setContentAreaFilled(false);
-        btn_deleteRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_deleteRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteRoleActionPerformed(evt);
-            }
-        });
-
-        btn_viewRoles.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_viewRoles.setForeground(new java.awt.Color(255, 255, 255));
-        btn_viewRoles.setText("View Roles");
-        btn_viewRoles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_viewRoles.setContentAreaFilled(false);
-        btn_viewRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_viewRoles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_viewRolesActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel_addRoleLayout = new javax.swing.GroupLayout(jPanel_addRole);
-        jPanel_addRole.setLayout(jPanel_addRoleLayout);
-        jPanel_addRoleLayout.setHorizontalGroup(
-            jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                                        .addGap(130, 130, 130)
-                                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                                                .addComponent(btn_addUser, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(23, 23, 23)
-                                                .addComponent(btn_deleteRole, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(btn_viewRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(t_role, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(55, 55, 55))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_addRoleLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lbl_roleAddmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addGap(361, 361, 361)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
-        jPanel_addRoleLayout.setVerticalGroup(
-            jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_addRoleLayout.createSequentialGroup()
-                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(t_role, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_roleAddmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel_addRoleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_addUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_deleteRole, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_viewRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(240, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel_addRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 1000, 540));
-
-        jPanel4.setBackground(new java.awt.Color(30, 40, 50));
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel4MouseClicked(evt);
-            }
-        });
-
-        pnl_subMenuOfPurchaseHis.setBackground(new java.awt.Color(40, 50, 60));
-
-        btn_dateWise.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_dateWise.setForeground(new java.awt.Color(255, 255, 255));
-        btn_dateWise.setText("Particular Date Wise");
-        btn_dateWise.setBorder(null);
-        btn_dateWise.setContentAreaFilled(false);
-        btn_dateWise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_dateWise.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_dateWiseActionPerformed(evt);
-            }
-        });
-
-        btn_saleHistory1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_saleHistory1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_saleHistory1.setText("In a time interval");
-        btn_saleHistory1.setBorder(null);
-        btn_saleHistory1.setContentAreaFilled(false);
-        btn_saleHistory1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        btn_productWise.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btn_productWise.setForeground(new java.awt.Color(255, 255, 255));
-        btn_productWise.setText("Product Wise");
-        btn_productWise.setBorder(null);
-        btn_productWise.setContentAreaFilled(false);
-        btn_productWise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_productWise.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_productWiseActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_subMenuOfPurchaseHisLayout = new javax.swing.GroupLayout(pnl_subMenuOfPurchaseHis);
-        pnl_subMenuOfPurchaseHis.setLayout(pnl_subMenuOfPurchaseHisLayout);
-        pnl_subMenuOfPurchaseHisLayout.setHorizontalGroup(
-            pnl_subMenuOfPurchaseHisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_subMenuOfPurchaseHisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_subMenuOfPurchaseHisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_dateWise, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                    .addComponent(btn_saleHistory1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_productWise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        pnl_subMenuOfPurchaseHisLayout.setVerticalGroup(
-            pnl_subMenuOfPurchaseHisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_subMenuOfPurchaseHisLayout.createSequentialGroup()
-                .addComponent(btn_productWise, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(btn_dateWise, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_saleHistory1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnl_subMenuOfPurchaseHis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(pnl_subMenuOfPurchaseHis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 170, 540));
+        sideBtn_addSupplier.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Add Supplier");
+        sideBtn_addSupplier.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 40));
+
+        pnl_sideBar.add(sideBtn_addSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 200, -1));
+
+        sideBtn_category.setBackground(new java.awt.Color(10, 10, 10));
+        sideBtn_category.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_category.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        sideBtn_category.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Add Category");
+        sideBtn_category.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 40));
+
+        pnl_sideBar.add(sideBtn_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_header, javax.swing.GroupLayout.PREFERRED_SIZE, 1290, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnl_sideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(pnl_header, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnl_sideBar, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // ============================================For adding User===============================================
-    private void btn_addUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addUser1ActionPerformed
+    private void lbl_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseClicked
         // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_lbl_exitMouseClicked
 
-    }//GEN-LAST:event_btn_addUser1ActionPerformed
 
-    private void btn_addRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRoleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_addRoleActionPerformed
-
-    private void btn_viewRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewRolesActionPerformed
-        // TODO add your handling code here:
-        showAllRolesInTable();
-    }//GEN-LAST:event_btn_viewRolesActionPerformed
-
-    private void btn_deleteRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteRoleActionPerformed
-        // TODO add your handling code here:
-        String roleName = t_role.getText().trim();
-
-        if (rSrvc.isRoleExists(roleName)) {
-            try{
-                rSrvc.deleteRole(roleName);
-                lbl_roleAddmsgs.setText(roleName + " deleted");
-                showAllRolesInTable();
-            }catch(SQLException e){
-                lbl_roleAddmsgs.setText(roleName + " is Usend in other table");
-            }
-
-        } else {
-            lbl_roleAddmsgs.setText(roleName + " doesn't exists");
-        }
-    }//GEN-LAST:event_btn_deleteRoleActionPerformed
-
-    private void btn_addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addUserActionPerformed
-        // TODO add your handling code here:
-        String roleName = t_role.getText().trim();
-        Role role = new Role(roleName);
-
-        RoleServices srvc = new RoleServices();
-        if (!srvc.isRoleExists(roleName)) {
-            srvc.save(role);
-            role = srvc.getRoleByRoleName(roleName);
-            addToRoleTable(role.getId(), roleName);
-        } else {
-            lbl_roleAddmsgs.setText(roleName + " exists");
-        }
-    }//GEN-LAST:event_btn_addUserActionPerformed
-
-    private void btn_dateWiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dateWiseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_dateWiseActionPerformed
-
-    private void btn_productWiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_productWiseActionPerformed
-        // TODO add your handling code here:
-        pnl_subMenuOfPurchaseHis.setVisible(false);
-    }//GEN-LAST:event_btn_productWiseActionPerformed
-
-    private void btn_saleHistoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saleHistoryMouseEntered
-        // TODO add your handling code here:
-        pnl_subMenuOfPurchaseHis.setVisible(true);
-    }//GEN-LAST:event_btn_saleHistoryMouseEntered
-
-    private void jPanel_addRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel_addRoleMouseClicked
-        // TODO add your handling code here:
-        pnl_subMenuOfPurchaseHis.setVisible(false);
-    }//GEN-LAST:event_jPanel_addRoleMouseClicked
-
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        // TODO add your handling code here:
-        pnl_subMenuOfPurchaseHis.setVisible(false);
-    }//GEN-LAST:event_jPanel4MouseClicked
-
-    private void addToRoleTable(int id, String roleName) {
-        DefaultTableModel tblModel = (DefaultTableModel) tbl_role.getModel();
-
-        Object[] obj = new Object[2];
-        obj[0] = id;
-        obj[1] = roleName;
-
-        tblModel.addRow(obj);
-    }
-    
-    private void showAllRolesInTable(){
-        DefaultTableModel tblModel = (DefaultTableModel) tbl_role.getModel();
-        tblModel.setRowCount(0);
-        List<Role> roles = rSrvc.getRoles();
-
-        for (Role role : roles) {
-            addToRoleTable(role.getId(),role.getRoleName());
-        }
-    }
-    
-     // ===========================================adding User end===============================================
-    
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -503,49 +275,76 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminDashBoard().setVisible(true);
+                new AdminDashboard().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_addRole;
-    private javax.swing.JButton btn_addUser;
-    private javax.swing.JButton btn_addUser1;
-    private javax.swing.JButton btn_checkAvailablity;
-    private javax.swing.JButton btn_dateWise;
-    private javax.swing.JButton btn_deleteRole;
-    private javax.swing.JButton btn_productWise;
-    private javax.swing.JButton btn_purchaseHistory;
-    private javax.swing.JButton btn_saleHistory;
-    private javax.swing.JButton btn_saleHistory1;
-    private javax.swing.JButton btn_viewRoles;
+    private javax.swing.JButton btn_analyze;
+    private javax.swing.JButton btn_purchase;
+    private javax.swing.JButton btn_roles;
+    private javax.swing.JButton btn_sell1;
+    private javax.swing.JButton btn_supplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel_addRole;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lbl_roleAddmsgs;
-    private javax.swing.JPanel pnl_subMenuOfPurchaseHis;
-    private javax.swing.JTextField t_role;
-    private javax.swing.JTable tbl_role;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lbl_exit;
+    private javax.swing.JPanel pnl_header;
+    private javax.swing.JPanel pnl_sideBar;
+    private javax.swing.JPanel sideBtn_addSupplier;
+    private javax.swing.JPanel sideBtn_addUser;
+    private javax.swing.JPanel sideBtn_category;
+    private javax.swing.JPanel sideBtn_role;
     // End of variables declaration//GEN-END:variables
 }

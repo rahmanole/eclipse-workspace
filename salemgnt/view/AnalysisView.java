@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author ccsl-pc
  */
-public class SlaeHistoryView extends javax.swing.JFrame {
+public class AnalysisView extends javax.swing.JFrame {
 
     /**
      * Creates new form SlaeHistoryView
      */
-    public SlaeHistoryView() {
+    public AnalysisView() {
         initComponents();
         setLocationRelativeTo(null);
         pnl_header.setBackground(new Color(0,0,0,180));
@@ -43,8 +43,11 @@ public class SlaeHistoryView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         mainMenu_purchase = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        mainMenu_sell = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lbl_exit = new javax.swing.JLabel();
+        mainMenu_sale = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        mainMenu_analysis = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         pnl_sideBar = new javax.swing.JPanel();
         sideBtn_revenue = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -76,7 +79,7 @@ public class SlaeHistoryView extends javax.swing.JFrame {
         jLabel4.setText("Home");
         mainMenu_home.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
 
-        pnl_header.add(mainMenu_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, 35));
+        pnl_header.add(mainMenu_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, 35));
 
         mainMenu_purchase.setBackground(new java.awt.Color(102, 102, 102));
         mainMenu_purchase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -88,22 +91,45 @@ public class SlaeHistoryView extends javax.swing.JFrame {
         jLabel5.setText("Purchase");
         mainMenu_purchase.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
 
-        pnl_header.add(mainMenu_purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, 35));
+        pnl_header.add(mainMenu_purchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, 35));
 
-        mainMenu_sell.setBackground(new java.awt.Color(102, 102, 102));
-        mainMenu_sell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        mainMenu_sell.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        lbl_exit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_exit.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_exit.setText("Exit");
+        lbl_exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_exitMouseClicked(evt);
+            }
+        });
+        pnl_header.add(lbl_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1229, 10, 30, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Sell");
-        mainMenu_sell.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
+        mainMenu_sale.setBackground(new java.awt.Color(102, 102, 102));
+        mainMenu_sale.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mainMenu_sale.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnl_header.add(mainMenu_sell, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, 35));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Analysis");
+        mainMenu_sale.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
+
+        pnl_header.add(mainMenu_sale, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, -1, 35));
+
+        mainMenu_analysis.setBackground(new java.awt.Color(102, 102, 102));
+        mainMenu_analysis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mainMenu_analysis.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Sell");
+        mainMenu_analysis.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
+
+        pnl_header.add(mainMenu_analysis, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, -1, 35));
 
         jPanel1.add(pnl_header);
-        pnl_header.setBounds(0, 0, 1500, 100);
+        pnl_header.setBounds(0, 0, 1290, 100);
 
         pnl_sideBar.setBackground(new java.awt.Color(0, 51, 51));
         pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -215,6 +241,11 @@ public class SlaeHistoryView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lbl_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_lbl_exitMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -232,20 +263,21 @@ public class SlaeHistoryView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SlaeHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnalysisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SlaeHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnalysisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SlaeHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnalysisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SlaeHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnalysisView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SlaeHistoryView().setVisible(true);
+                new AnalysisView().setVisible(true);
             }
         });
     }
@@ -256,15 +288,18 @@ public class SlaeHistoryView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lbl_bg;
+    private javax.swing.JLabel lbl_exit;
+    private javax.swing.JPanel mainMenu_analysis;
     private javax.swing.JPanel mainMenu_home;
     private javax.swing.JPanel mainMenu_purchase;
-    private javax.swing.JPanel mainMenu_sell;
+    private javax.swing.JPanel mainMenu_sale;
     private javax.swing.JPanel pnl_body;
     private javax.swing.JPanel pnl_header;
     private javax.swing.JPanel pnl_sideBar;
