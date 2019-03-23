@@ -12,6 +12,7 @@ public class Member {
     private List<Integer> offDays;
     private boolean membershipStaus;
     private String membershipType;
+    private String creationDate;
     
     
 }

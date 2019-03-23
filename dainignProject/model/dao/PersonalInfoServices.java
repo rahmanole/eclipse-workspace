@@ -71,4 +71,20 @@ public class PersonalInfoServices {
 
         return -1;
     }
+    
+    public int deleteInfo(PersonalInfo personalInfo) {
+        String delete = "delete from personal_info where id=?";
+
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(delete);
+            ps.setInt(1, personalInfo.getId());
+            ps.executeUpdate();
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
 }
