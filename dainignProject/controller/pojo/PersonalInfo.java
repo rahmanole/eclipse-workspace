@@ -10,9 +10,28 @@ public class PersonalInfo {
     private String name;
     private String contNum;
     private String email;
-    private Department dept;
+    private String deptName;
     private String regNum;
     private String session;
+
+    public PersonalInfo(int id, String name, String contNum, String email, String deptName, String regNum, String session) {
+        this.id = id;
+        this.name = name;
+        this.contNum = contNum;
+        this.email = email;
+        this.deptName = deptName;
+        this.regNum = regNum;
+        this.session = session;
+    }
+
+    public PersonalInfo(String name, String contNum, String email, String deptName, String regNum, String session) {
+        this.name = name;
+        this.contNum = contNum;
+        this.email = email;
+        this.deptName = deptName;
+        this.regNum = regNum;
+        this.session = session;
+    }
     
     
 
@@ -48,13 +67,15 @@ public class PersonalInfo {
         this.email = email;
     }
 
-    public Department getDept() {
-        return dept;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setDept(Department dept) {
-        this.dept = dept;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
+
+
 
     public String getRegNum() {
         return regNum;

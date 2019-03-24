@@ -8,6 +8,7 @@ package model.dao;
 import com.mysql.jdbc.Connection;
 import controller.pojo.PersonalInfo;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.conn.ConnectionForDB;
 
@@ -26,11 +27,15 @@ public class PersonalInfoServices {
     private String session;
 
     static String sql = "create table IF NOT EXISTS personal_info(id int(6)primary key auto_increment,"
-            + "name varchar(55),cnt_num varchar(20),email varchar(55),dept_id int(4),"
-            + "reg_num varchar(20),session varchar(20),foreign key (dept_id) references dept_names(id))";
+            + "name varchar(55),cnt_num varchar(20),email varchar(55),dept_name varchar(55),"
+            + "reg_num varchar(20),session varchar(20))";
+    
+//    public static void main(String[] args) {
+//        ConnectionForDB.createTable(sql);
+//    }
 
     public int saveInfo(PersonalInfo personalInfo) {
-        String insert = "insert into personal_info(name,cnt_num,email,dept_id,reg_num,session) values(?,?,?,?,?,?)";
+        String insert = "insert into personal_info(name,cnt_num,email,dept_name,reg_num,session) values(?,?,?,?,?,?)";
 
         try {
             Connection conn = ConnectionForDB.connect();
@@ -38,7 +43,7 @@ public class PersonalInfoServices {
             ps.setString(1, personalInfo.getName());
             ps.setString(2, personalInfo.getContNum());
             ps.setString(3, personalInfo.getEmail());
-            ps.setInt(4, personalInfo.getDept().getId());
+            ps.setString(4, personalInfo.getDeptName());
             ps.setString(5, personalInfo.getRegNum());
             ps.setString(6, personalInfo.getSession());
             ps.executeUpdate();
@@ -48,9 +53,45 @@ public class PersonalInfoServices {
         }
         return -1;
     }
+    
+    public boolean isEmailExists(String email){
+        String sql = "select * from personal_info where email = ?";
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public PersonalInfo getPersonalInfo(){
+        PersonalInfo personalInfo = null;
+        String sql = "select * from personal_info where id = ?";
+        DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, personalInfo.getName());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                personalInfo = new PersonalInfo(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), 
+                        rs.getString(5), rs.getString(6), rs.getString(7));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return personalInfo;
+    }
 
     public int updateInfo(PersonalInfo personalInfo) {
-        String update = "update personal_info set name=?,cnt_num=?,email=?,dept_id=?,reg_num=?,session=? where id=?";
+        String update = "update personal_info set name=?,cnt_num=?,email=?,dept_name=?,reg_num=?,session=? where id=?";
 
         try {
             Connection conn = ConnectionForDB.connect();
@@ -58,7 +99,7 @@ public class PersonalInfoServices {
             ps.setString(1, personalInfo.getName());
             ps.setString(2, personalInfo.getContNum());
             ps.setString(3, personalInfo.getEmail());
-            ps.setInt(4, personalInfo.getDept().getId());
+            ps.setString(4, personalInfo.getDeptName());
             ps.setString(5, personalInfo.getRegNum());
             ps.setString(6, personalInfo.getSession());
 
