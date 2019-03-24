@@ -30,17 +30,6 @@ public class ConnectionForDB {
         return conn;
     }
     
-    public static void createTable(String sql){
-       
-        try {
-            Connection conn = ConnectionForDB.connect();
-            
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.execute();
-            System.out.println("Table created");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
+    
     
 }

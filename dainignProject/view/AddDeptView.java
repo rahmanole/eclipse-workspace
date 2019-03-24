@@ -7,7 +7,10 @@ package view;
 
 import controller.pojo.Department;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -160,8 +163,6 @@ public class AddDeptView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl_deptNames);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 130, 420));
-
-        lbl_bg.setIcon(new javax.swing.ImageIcon("C:\\Users\\OLEE\\Desktop\\asset\\Untitled Export\\251850.jpg")); // NOI18N
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
         pack();
@@ -185,6 +186,9 @@ public class AddDeptView extends javax.swing.JFrame {
             lbl_oprtnFeedbck.setText("Enter Department Name");
             lbl_oprtnFeedbck.setForeground(Color.red);
         }
+        
+        DateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
+  
 
     }//GEN-LAST:event_btn_saveActionPerformed
         

@@ -55,7 +55,7 @@ public class PersonalInfoServices {
     }
     
     public boolean isEmailExists(String email){
-        String sql = "select * from personal_info where email = ?";
+        String sql = "select * from member_info where email = ?";
         try {
             Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);

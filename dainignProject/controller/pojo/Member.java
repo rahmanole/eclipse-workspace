@@ -1,42 +1,56 @@
 package controller.pojo;
 
+import java.util.Date;
 import java.util.List;
 
-
 public class Member {
+
     private int id;
-    private PersonalInfo pInfo;
+    private String name;
+    private String mobile;
+    private String email;
+    private String deptName;
+    private String regNum;
+    private String session;
     private int cardNo;
+    private String membershipType;
+    private String membershipStaus="Inactive";
+    private Date creationDate;
+    
     private List<String> monthAssigend;
     private List<Integer> offDays;
-    private boolean membershipStaus;
-    private String membershipType;
-    private String creationDate;
 
-    public Member(int id, PersonalInfo pInfo, int cardNo, List<String> monthAssigend, List<Integer> offDays, boolean membershipStaus, String membershipType, String creationDate) {
+    public Member(int id, String name, String mobile, String email, String deptName, String regNum, String session, int cardNo, String membershipType, String membershipStaus, Date creationDate) {
         this.id = id;
-        this.pInfo = pInfo;
+        this.name = name;
+        this.mobile = mobile;
+        this.email = email;
+        this.deptName = deptName;
+        this.regNum = regNum;
+        this.session = session;
         this.cardNo = cardNo;
-        this.monthAssigend = monthAssigend;
-        this.offDays = offDays;
-        this.membershipStaus = membershipStaus;
         this.membershipType = membershipType;
-        this.creationDate = creationDate;
-    }
-
-    public Member(PersonalInfo pInfo, int cardNo, List<String> monthAssigend, List<Integer> offDays, boolean membershipStaus, String membershipType, String creationDate) {
-        this.pInfo = pInfo;
-        this.cardNo = cardNo;
-        this.monthAssigend = monthAssigend;
-        this.offDays = offDays;
         this.membershipStaus = membershipStaus;
-        this.membershipType = membershipType;
         this.creationDate = creationDate;
     }
     
     
     
-
+    public Member(String name, String mobile, String email, String deptName, String regNum, String session, int cardNo, String membershipType, String membershipStaus, Date creationDate) {
+        this.name = name;
+        this.mobile = mobile;
+        this.email = email;
+        this.deptName = deptName;
+        this.regNum = regNum;
+        this.session = session;
+        this.cardNo = cardNo;
+        this.membershipType = membershipType;
+        this.membershipStaus = membershipStaus;
+        this.creationDate = creationDate;
+    }
+    
+    
+    
     public int getId() {
         return id;
     }
@@ -45,12 +59,52 @@ public class Member {
         this.id = id;
     }
 
-    public PersonalInfo getpInfo() {
-        return pInfo;
+    public String getName() {
+        return name;
     }
 
-    public void setpInfo(PersonalInfo pInfo) {
-        this.pInfo = pInfo;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getRegNum() {
+        return regNum;
+    }
+
+    public void setRegNum(String regNum) {
+        this.regNum = regNum;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
     }
 
     public int getCardNo() {
@@ -60,6 +114,32 @@ public class Member {
     public void setCardNo(int cardNo) {
         this.cardNo = cardNo;
     }
+
+    public String getMembershipType() {
+        return membershipType;
+    }
+
+    public void setMembershipType(String membershipType) {
+        this.membershipType = membershipType;
+    }
+
+    public String getMembershipStaus() {
+        return membershipStaus;
+    }
+
+    public void setMembershipStaus(String membershipStaus) {
+        this.membershipStaus = membershipStaus;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    
 
     public List<String> getMonthAssigend() {
         return monthAssigend;
@@ -76,32 +156,9 @@ public class Member {
     public void setOffDays(List<Integer> offDays) {
         this.offDays = offDays;
     }
-
-    public boolean isMembershipStaus() {
-        return membershipStaus;
-    }
-
-    public void setMembershipStaus(boolean membershipStaus) {
-        this.membershipStaus = membershipStaus;
-    }
-
-    public String getMembershipType() {
-        return membershipType;
-    }
-
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
-    }
-
-    public String getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
-    }
     
     
     
     
+
 }
