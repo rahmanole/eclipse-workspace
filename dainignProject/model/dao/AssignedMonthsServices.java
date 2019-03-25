@@ -10,7 +10,8 @@ public class AssignedMonthsServices {
     
     public static void createAssignedMonthsRecordTable(int cardNo){
         String tblName = TBL_NAME_PREFIX+cardNo;
-        String sql = "create table IF NOT EXISTS "+tblName+"(id int(5) primary key auto_increment,month_name varchar(20),year varchar(4),expensess double)";
+        String sql = "create table IF NOT EXISTS "+tblName+"(id int(5) primary key auto_increment,"
+                + "month_name varchar(20),year varchar(4),expensess double,paymentDate date)";
         try {
             Connection conn = ConnectionForDB.connect();
             

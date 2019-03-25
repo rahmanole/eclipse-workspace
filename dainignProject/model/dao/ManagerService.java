@@ -19,11 +19,12 @@ import model.conn.ConnectionForDB;
  */
 public class ManagerService {
     
-    static String sql = "create table manager(id int(5),card_no int(5),month_name varchar(20))";
+    static String sql = "create table manager(id int(5),card_no int(5),month_name varchar(10),year varchar(5))";
 
-//    public static void main(String[] args) {
-//        TableCreateServices.createTable(sql);
-//    }
+    public static void main(String[] args) {
+        TableCreateServices.createTable(sql);
+    }
+    
     public boolean isCardActive(int cardNo) {
         String sql = "select membership_status from member_info where card_no=?";
         boolean flag = false;
@@ -42,14 +43,15 @@ public class ManagerService {
     }
     
     public int save(Manager manager) {
-        String insert = "insert into manager(card_no,month_name) values(?,?)";
+        String insert = "insert into manager(card_no,month_name,year) values(?,?,?)";
         
         try {
             if (isCardActive(manager.getCardNo())) {
                 Connection conn = ConnectionForDB.connect();
                 PreparedStatement ps = conn.prepareStatement(insert);
                 ps.setInt(1, manager.getCardNo());
-                ps.setString(2, manager.getMonthNameWithYear());
+                ps.setString(2, manager.getMonthName());
+                ps.setString(3, manager.getYear());
                 ps.executeUpdate();
                 
                 return 1;                
@@ -59,4 +61,6 @@ public class ManagerService {
         }
         return -1;
     }
+    
+    
 }

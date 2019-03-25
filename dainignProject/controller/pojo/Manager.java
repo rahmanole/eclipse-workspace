@@ -4,19 +4,21 @@ package controller.pojo;
 public class Manager {
     private int id;
     private int cardNo;
-    private String monthNameWithYear;
+    private String monthName;
+    private String year;
 
-    public Manager(int id, int cardNo, String monthNameWithYear) {
+    public Manager(int id, int cardNo, String monthName, String year) {
         this.id = id;
         this.cardNo = cardNo;
-        this.monthNameWithYear = monthNameWithYear;
+        this.monthName = monthName;
+        this.year = year;
     }
 
-    public Manager(int cardNo, String monthNameWithYear) {
+    public Manager(int cardNo, String monthName, String year) {
         this.cardNo = cardNo;
-        this.monthNameWithYear = monthNameWithYear;
+        this.monthName = monthName;
+        this.year = year;
     }
-    
     
     
 
@@ -36,13 +38,22 @@ public class Manager {
         this.cardNo = cardNo;
     }
 
-    public String getMonthNameWithYear() {
-        return monthNameWithYear;
+    public String getMonthName() {
+        return monthName;
     }
 
-    public void setMonthNameWithYear(String monthNameWithYear) {
-        this.monthNameWithYear = monthNameWithYear;
+    public void setMonthName(String monthName) {
+        this.monthName = monthName;
     }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
     
     
     

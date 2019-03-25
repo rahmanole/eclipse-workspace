@@ -124,6 +124,11 @@ public class ManagerView extends javax.swing.JFrame {
         btn_editMember.setText("Edit Info");
         btn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_editMember.setOpaque(true);
+        btn_editMember.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_editMemberMouseClicked(evt);
+            }
+        });
 
         btn_removeMember.setBackground(new java.awt.Color(51, 0, 153));
         btn_removeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -169,8 +174,16 @@ public class ManagerView extends javax.swing.JFrame {
 
     private void btn_addMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMemberMouseClicked
         // TODO add your handling code here:
+        this.setVisible(false);
         new Addmember().setVisible(true);
     }//GEN-LAST:event_btn_addMemberMouseClicked
+
+    private void btn_editMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMemberMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new EditMemberView().setVisible(true);
+        
+    }//GEN-LAST:event_btn_editMemberMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();

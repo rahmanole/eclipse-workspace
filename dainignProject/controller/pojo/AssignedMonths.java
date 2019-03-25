@@ -1,5 +1,7 @@
 package controller.pojo;
 
+import java.sql.Date;
+
 
 public class AssignedMonths {
     private int id;
@@ -7,4 +9,5 @@ public class AssignedMonths {
     private String monthName;
     private String year;
     private double expensses;
+    private Date paymentDate;
 }

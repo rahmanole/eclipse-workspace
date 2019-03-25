@@ -14,7 +14,7 @@ public class Member {
     private String session;
     private int cardNo;
     private String membershipType;
-    private String membershipStaus="Inactive";
+    private String membershipStaus="inactive";
     private Date creationDate;
     
     private List<String> monthAssigend;
