@@ -8,9 +8,13 @@ package model.dao;
 import com.mysql.jdbc.Connection;
 import controller.pojo.Manager;
 import controller.pojo.Member;
+import java.awt.Color;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
 import model.conn.ConnectionForDB;
 
 /**
@@ -19,42 +23,57 @@ import model.conn.ConnectionForDB;
  */
 public class ManagerService {
     
-    static String sql = "create table manager(id int(5),card_no int(5),month_name varchar(10),year varchar(5))";
-
+    MemberServices memberServices = new MemberServices();
+    
+    static String sql = "create table manager(id int(5) primary key auto_increment,card_no int(5),month_name varchar(10),"
+            + "year varchar(5),pin varchar(55))";
+    
     public static void main(String[] args) {
         TableCreateServices.createTable(sql);
     }
     
-    public boolean isCardActive(int cardNo) {
-        String sql = "select membership_status from member_info where card_no=?";
-        boolean flag = false;
+    public boolean isManagerAssignedForThisMonth(String month,String year) {
+        String sql = "select * from manager where month_name=? and year =?";
         try {
             Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, cardNo);
+            ps.setString(1, month);
+            ps.setString(2,year);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                flag = rs.getString(1).equalsIgnoreCase("Active") ? true : false;
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return flag;
+        return false;
     }
     
-    public int save(Manager manager) {
-        String insert = "insert into manager(card_no,month_name,year) values(?,?,?)";
+    public int save(Manager manager, JLabel lbl) {
+        String insert = "insert into manager(card_no,month_name,year,pin) values(?,?,?,?)";
         
         try {
-            if (isCardActive(manager.getCardNo())) {
-                Connection conn = ConnectionForDB.connect();
-                PreparedStatement ps = conn.prepareStatement(insert);
-                ps.setInt(1, manager.getCardNo());
-                ps.setString(2, manager.getMonthName());
-                ps.setString(3, manager.getYear());
-                ps.executeUpdate();
-                
-                return 1;                
+            if (memberServices.isCardExists(manager.getCardNo())) {
+                if (!memberServices.isCardAtive(manager.getCardNo())) {
+                    Connection conn = ConnectionForDB.connect();
+                    PreparedStatement ps = conn.prepareStatement(insert);
+                    ps.setInt(1, manager.getCardNo());
+                    ps.setString(2, manager.getMonthName());
+                    ps.setString(3, manager.getYear());
+                    ps.setString(4, manager.getPin());
+                    ps.executeUpdate();
+                    
+                    lbl.setText("saved");
+                    lbl.setForeground(Color.red);
+                    
+                    return 1;                    
+                } else {
+                    lbl.setText("Card not active");
+                    lbl.setForeground(Color.red);
+                }
+            }else{
+                 lbl.setText("Card doesn't exists");
+                 lbl.setForeground(Color.red);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,5 +81,23 @@ public class ManagerService {
         return -1;
     }
     
+    public List<Manager> getAllManager() {
+        List<Manager> list = new ArrayList<>();
+        
+        String sql = "select * from manager";
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                list.add(new Manager(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+        
+    }
     
 }

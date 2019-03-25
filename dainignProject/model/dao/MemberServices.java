@@ -133,14 +133,15 @@ public class MemberServices {
     public boolean isCardAtive (int cardNo){
         boolean flag = false;
         String sql = "select membership_status from member_info where card_no=?";
-        Member member = null;
         try {
             Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, cardNo);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                
                 flag = rs.getString(1).equalsIgnoreCase("active")?true:false;
+                System.out.println(rs.getString(1));
             }
         } catch (Exception e) {
             e.printStackTrace();

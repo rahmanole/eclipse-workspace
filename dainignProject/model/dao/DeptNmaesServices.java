@@ -26,9 +26,9 @@ public class DeptNmaesServices {
 
     static String sql = "create table IF NOT EXISTS dept_names(id int(4) primary key auto_increment,dept_name varchar(55))";
 
-//    public static void main(String[] args) {
-//        TableCreateServices.createTable(sql);
-//    }
+    public static void main(String[] args) {
+        TableCreateServices.createTable(sql);
+    }
     
 //Save operation    
     public void save(String dept_name) {
