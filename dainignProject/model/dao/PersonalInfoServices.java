@@ -18,6 +18,8 @@ import model.conn.ConnectionForDB;
  */
 public class PersonalInfoServices {
 
+    
+
     private int id;
     private String name;
     private String contNum;
@@ -26,7 +28,7 @@ public class PersonalInfoServices {
     private String regNum;
     private String session;
 
-    static String sql = "create table IF NOT EXISTS personal_info(id int(6)primary key auto_increment,"
+    static String tblCrtStmt  = "create table IF NOT EXISTS personal_info(id int(6)primary key auto_increment,"
             + "name varchar(55),cnt_num varchar(20),email varchar(55),dept_name varchar(55),"
             + "reg_num varchar(20),session varchar(20))";
     

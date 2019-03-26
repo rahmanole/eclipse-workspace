@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.conn.ConnectionForDB;
-import static model.dao.PersonalInfoServices.sql;
 
 /**
  *
@@ -24,11 +23,9 @@ import static model.dao.PersonalInfoServices.sql;
  */
 public class DeptNmaesServices {
 
-    static String sql = "create table IF NOT EXISTS dept_names(id int(4) primary key auto_increment,dept_name varchar(55))";
+    public static String tblCrtStmt = "create table IF NOT EXISTS dept_names(id int(4) primary key auto_increment,dept_name varchar(55))";
 
-    public static void main(String[] args) {
-        TableCreateServices.createTable(sql);
-    }
+
     
 //Save operation    
     public void save(String dept_name) {

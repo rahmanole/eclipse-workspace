@@ -134,11 +134,11 @@ public class AddAdminView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Month", "Year", "Manager Card No.", "PIN"
+                "Email", "Role", "PIN"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -230,6 +230,7 @@ public class AddAdminView extends javax.swing.JFrame {
             Role role = new Role(email, roleName, pin);
             if (!roleServices.isEmailExists(email)) {
                 if (roleServices.save(role, lbl_oprtnFeedbck) > 0) {
+                    addToTable(role);
                     lbl_oprtnFeedbck.setText("PIN Code:" + pin);
                     lbl_oprtnFeedbck.setForeground(Color.WHITE);
                     lbl_oprtnFeedbck.setFont(new Font("Serif", Font.PLAIN, 14));
@@ -267,15 +268,14 @@ public class AddAdminView extends javax.swing.JFrame {
         return pin;
     }
 
-    private void addToTable(Manager manager) {
+    private void addToTable(Role role) {
         DefaultTableModel model = (DefaultTableModel) tbl_managerList.getModel();
 
-        Object[] obj = new Object[1];
+        Object[] obj = new Object[3];
 
-        obj[0] = manager.getMonthName();
-        obj[1] = manager.getYear();
-        obj[2] = manager.getCardNo();
-        obj[3] = manager.getPin();
+        obj[0] = role.getEmail();
+        obj[1] = role.getRoleNmae();
+        obj[2] = role.getPin();
         model.addRow(obj);
     }
 

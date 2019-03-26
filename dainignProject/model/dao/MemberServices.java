@@ -13,13 +13,11 @@ import model.conn.ConnectionForDB;
 
 public class MemberServices {
     
-    public static String sql = "create table IF NOT EXISTS member_info(id int(5)primary key auto_increment,"
+    public static String tblCrtStmt = "create table IF NOT EXISTS member_info(id int(5)primary key auto_increment,"
             + "name varchar(55),mobile varchar(55),email varchar(55),dept_name varchar(55),reg_no varchar(55),"
             + "session varchar(55),card_no int(5) ,membership_type varchar(55),membership_status varchar(55),creation_date date)";
     
-    public static void main(String[] args) {
-        TableCreateServices.createTable(sql);
-    }
+
     
      
  

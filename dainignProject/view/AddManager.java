@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.dao.DeptNmaesServices;
 import model.dao.ManagerService;
+import model.dao.MealDetailsServices;
+import model.dao.MealHistoryServices;
 import model.dao.RoleServices;
 import sun.font.FontFamily;
 
@@ -143,7 +145,7 @@ public class AddManager extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Month", "Year", "Manager Card No.", "PIN"
+                "Card No", "Month", "Year", "PIN"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -250,7 +252,7 @@ public class AddManager extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int cardNo = 0;
-        String email = t_eamil.getText().trim();
+        String email = t_eamil.getText().trim().toLowerCase();
         try {
             cardNo = Integer.parseInt(t_cardNo.getText().trim());
         } catch (NumberFormatException e) {
@@ -259,7 +261,10 @@ public class AddManager extends javax.swing.JFrame {
         }
         String month = com_month.getSelectedItem().toString();
         String year = com_year.getSelectedItem().toString();
-        String pin = generatePin();
+        String pin = generatePin().toLowerCase();
+        while (roleServices.getPinList().contains(pin)) {
+            pin = generatePin().toLowerCase();
+        }
 
         if (cardNo == 0 || month.equals("Select month") || year.equals("Select year")) {
             lbl_oprtnFeedbck.setText("Enter all data");
@@ -269,11 +274,15 @@ public class AddManager extends javax.swing.JFrame {
 
             if (!managerService.isManagerAssignedForThisMonth(month, year)) {
                 if (managerService.save(manager, lbl_oprtnFeedbck) > 0) {
+                    addToTable(manager);
                     Role role = new Role(email, "manager", pin);
                     roleServices.save(role, lbl_bg);
-                    lbl_oprtnFeedbck.setText("PIN Code: " + pin);
+                    lbl_oprtnFeedbck.setText("PIN Code: " + pin.toUpperCase());
                     lbl_oprtnFeedbck.setForeground(Color.WHITE);
                     lbl_oprtnFeedbck.setFont(new Font("Serif", Font.PLAIN, 14));
+                    MealHistoryServices.createMealHistoryTable(month, year);
+                    MealDetailsServices.createMealDetailsTable(month, year);
+
                 }
             } else {
                 lbl_oprtnFeedbck.setText("manager Already assign ed for this month");
@@ -297,6 +306,7 @@ public class AddManager extends javax.swing.JFrame {
 
     private String generatePin() {
         String pin = "";
+
         for (int i = 0; i < 7; i++) {
 
             if (i == 3 || i == 4 || i == 6) {
@@ -312,12 +322,12 @@ public class AddManager extends javax.swing.JFrame {
     private void addToTable(Manager manager) {
         DefaultTableModel model = (DefaultTableModel) tbl_managerList.getModel();
 
-        Object[] obj = new Object[1];
+        Object[] obj = new Object[4];
 
-        obj[0] = manager.getMonthName();
-        obj[1] = manager.getYear();
-        obj[2] = manager.getCardNo();
-        obj[3] = manager.getPin();
+        obj[0] = manager.getCardNo();
+        obj[1] = manager.getMonthName();
+        obj[2] = manager.getYear();
+        obj[3] = manager.getPin().toUpperCase();
         model.addRow(obj);
     }
 

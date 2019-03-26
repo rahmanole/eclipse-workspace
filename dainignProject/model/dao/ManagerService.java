@@ -25,13 +25,10 @@ public class ManagerService {
     
     MemberServices memberServices = new MemberServices();
     
-    static String sql = "create table manager(id int(5) primary key auto_increment,card_no int(5),month_name varchar(10),"
+    public static String tblCrtStmt = "create table manager(id int(5) primary key auto_increment,card_no int(5),month_name varchar(10),"
             + "year varchar(5),pin varchar(55))";
     
-    public static void main(String[] args) {
-        TableCreateServices.createTable(sql);
-    }
-    
+
     public boolean isManagerAssignedForThisMonth(String month,String year) {
         String sql = "select * from manager where month_name=? and year =?";
         try {
@@ -97,6 +94,25 @@ public class ManagerService {
             e.printStackTrace();
         }
         return list;
+        
+    }
+    
+    public Manager getManagerByPin(String pin) {
+        Manager manager = null;
+        String sql = "select * from manager where pin=?";
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, pin);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                return new Manager(rs.getInt(1), rs.getInt(2),rs.getString(3), rs.getString(4),rs.getString(5));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return manager;
         
     }
     

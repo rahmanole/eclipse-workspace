@@ -7,6 +7,7 @@ package view;
 
 import controller.pojo.AssignedMonths;
 import controller.pojo.Department;
+import controller.pojo.Manager;
 import controller.pojo.Member;
 import controller.pojo.PersonalInfo;
 import java.awt.Color;
@@ -18,7 +19,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
-import model.dao.MealDetailsServices;
 import model.dao.MemberServices;
 import model.dao.OffDaysServices;
 import model.dao.PersonalInfoServices;
@@ -27,7 +27,7 @@ import model.dao.PersonalInfoServices;
  *
  * @author OLEE
  */
-public class AdminDashboard extends javax.swing.JFrame {
+public class ManagerDashBoard extends javax.swing.JFrame {
 
     /**
      * Creates new form PersonalInfo
@@ -36,11 +36,18 @@ public class AdminDashboard extends javax.swing.JFrame {
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
-
-    public AdminDashboard() {
+    String monthName = "";
+    String year = "";
+    Manager manager = null;
+    public ManagerDashBoard(Manager manager) {
 
         initComponents();
-
+        monthName = manager.getMonthName();
+        year = manager.getYear();      
+        this.manager = manager;
+        
+        LogingPage logingPage = new LogingPage();
+        lbl_title.setText("Month Name:"+manager.getMonthName()+" "+manager.getYear());
         this.setTitle("Registrar Memebr");
         t_name.setBackground(new Color(0, 0, 0, 0));
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
@@ -57,6 +64,12 @@ public class AdminDashboard extends javax.swing.JFrame {
             com_depts.addItem(deptNames);
         }
     }
+
+    private ManagerDashBoard() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 
     private void designTable(JTable tableName) {
         tableName.getTableHeader().setForeground(new Color(255, 255, 255));
@@ -85,13 +98,15 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         pnl_sideBar = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        sideBtn_addManager = new javax.swing.JLabel();
-        sideBtn_addAdmin = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         sideBtn_addmmeber = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        sideBtn_addMontlyExpensess = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        sideBtn_addMealDetails = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        sideBtn_submitMeal = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lbl_title = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         t_name = new javax.swing.JTextField();
@@ -120,52 +135,27 @@ public class AdminDashboard extends javax.swing.JFrame {
         com_type = new javax.swing.JComboBox<>();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
+        drpDown_mealDetails = new javax.swing.JPanel();
+        btn_addMealDetails = new javax.swing.JLabel();
+        btn_editMealDetails = new javax.swing.JLabel();
+        btn_removeMealDetails = new javax.swing.JLabel();
         drpDown_member = new javax.swing.JPanel();
         btn_addMember = new javax.swing.JLabel();
         btn_editMember = new javax.swing.JLabel();
         btn_removeMember = new javax.swing.JLabel();
+        lbl_title1 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
+        drpDown_mealDetails1 = new javax.swing.JPanel();
+        btn_addMealDetails1 = new javax.swing.JLabel();
+        btn_editMealDetails1 = new javax.swing.JLabel();
+        btn_removeMealDetails1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
         pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setOpaque(true);
-        pnl_sideBar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
-
-        sideBtn_addManager.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addManager.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addManager.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addManager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addManager.setText("Add Manager");
-        sideBtn_addManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addManager.setOpaque(true);
-        sideBtn_addManager.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addManagerMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
-
-        sideBtn_addAdmin.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addAdmin.setText("Add Admin");
-        sideBtn_addAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addAdmin.setOpaque(true);
-        sideBtn_addAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addAdminMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
-
-        jLabel12.setOpaque(true);
-        pnl_sideBar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
 
         sideBtn_addmmeber.setBackground(new java.awt.Color(51, 0, 153));
         sideBtn_addmmeber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -179,18 +169,69 @@ public class AdminDashboard extends javax.swing.JFrame {
                 sideBtn_addmmeberMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
+        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 180, 40));
 
         jLabel13.setOpaque(true);
-        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
+        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 10, 40));
+
+        sideBtn_addMontlyExpensess.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addMontlyExpensess.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addMontlyExpensess.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addMontlyExpensess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addMontlyExpensess.setText("Preapre Month");
+        sideBtn_addMontlyExpensess.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addMontlyExpensess.setOpaque(true);
+        sideBtn_addMontlyExpensess.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addMontlyExpensessMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addMontlyExpensess, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
+
+        jLabel14.setOpaque(true);
+        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
+
+        sideBtn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addMealDetails.setText("Meal Details");
+        sideBtn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addMealDetails.setOpaque(true);
+        sideBtn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addMealDetailsMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addMealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
+
+        jLabel15.setOpaque(true);
+        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
+
+        sideBtn_submitMeal.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_submitMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_submitMeal.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_submitMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_submitMeal.setText("Submit Meals");
+        sideBtn_submitMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_submitMeal.setOpaque(true);
+        sideBtn_submitMeal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_submitMealMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_submitMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
+
+        jLabel16.setOpaque(true);
+        pnl_sideBar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Personal Information");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 620, 30));
+        lbl_title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_title.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_title.setText("Personal Information");
+        getContentPane().add(lbl_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 170, 30));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1020, 20));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -330,6 +371,59 @@ public class AdminDashboard extends javax.swing.JFrame {
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 10, 420));
 
+        btn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
+        btn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
+        btn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_addMealDetails.setText("Add Meal Details");
+        btn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addMealDetails.setOpaque(true);
+        btn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addMealDetailsMouseClicked(evt);
+            }
+        });
+
+        btn_editMealDetails.setBackground(new java.awt.Color(51, 0, 153));
+        btn_editMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_editMealDetails.setForeground(new java.awt.Color(255, 255, 255));
+        btn_editMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_editMealDetails.setText("Edit Meal Details");
+        btn_editMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_editMealDetails.setOpaque(true);
+
+        btn_removeMealDetails.setBackground(new java.awt.Color(51, 0, 153));
+        btn_removeMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_removeMealDetails.setForeground(new java.awt.Color(255, 255, 255));
+        btn_removeMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_removeMealDetails.setText("Remove a Meal");
+        btn_removeMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_removeMealDetails.setOpaque(true);
+
+        javax.swing.GroupLayout drpDown_mealDetailsLayout = new javax.swing.GroupLayout(drpDown_mealDetails);
+        drpDown_mealDetails.setLayout(drpDown_mealDetailsLayout);
+        drpDown_mealDetailsLayout.setHorizontalGroup(
+            drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drpDown_mealDetailsLayout.createSequentialGroup()
+                .addGroup(drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_addMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_editMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_removeMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        drpDown_mealDetailsLayout.setVerticalGroup(
+            drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drpDown_mealDetailsLayout.createSequentialGroup()
+                .addComponent(btn_addMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_editMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_removeMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(drpDown_mealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 130, 130));
+
         btn_addMember.setBackground(new java.awt.Color(51, 0, 153));
         btn_addMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_addMember.setForeground(new java.awt.Color(255, 255, 255));
@@ -371,12 +465,18 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 130, 130));
+        getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 130, 180));
+
+        lbl_title1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_title1.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_title1.setText("Monthly Expenses ");
+        getContentPane().add(lbl_title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 280, 30));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -384,6 +484,59 @@ public class AdminDashboard extends javax.swing.JFrame {
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
+
+        btn_addMealDetails1.setBackground(new java.awt.Color(51, 0, 153));
+        btn_addMealDetails1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_addMealDetails1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_addMealDetails1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_addMealDetails1.setText("Add Meal Details");
+        btn_addMealDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addMealDetails1.setOpaque(true);
+        btn_addMealDetails1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addMealDetails1MouseClicked(evt);
+            }
+        });
+
+        btn_editMealDetails1.setBackground(new java.awt.Color(51, 0, 153));
+        btn_editMealDetails1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_editMealDetails1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_editMealDetails1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_editMealDetails1.setText("Edit Meal Details");
+        btn_editMealDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_editMealDetails1.setOpaque(true);
+
+        btn_removeMealDetails1.setBackground(new java.awt.Color(51, 0, 153));
+        btn_removeMealDetails1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_removeMealDetails1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_removeMealDetails1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_removeMealDetails1.setText("Remove a Meal");
+        btn_removeMealDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_removeMealDetails1.setOpaque(true);
+
+        javax.swing.GroupLayout drpDown_mealDetails1Layout = new javax.swing.GroupLayout(drpDown_mealDetails1);
+        drpDown_mealDetails1.setLayout(drpDown_mealDetails1Layout);
+        drpDown_mealDetails1Layout.setHorizontalGroup(
+            drpDown_mealDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drpDown_mealDetails1Layout.createSequentialGroup()
+                .addGroup(drpDown_mealDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_addMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_editMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_removeMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        drpDown_mealDetails1Layout.setVerticalGroup(
+            drpDown_mealDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drpDown_mealDetails1Layout.createSequentialGroup()
+                .addComponent(btn_addMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_editMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_removeMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(drpDown_mealDetails1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 130, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -413,10 +566,10 @@ public class AdminDashboard extends javax.swing.JFrame {
                 Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
 
                 if (memberServices.saveInfo(member) > 0) {
-
                     lbl_msgs.setText("Info saved");
                     lbl_msgs.setForeground(Color.GREEN);
-
+                    OffDaysServices.createOffDaysRecordTable(cardNo);
+                    AssignedMonthsServices.createAssignedMonthsRecordTable(cardNo);
 //                    addToTable(member);
                 } else {
                     lbl_msgs.setText("Not saved");
@@ -430,20 +583,33 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_saveActionPerformed
 
-    private void sideBtn_addManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addManagerMouseClicked
-        // TODO add your handling code here:
-        new AddManager().setVisible(true);
-    }//GEN-LAST:event_sideBtn_addManagerMouseClicked
-
-    private void sideBtn_addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdminMouseClicked
-        // TODO add your handling code here:
-        new AddAdminView().setVisible(true);
-    }//GEN-LAST:event_sideBtn_addAdminMouseClicked
-
     private void sideBtn_addmmeberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeberMouseClicked
         // TODO add your handling code here:
         new Addmember().setVisible(true);
     }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
+
+    private void sideBtn_addMontlyExpensessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMontlyExpensessMouseClicked
+        // TODO add your handling code here:
+        new PrepareMonthView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_addMontlyExpensessMouseClicked
+
+    private void sideBtn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMealDetailsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sideBtn_addMealDetailsMouseClicked
+
+    private void sideBtn_submitMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_submitMealMouseClicked
+        // TODO add your handling code here:
+        new SubmitMeal(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_submitMealMouseClicked
+
+    private void btn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMealDetailsMouseClicked
+        // TODO add your handling code here:
+        new AddMealDetailsView(manager).setVisible(true);
+    }//GEN-LAST:event_btn_addMealDetailsMouseClicked
+
+    private void btn_addMealDetails1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMealDetails1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_addMealDetails1MouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -477,14 +643,30 @@ public class AdminDashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerDashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -505,24 +687,32 @@ public class AdminDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminDashboard().setVisible(true);
+                new ManagerDashBoard( ).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_addMealDetails;
+    private javax.swing.JLabel btn_addMealDetails1;
     private javax.swing.JLabel btn_addMember;
+    private javax.swing.JLabel btn_editMealDetails;
+    private javax.swing.JLabel btn_editMealDetails1;
     private javax.swing.JLabel btn_editMember;
+    private javax.swing.JLabel btn_removeMealDetails;
+    private javax.swing.JLabel btn_removeMealDetails1;
     private javax.swing.JLabel btn_removeMember;
     private javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> com_depts;
     private javax.swing.JComboBox<String> com_type;
+    private javax.swing.JPanel drpDown_mealDetails;
+    private javax.swing.JPanel drpDown_mealDetails1;
     private javax.swing.JPanel drpDown_member;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -542,10 +732,13 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lbl_bg;
     private javax.swing.JLabel lbl_msgs;
+    private javax.swing.JLabel lbl_title;
+    private javax.swing.JLabel lbl_title1;
     private javax.swing.JPanel pnl_sideBar;
-    private javax.swing.JLabel sideBtn_addAdmin;
-    private javax.swing.JLabel sideBtn_addManager;
+    private javax.swing.JLabel sideBtn_addMealDetails;
+    private javax.swing.JLabel sideBtn_addMontlyExpensess;
     private javax.swing.JLabel sideBtn_addmmeber;
+    private javax.swing.JLabel sideBtn_submitMeal;
     private javax.swing.JTextField t_cardNo;
     private javax.swing.JTextField t_cntNum;
     private javax.swing.JTextField t_email;

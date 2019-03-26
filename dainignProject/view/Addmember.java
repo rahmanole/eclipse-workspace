@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
+import model.dao.MealManageService;
 import model.dao.MemberServices;
 import model.dao.OffDaysServices;
 import model.dao.PersonalInfoServices;
@@ -33,6 +34,7 @@ public class Addmember extends javax.swing.JFrame {
      */
     MemberServices memberServices = new MemberServices();
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
+    MealManageService mealManageService = new MealManageService();
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
 
@@ -369,6 +371,7 @@ public class Addmember extends javax.swing.JFrame {
                 Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
 
                 if (memberServices.saveInfo(member) > 0) {
+                    mealManageService.save(cardNo);
                     lbl_msgs.setText("Info saved");
                     lbl_msgs.setForeground(Color.GREEN);
                     OffDaysServices.createOffDaysRecordTable(cardNo);

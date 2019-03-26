@@ -9,6 +9,8 @@ import com.mysql.jdbc.Connection;
 import controller.pojo.Role;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 import model.conn.ConnectionForDB;
 
@@ -19,12 +21,10 @@ import model.conn.ConnectionForDB;
 public class RoleServices {
 
     MemberServices memberServices = new MemberServices();
-    public static String sql = "create table IF NOT EXISTS role(id int(5)primary key auto_increment,"
+    public static String tblCrtStmt = "create table IF NOT EXISTS role(id int(5)primary key auto_increment,"
             + "email varchar(55),role_name varchar(55),pin varchar(10))";
 
-    public static void main(String[] args) {
-        TableCreateServices.createTable(sql);
-    }
+
 
     public int save(Role role, JLabel lbl) {
         String insert = "insert into role(email,role_name,pin) values(?,?,?)";
@@ -57,5 +57,38 @@ public class RoleServices {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public List<String> getPinList(){
+        List<String> pinList = new ArrayList<>();
+        String sql = "select pin from role";
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                pinList.add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pinList;
+    }
+    
+    public String getRoleNameByPin(String pin){
+        String roleName = "admin";
+        String sql = "select role_name from role where pin = ?";
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, pin);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                roleName = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return roleName;
     }
 }

@@ -6,31 +6,33 @@ import java.util.List;
 public class Meal {
     private int id;
     private String date;
-    List<Integer> offCards;
+    private int totalMeals;
+    private String mealType;
     private double actual_expensess;
     private double spent_expenss;
     private double balance;
     private String itemDetails;
 
-    public Meal(int id, String date, List<Integer> offCards, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
+    public Meal(int id, String date, int totalMeals, String mealType, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
         this.id = id;
         this.date = date;
-        this.offCards = offCards;
+        this.totalMeals = totalMeals;
+        this.mealType = mealType;
         this.actual_expensess = actual_expensess;
         this.spent_expenss = spent_expenss;
         this.balance = balance;
         this.itemDetails = itemDetails;
     }
 
-    public Meal(String date, List<Integer> offCards, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
+    public Meal(String date, int totalMeals, String mealType, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
         this.date = date;
-        this.offCards = offCards;
+        this.totalMeals = totalMeals;
+        this.mealType = mealType;
         this.actual_expensess = actual_expensess;
         this.spent_expenss = spent_expenss;
         this.balance = balance;
         this.itemDetails = itemDetails;
     }
-    
     
     
     public int getId() {
@@ -49,12 +51,20 @@ public class Meal {
         this.date = date;
     }
 
-    public List<Integer> getOffCards() {
-        return offCards;
+    public int getTotalMeals() {
+        return totalMeals;
     }
 
-    public void setOffCards(List<Integer> offCards) {
-        this.offCards = offCards;
+    public void setTotalMeals(int totalMeals) {
+        this.totalMeals = totalMeals;
+    }
+
+    public String getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(String mealType) {
+        this.mealType = mealType;
     }
 
     public double getActual_expensess() {
@@ -88,8 +98,5 @@ public class Meal {
     public void setItemDetails(String itemDetails) {
         this.itemDetails = itemDetails;
     }
-    
-    
-    
 }
      
