@@ -280,8 +280,6 @@ public class AddManager extends javax.swing.JFrame {
                     lbl_oprtnFeedbck.setText("PIN Code: " + pin.toUpperCase());
                     lbl_oprtnFeedbck.setForeground(Color.WHITE);
                     lbl_oprtnFeedbck.setFont(new Font("Serif", Font.PLAIN, 14));
-                    MealHistoryServices.createMealHistoryTable(month, year);
-                    MealDetailsServices.createMealDetailsTable(month, year);
 
                 }
             } else {

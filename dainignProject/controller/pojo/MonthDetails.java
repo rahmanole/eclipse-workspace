@@ -21,9 +21,10 @@ public class MonthDetails {
     private double normalMealRate;
     private double feastMealRate;
     private Date feastDate;
+    private Date startDate;
     private List<Integer> cardNoList;
 
-    public MonthDetails(String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, Date feastDate) {
+    public MonthDetails(String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, Date feastDate,Date startDate) {
         this.monthName = monthName;
         this.year = year;
         this.employee_fees = employee_fees;
@@ -34,9 +35,10 @@ public class MonthDetails {
         this.normalMealRate = normalMealRate;
         this.feastMealRate = feastMealRate;
         this.feastDate = feastDate;
+        this.startDate = startDate;
     }
     
-    public MonthDetails(int id, String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, Date feastDate) {
+    public MonthDetails(int id, String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, Date feastDate,Date startDate) {
         this.id = id;
         this.monthName = monthName;
         this.year = year;
@@ -48,6 +50,7 @@ public class MonthDetails {
         this.normalMealRate = normalMealRate;
         this.feastMealRate = feastMealRate;
         this.feastDate = feastDate;
+        this.startDate = startDate;
     }
 
     
@@ -148,6 +151,15 @@ public class MonthDetails {
         this.cardNoList = cardNoList;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+    
+    
     
     
     

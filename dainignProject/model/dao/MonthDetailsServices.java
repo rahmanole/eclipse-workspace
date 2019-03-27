@@ -23,11 +23,11 @@ public class MonthDetailsServices {
     public static String tblCrtStmt = "create table IF NOT EXISTS month_details(id int(5)primary key auto_increment,"
             + "month_name varchar(55),year varchar(5),employee_fees double,total_days int,"
             + "total_fridays int,friday_mealRate double,total_normalDaymeals double ,normal_mealRate double,"
-            + "feast_mealRate double,feast_date date)";
+            + "feast_mealRate double,feast_date date,start_date date)";
 
     public int save(MonthDetails month) {
         String inserStmt = "insert into month_details(month_name,year,employee_fees,total_days,total_fridays,friday_mealRate,"
-                + "total_normalDaymeals,normal_mealRate,feast_mealRate,feast_date) values(?,?,?,?,?,?,?,?,?,?)";
+                + "total_normalDaymeals,normal_mealRate,feast_mealRate,feast_date,start_date) values(?,?,?,?,?,?,?,?,?,?,?)";
         
          try {
             Connection conn = ConnectionForDB.connect();
@@ -43,6 +43,7 @@ public class MonthDetailsServices {
             ps.setDouble(8, month.getNormalMealRate());
             ps.setDouble(9, month.getFeastMealRate());
             ps.setDate(10, month.getFeastDate());
+            ps.setDate(11, month.getStartDate());
             ps.executeUpdate();
             
             return 1;

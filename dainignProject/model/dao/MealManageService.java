@@ -7,7 +7,12 @@ package model.dao;
 
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import model.conn.ConnectionForDB;
 
 /**
@@ -50,5 +55,24 @@ public class MealManageService {
         }
         
         return -1;
+    }
+    
+    public List<Integer> cardList(){
+        ArrayList<Integer> cardList = new ArrayList<>();
+        String stmt = "select card_no from last_day_meal_history";
+
+        try {
+            Connection conn = ConnectionForDB.connect();
+
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                cardList.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        Collections.sort(cardList);
+        return cardList;
     }
 }

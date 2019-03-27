@@ -91,6 +91,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         sideBtn_addmmeber = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        sideBtn_addmmeber1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        sideBtn_addDept = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -183,6 +187,40 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel13.setOpaque(true);
         pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
+
+        sideBtn_addmmeber1.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addmmeber1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addmmeber1.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addmmeber1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addmmeber1.setText("Add Member");
+        sideBtn_addmmeber1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addmmeber1.setOpaque(true);
+        sideBtn_addmmeber1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addmmeber1MouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addmmeber1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
+
+        jLabel14.setOpaque(true);
+        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
+
+        sideBtn_addDept.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addDept.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addDept.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addDept.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addDept.setText("Add Department");
+        sideBtn_addDept.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addDept.setOpaque(true);
+        sideBtn_addDept.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addDeptMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addDept, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, 40));
+
+        jLabel15.setOpaque(true);
+        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 10, 40));
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -444,6 +482,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Addmember().setVisible(true);
     }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
+
+    private void sideBtn_addmmeber1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeber1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sideBtn_addmmeber1MouseClicked
+
+    private void sideBtn_addDeptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addDeptMouseClicked
+        // TODO add your handling code here:
+        
+        new  AddDeptView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addDeptMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -522,6 +570,8 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -544,8 +594,10 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_msgs;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addAdmin;
+    private javax.swing.JLabel sideBtn_addDept;
     private javax.swing.JLabel sideBtn_addManager;
     private javax.swing.JLabel sideBtn_addmmeber;
+    private javax.swing.JLabel sideBtn_addmmeber1;
     private javax.swing.JTextField t_cardNo;
     private javax.swing.JTextField t_cntNum;
     private javax.swing.JTextField t_email;

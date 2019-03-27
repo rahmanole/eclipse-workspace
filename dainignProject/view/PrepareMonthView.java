@@ -11,12 +11,15 @@ import java.awt.Color;
 import java.time.Month;
 import java.time.YearMonth;
 import java.sql.Date;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import model.dao.DeptNmaesServices;
 import model.dao.MealHistoryServices;
 import model.dao.MealDetailsServices;
+import model.dao.MealManageService;
 import model.dao.MemberServices;
 import model.dao.MonthDetailsServices;
 
@@ -32,6 +35,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
     MemberServices memberServices = new MemberServices();
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
     MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
+    MealManageService mealManageService = new MealManageService();
 
     String monthName = "";
     String year = "";
@@ -145,6 +149,8 @@ public class PrepareMonthView extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
         date_feastDate = new com.toedter.calendar.JDateChooser();
+        date_startDate = new com.toedter.calendar.JDateChooser();
+        jLabel15 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -265,7 +271,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 250, 10));
-        getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 380, 140, 30));
+        getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 440, 140, 30));
 
         btn_save.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_save.setForeground(new java.awt.Color(255, 255, 255));
@@ -278,7 +284,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
                 btn_saveActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 430, 100, 40));
+        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 490, 100, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -403,9 +409,13 @@ public class PrepareMonthView extends javax.swing.JFrame {
 
         jSeparator11.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 220, 250, 10));
-
-        date_feastDate.setDateFormatString("d-MM- yyyy");
         getContentPane().add(date_feastDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 320, 250, 30));
+        getContentPane().add(date_startDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 380, 250, 30));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Starting Date");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 380, 90, 30));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -426,6 +436,10 @@ public class PrepareMonthView extends javax.swing.JFrame {
         int numberOfNormalDaymeals = 0;
         double normalMealRate = 0;
         double feastMealRate = 0;
+        
+        List<Integer> cardList = mealManageService.cardList();
+        Collections.sort(cardList);
+        
 
         try {
             employee_fees = Double.parseDouble(t_empFees.getText().trim());
@@ -440,15 +454,21 @@ public class PrepareMonthView extends javax.swing.JFrame {
             lbl_msgs.setForeground(Color.red);
             return;
         }
-        Date feastDate = new java.sql.Date(date_feastDate.getDate().getTime());;
-
+        Date feastDate = new java.sql.Date(date_feastDate.getDate().getTime());
+        Date startDate = new java.sql.Date(date_startDate.getDate().getTime());
         if (employee_fees == 0 || totalDays == 0 || totalFridays == 0 || friDayMealRate == 0 || numberOfNormalDaymeals == 0
                 || normalMealRate == 0 || feastMealRate == 0 || feastDate == null) {
             lbl_msgs.setText("Fill out all the fields");
             lbl_msgs.setForeground(Color.red);
         } else {
-            MonthDetails monthDetails = new MonthDetails(monthName, year, employee_fees, totalDays, totalFridays, friDayMealRate, numberOfNormalDaymeals, normalMealRate, feastMealRate, feastDate);
+            MonthDetails monthDetails = new MonthDetails(monthName, year, employee_fees, totalDays, totalFridays, friDayMealRate, numberOfNormalDaymeals, normalMealRate, feastMealRate, feastDate, startDate);
+            
             if (monthDetailsServices.save(monthDetails) > 0) {
+                lbl_msgs.setText("Wait");
+                lbl_msgs.setForeground(Color.YELLOW);
+                MealHistoryServices.createMealHistoryTable(monthName, year,cardList , startDate, totalDays);
+                MealDetailsServices.createMealDetailsTable(monthName, year);
+                
                 lbl_msgs.setText("Successfully saved");
                 lbl_msgs.setForeground(Color.GREEN);
             } else {
@@ -595,12 +615,14 @@ public class PrepareMonthView extends javax.swing.JFrame {
     private javax.swing.JLabel btn_removeMember;
     private javax.swing.JButton btn_save;
     private com.toedter.calendar.JDateChooser date_feastDate;
+    private com.toedter.calendar.JDateChooser date_startDate;
     private javax.swing.JPanel drpDown_member;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

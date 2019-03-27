@@ -5,23 +5,18 @@
  */
 package view;
 
-import controller.pojo.AssignedMonths;
-import controller.pojo.Department;
+
 import controller.pojo.Member;
-import controller.pojo.PersonalInfo;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
 import model.dao.MealManageService;
 import model.dao.MemberServices;
-import model.dao.OffDaysServices;
-import model.dao.PersonalInfoServices;
 
 /**
  *
@@ -37,6 +32,7 @@ public class Addmember extends javax.swing.JFrame {
     MealManageService mealManageService = new MealManageService();
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
+    
 
     public Addmember() {
 
@@ -53,7 +49,7 @@ public class Addmember extends javax.swing.JFrame {
         com_type.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
-
+        Collections.sort(deptNames);
         for (String deptNames : deptNames) {
             com_depts.addItem(deptNames);
         }
@@ -367,22 +363,24 @@ public class Addmember extends javax.swing.JFrame {
             lbl_msgs.setText("Fill out all the fields");
             lbl_msgs.setForeground(Color.red);
         } else {
-            if (!memberServices.isEmailExists(email)) {
-                Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
+            if (memberServices.isCardExists(cardNo)) {
+                if (!memberServices.isEmailExists(email)) {
+                    Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
 
-                if (memberServices.saveInfo(member) > 0) {
-                    mealManageService.save(cardNo);
-                    lbl_msgs.setText("Info saved");
-                    lbl_msgs.setForeground(Color.GREEN);
-                    OffDaysServices.createOffDaysRecordTable(cardNo);
-                    AssignedMonthsServices.createAssignedMonthsRecordTable(cardNo);
-//                    addToTable(member);
+                    if (memberServices.saveInfo(member) > 0) {
+                        mealManageService.save(cardNo);
+                        lbl_msgs.setText(cardNo+" card saved");
+                        lbl_msgs.setForeground(Color.GREEN);
+                    } else {
+                        lbl_msgs.setText("Not saved");
+                        lbl_msgs.setForeground(Color.red);
+                    }
                 } else {
-                    lbl_msgs.setText("Not saved");
+                    lbl_msgs.setText("Email already exists");
                     lbl_msgs.setForeground(Color.red);
                 }
             } else {
-                lbl_msgs.setText("Email already exists");
+                lbl_msgs.setText("Card No. already exists");
                 lbl_msgs.setForeground(Color.red);
             }
         }

@@ -8,13 +8,13 @@ import model.conn.ConnectionForDB;
 public class TableCreateServices {
 
     public static void main(String[] args) {
-        //createTable(DeptNmaesServices.tblCrtStmt);
-        //createTable(ManagerService.tblCrtStmt);
+//        createTable(DeptNmaesServices.tblCrtStmt);
+//        createTable(ManagerService.tblCrtStmt);
 //        createTable(MemberServices.tblCrtStmt);
 //        createTable(PersonalInfoServices.tblCrtStmt);
 //        createTable(RoleServices.tblCrtStmt);
-//        createTable(MonthDetailsServices.tblCrtStmt);
-        createTblLastDayMealHistory();
+        createTable(MonthDetailsServices.tblCrtStmt);
+//        createTblLastDayMealHistory();
     }
 
     public static void createTable(String sql) {

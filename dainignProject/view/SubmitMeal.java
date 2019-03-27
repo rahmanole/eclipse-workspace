@@ -5,24 +5,15 @@
  */
 package view;
 
-import controller.pojo.AssignedMonths;
-import controller.pojo.Department;
 import controller.pojo.Manager;
-import controller.pojo.Member;
-import controller.pojo.PersonalInfo;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
 import model.dao.MealManageService;
 import model.dao.MemberServices;
-import model.dao.OffDaysServices;
-import model.dao.PersonalInfoServices;
 
 /**
  *
@@ -448,7 +439,7 @@ public class SubmitMeal extends javax.swing.JFrame {
         obj[0] = cardNo + "";
         model.addRow(obj);
     }
-//
+
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
 //
