@@ -13,7 +13,6 @@ public class MonthlyExpensessServices {
 
     SummaryService summaryService = new SummaryService();
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
-    List<Integer> cardListInSummaryTable = summaryService.getCardList();
 
     public void createMontlyExpenseTable(Manager manager) {
 
@@ -38,10 +37,8 @@ public class MonthlyExpensessServices {
             ps.setDate(4, monthlyExpense.getPaymentDate());
 
             ps.executeUpdate();
-            if(!cardListInSummaryTable.contains(monthlyExpense.getCardNo())){
-                summaryService.save(monthlyExpense.getCardNo());
-                mealHistoryServices.insertOneCard(monthlyExpense.getCardNo(), manager.getMonthName(), manager.getYear());
-            }
+            summaryService.save(monthlyExpense.getCardNo());
+  
              
         } catch (SQLException ex) {
             ex.printStackTrace();

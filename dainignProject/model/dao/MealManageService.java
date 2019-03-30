@@ -21,10 +21,12 @@ import model.conn.ConnectionForDB;
  * @author OLEE
  */
 public class MealManageService {
+    public static String crtCMSTbl = "create table IF NOT EXISTS current_meal_status(id int(5) primary key auto_increment,"
+            + "card_no int,on_or_off varchar(5))";
 
-    public int stopMeal(Manager manager,String colName,int cardNo) {
-        String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
-        String stmt = "update "+tblName+" set "+colName+"=? where card_no=?";
+    public int stopMeal(int cardNo) {
+        
+        String stmt = "update current_meal_status where card_no=?";
         
         try {
             Connection conn = ConnectionForDB.connect();
@@ -116,4 +118,6 @@ public class MealManageService {
         Collections.sort(cardList);
         return cardList;
     }
+    
+    
 }

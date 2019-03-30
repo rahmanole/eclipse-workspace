@@ -25,6 +25,7 @@ public class SubmitMeal extends javax.swing.JFrame {
     MealManageService mealManageService = new MealManageService();
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
     MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
+    MealStopService stopService = new MealStopService();
 
     String monthName = "";
     String year = "";
@@ -39,8 +40,7 @@ public class SubmitMeal extends javax.swing.JFrame {
         year = manager.getYear();
         this.manager = manager;
 
-        uncetainCards = MealHistoryServices.getUncertainCardList();
-        lbl_totalUncertain.setText(uncetainCards.size() + "");
+        uncetainCards = MealStopService.getUncertainCardList();
         dateList = monthDetailsServices.getDateList(manager);
 
         lbl_title.setText("Month Name:" + manager.getMonthName() + " " + manager.getYear());
@@ -101,8 +101,6 @@ public class SubmitMeal extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        lbl_totalUncertain = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         lbl_stopedToday = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
@@ -112,6 +110,10 @@ public class SubmitMeal extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         btn_uncertain = new javax.swing.JButton();
         lbl_uncertain = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        t_cardNoToStopMoreThan1 = new javax.swing.JTextField();
+        jSeparator12 = new javax.swing.JSeparator();
+        lbl_stopMoreThan1 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -201,39 +203,30 @@ public class SubmitMeal extends javax.swing.JFrame {
                 btn_stopParticularActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_stopParticular, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, 90, 40));
-        getContentPane().add(lbl_stopMoreThan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 250, 30));
+        getContentPane().add(btn_stopParticular, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 90, 40));
+        getContentPane().add(lbl_stopMoreThan, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, 250, 30));
 
         jSeparator11.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 250, 10));
+        getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 220, 250, 10));
 
         t_cardNoToStopMoreThan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         t_cardNoToStopMoreThan.setForeground(new java.awt.Color(255, 255, 255));
         t_cardNoToStopMoreThan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         t_cardNoToStopMoreThan.setBorder(null);
         t_cardNoToStopMoreThan.setOpaque(false);
-        getContentPane().add(t_cardNoToStopMoreThan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 250, 30));
+        getContentPane().add(t_cardNoToStopMoreThan, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 190, 250, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Card No");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 70, 30));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, 70, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("More Than One Day");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 420, 30));
+        jLabel12.setText("Stop For This Meal Only");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 420, 20));
         getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 420, 10));
-
-        lbl_totalUncertain.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_totalUncertain.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lbl_totalUncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 190, 80, 30));
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Total:");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 190, 60, 30));
 
         lbl_stopedToday.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_stopedToday.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,12 +247,12 @@ public class SubmitMeal extends javax.swing.JFrame {
                 com_uncertainItemStateChanged(evt);
             }
         });
-        getContentPane().add(com_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 250, 30));
+        getContentPane().add(com_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 250, 250, 30));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Type");
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 70, 30));
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 250, 70, 30));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
@@ -277,8 +270,24 @@ public class SubmitMeal extends javax.swing.JFrame {
                 btn_uncertainActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 340, 130, 40));
-        getContentPane().add(lbl_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 290, 250, 30));
+        getContentPane().add(btn_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 130, 40));
+        getContentPane().add(lbl_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 290, 250, 30));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Card No");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 70, 30));
+
+        t_cardNoToStopMoreThan1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        t_cardNoToStopMoreThan1.setForeground(new java.awt.Color(255, 255, 255));
+        t_cardNoToStopMoreThan1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t_cardNoToStopMoreThan1.setBorder(null);
+        t_cardNoToStopMoreThan1.setOpaque(false);
+        getContentPane().add(t_cardNoToStopMoreThan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 250, 30));
+
+        jSeparator12.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 250, 10));
+        getContentPane().add(lbl_stopMoreThan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 310, 250, 30));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -323,7 +332,7 @@ public class SubmitMeal extends javax.swing.JFrame {
                     Date startDate = new java.sql.Date(date_mealDate.getDate().getTime());
                     if (dateList.contains(startDate.toString())) {
                         String colName = mealHistoryServices.dateFormate(startDate);
-                        mealManageService.stopMeal(manager, colName, cardNo);
+                        //mealManageService.stopMeal(manager, colName, cardNo);
                     } else {
                         lbl_stopMoreThan.setText("Select this month date");
                     }
@@ -333,8 +342,8 @@ public class SubmitMeal extends javax.swing.JFrame {
                     if (startDate != null) {
                         if (dateList.contains(startDate.toString())) {
                             String colName = mealHistoryServices.dateFormate(startDate);
-                            mealManageService.stopMeal(manager, colName, cardNo);
-                            mealHistoryServices.insertIntoUncertain(cardNo);
+                            //mealManageService.stopMeal(manager, colName, cardNo);
+                            stopService.insertIntoUncertain(cardNo);
                         } else {
                             lbl_stopMoreThan.setText("Select this month date");
                         }
@@ -366,7 +375,7 @@ public class SubmitMeal extends javax.swing.JFrame {
 
         if (dateList.contains(startDate.toString())) {
             for (int cardNo : uncetainCards) {
-                mealManageService.stopMeal(manager, colName, cardNo);
+                //mealManageService.stopMeal(manager, colName, cardNo);
             }
         } else {
             lbl_uncertain.setText("Select this month date");
@@ -502,29 +511,31 @@ public class SubmitMeal extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser date_mealDate;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel lbl_bg;
     private javax.swing.JLabel lbl_stopMoreThan;
+    private javax.swing.JLabel lbl_stopMoreThan1;
     private javax.swing.JLabel lbl_stopedToday;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_title1;
-    private javax.swing.JLabel lbl_totalUncertain;
     private javax.swing.JLabel lbl_uncertain;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addMeal;
     private javax.swing.JLabel sideBtn_addmmeber2;
     private javax.swing.JLabel sideBtn_stopMeal;
     private javax.swing.JTextField t_cardNoToStopMoreThan;
+    private javax.swing.JTextField t_cardNoToStopMoreThan1;
     // End of variables declaration//GEN-END:variables
 }

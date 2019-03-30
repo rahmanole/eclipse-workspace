@@ -149,7 +149,7 @@ public class MemberServices {
     
     public List<Integer> getAllActiveCards(){
         ArrayList<Integer> uncertainCars = new ArrayList<>();
-        String sql = "select card_no from uncertain_cards";
+        String sql = "select card_no from member_info";
         try {
             Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);

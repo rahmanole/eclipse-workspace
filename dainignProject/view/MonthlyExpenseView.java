@@ -467,7 +467,7 @@ public class MonthlyExpenseView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     int cardNo = 0;
     
-    List<Integer> cardListInMealHistoryTable = mealHistoryServices.getCardList(manager);
+    //List<Integer> cardListInMealHistoryTable = mealHistoryServices.getCardList(manager);
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         // TODO add your handling code here:
 
@@ -480,9 +480,7 @@ public class MonthlyExpenseView extends javax.swing.JFrame {
             
             
             monthlyExpensessServices.saveMonthlyExpense(monthlyExpense,manager);
-            if(!cardListInMealHistoryTable.contains(monthlyExpense.getCardNo())){
-                mealHistoryServices.insertOneCard(monthlyExpense.getCardNo(), manager.getMonthName(), manager.getYear());
-            }
+            
             
             lbl_msgs.setText(cardNo + " paid monthly expense");
             lbl_msgs.setForeground(Color.red);

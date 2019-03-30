@@ -449,7 +449,6 @@ public class Addmember extends javax.swing.JFrame {
                     Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
 
                     if (memberServices.saveInfo(member) > 0) {
-                        mealManageService.save(cardNo);
                         lbl_msgs.setText(cardNo+" card saved");
                         lbl_msgs.setForeground(Color.GREEN);
                     } else {

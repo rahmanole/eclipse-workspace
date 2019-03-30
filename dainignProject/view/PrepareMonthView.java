@@ -515,7 +515,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
             if (monthDetailsServices.save(monthDetails) > 0) {
 
                 MealDetailsServices.createMealDetailsTable(monthName, year);
-                MealHistoryServices.createMealHistoryTable(monthName, year, cardList, startDate, endDate);
+                MealHistoryServices.createMealHistoryTable(monthName, year,startDate, endDate);
                 monthlyExpensessServices.createMontlyExpenseTable(manager);
 
                 lbl_msgs.setText("Successfully saved");

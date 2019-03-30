@@ -22,8 +22,11 @@ import model.conn.ConnectionForDB;
  * @author OLEE
  */
 public class MealHistoryServices {
+    static SummaryService summaryService = new SummaryService();
 
-    public static void createMealHistoryTable(String month, String year, List<Integer> cardList, Date startDate, Date endDate) {
+    
+
+    public static void createMealHistoryTable(String month, String year, Date startDate, Date endDate) {
         String tblName = "meal_history_for_" + month + "_" + year;
         String tblCrtStmt = "create table IF NOT EXISTS " + tblName + "(id int(5)primary key auto_increment,"
                 + "card_no int)";
@@ -32,22 +35,29 @@ public class MealHistoryServices {
 
             PreparedStatement ps = conn.prepareStatement(tblCrtStmt);
             ps.execute();
-            for (String date : getDateList(startDate, endDate)) {
+            getDateList(startDate, endDate).forEach((date) -> {
                 addCol(date, tblName);
+            });
+            List<Integer> cardListInSummaryTable = summaryService.getCardList();
+            
+            for(int cardNo:cardListInSummaryTable){
+                insertOneCard(cardNo,tblName);
+                
+                
             }
             
-            
+
             System.out.println("Table created");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
     }
-    
-    public List<Integer> getCardList(Manager manager){
+
+    public static List<Integer> getCardList(Manager manager) {
         List<Integer> cardList = new ArrayList<>();
-        String tblName = "meal_history_for_" + manager.getMonthName()+ "_" + manager.getYear();
-        String sql = "select card_no from "+tblName;
+        String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
+        String sql = "select card_no from " + tblName;
         try {
             Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -58,15 +68,14 @@ public class MealHistoryServices {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return cardList;
     }
 
     public static void main(String[] args) {
     }
 
-    public void insertOneCard(int cardNo, String month, String year) {
-        String tblName = "meal_history_for_" + month + "_" + year;
+    public static void insertOneCard(int cardNo,String tblName) {
         String stmt = "insert into " + tblName + "(card_no) values(?)";
         try {
             Connection conn = ConnectionForDB.connect();
@@ -80,7 +89,7 @@ public class MealHistoryServices {
     }
 
     private static void addCol(String date, String tblName) {
-        String stmt = "alter table " + tblName + " add " + date + " varchar(10) default 'on'";
+        String stmt = "alter table " + tblName + " add " + date + " varchar(10)";
         try {
             Connection conn = ConnectionForDB.connect();
 
@@ -120,7 +129,7 @@ public class MealHistoryServices {
         cal.setTime(date);
         int day = cal.get(Calendar.DAY_OF_MONTH);
         int month = cal.get(Calendar.MONTH);
-        String date_name = getMonth(month) + "_" + day;        
+        String date_name = getMonth(month) + "_" + day;
         return date_name;
     }
 
@@ -154,51 +163,4 @@ public class MealHistoryServices {
         return dates;
     }
 
-    public static List<Integer> getUncertainCardList() {
-        ArrayList<Integer> uncertainCards = new ArrayList<>();
-        String sql = "select card_no from uncertain_cards";
-        Member member = null;
-        try {
-            Connection conn = ConnectionForDB.connect();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                uncertainCards.add(rs.getInt(1));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return uncertainCards;
-    }
-
-    public int removeFromUncertain(int cardNo) {
-        String sql = "delete from uncertain_cards where card_no=?";
-        Member member = null;
-        try {
-            Connection conn = ConnectionForDB.connect();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, cardNo);
-            return 1;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return -1;
-    }
-
-    public int insertIntoUncertain(int cardNo) {
-        String insert = "insert into uncertain_cards(card_no) values(?)";
-
-        try {
-            Connection conn = ConnectionForDB.connect();
-            PreparedStatement ps = conn.prepareStatement(insert);
-            ps.setInt(1, cardNo);
-            ps.executeUpdate();
-            return 1;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
 }
