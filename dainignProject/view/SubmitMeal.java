@@ -7,30 +7,30 @@ package view;
 
 import controller.pojo.Manager;
 import java.awt.Color;
+import java.sql.Date;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import model.dao.DeptNmaesServices;
+import model.dao.*;
+import model.dao.MealHistoryServices;
 import model.dao.MealManageService;
 import model.dao.MemberServices;
 
-/**
- *
- * @author OLEE
- */
 public class SubmitMeal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PersonalInfo
-     */
     MemberServices memberServices = new MemberServices();
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
     MealManageService mealManageService = new MealManageService();
+    MealHistoryServices mealHistoryServices = new MealHistoryServices();
+    MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
 
     String monthName = "";
     String year = "";
     Manager manager = null;
+    List<Integer> uncetainCards = null;
+    List<String> dateList = null;
 
     public SubmitMeal(Manager manager) {
 
@@ -39,15 +39,17 @@ public class SubmitMeal extends javax.swing.JFrame {
         year = manager.getYear();
         this.manager = manager;
 
+        uncetainCards = MealHistoryServices.getUncertainCardList();
+        lbl_totalUncertain.setText(uncetainCards.size() + "");
+        dateList = monthDetailsServices.getDateList(manager);
+
         lbl_title.setText("Month Name:" + manager.getMonthName() + " " + manager.getYear());
         this.setTitle("Registrar Memebr");
 
-        t_cardNoForStart.setBackground(new Color(0, 0, 0, 0));
-        t_cardNoForStop.setBackground(new Color(0, 0, 0, 0));
+        t_cardNoToStopMoreThan.setBackground(new Color(0, 0, 0, 0));
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
 
-        designTable(tbl_started);
-        designTable(tbl_stoped);
+       
 
     }
 
@@ -84,40 +86,32 @@ public class SubmitMeal extends javax.swing.JFrame {
         pnl_sideBar = new javax.swing.JPanel();
         sideBtn_addMeal = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        sideBtn_addMealDetails = new javax.swing.JLabel();
+        sideBtn_stopMeal = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         sideBtn_addmmeber2 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         lbl_title = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
         lbl_title1 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        btn_start = new javax.swing.JButton();
-        lbl_msgsStart = new javax.swing.JLabel();
-        jSeparator10 = new javax.swing.JSeparator();
-        t_cardNoForStart = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        btn_stop = new javax.swing.JButton();
-        lbl_msgsStop = new javax.swing.JLabel();
+        btn_stopParticular = new javax.swing.JButton();
+        lbl_stopMoreThan = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
-        t_cardNoForStop = new javax.swing.JTextField();
+        t_cardNoToStopMoreThan = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        lbl_startedToday = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_stoped = new javax.swing.JTable();
+        lbl_totalUncertain = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         lbl_stopedToday = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_started = new javax.swing.JTable();
+        date_mealDate = new com.toedter.calendar.JDateChooser();
+        com_uncertain = new javax.swing.JComboBox<>();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        btn_uncertain = new javax.swing.JButton();
+        lbl_uncertain = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -144,19 +138,19 @@ public class SubmitMeal extends javax.swing.JFrame {
         jLabel14.setOpaque(true);
         pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
 
-        sideBtn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addMealDetails.setText("Stop Meal");
-        sideBtn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addMealDetails.setOpaque(true);
-        sideBtn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+        sideBtn_stopMeal.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_stopMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_stopMeal.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_stopMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_stopMeal.setText("Stop Meal");
+        sideBtn_stopMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_stopMeal.setOpaque(true);
+        sideBtn_stopMeal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addMealDetailsMouseClicked(evt);
+                sideBtn_stopMealMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addMealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
+        pnl_sideBar.add(sideBtn_stopMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
 
         jLabel15.setOpaque(true);
         pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
@@ -185,173 +179,112 @@ public class SubmitMeal extends javax.swing.JFrame {
         lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_title.setText("Month Information");
         getContentPane().add(lbl_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 170, 30));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1020, 20));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Start Meal");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 70, 30));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1020, 10));
 
         lbl_title1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_title1.setForeground(new java.awt.Color(255, 255, 255));
         lbl_title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_title1.setText("Submit Meals");
+        lbl_title1.setText("Stop Meal");
         getContentPane().add(lbl_title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 280, 30));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 420, 10));
-
-        btn_start.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_start.setForeground(new java.awt.Color(255, 255, 255));
-        btn_start.setText("Start");
-        btn_start.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_start.setContentAreaFilled(false);
-        btn_start.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_start.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_startActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, 100, 40));
-        getContentPane().add(lbl_msgsStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 140, 30));
-
-        jSeparator10.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 250, 10));
-
-        t_cardNoForStart.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_cardNoForStart.setForeground(new java.awt.Color(255, 255, 255));
-        t_cardNoForStart.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_cardNoForStart.setBorder(null);
-        t_cardNoForStart.setOpaque(false);
-        getContentPane().add(t_cardNoForStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 250, 30));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Card No");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 70, 30));
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 20, 380));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 150, 10, 340));
 
-        btn_stop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_stop.setForeground(new java.awt.Color(255, 255, 255));
-        btn_stop.setText("Stop");
-        btn_stop.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_stop.setContentAreaFilled(false);
-        btn_stop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_stop.addActionListener(new java.awt.event.ActionListener() {
+        btn_stopParticular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_stopParticular.setForeground(new java.awt.Color(255, 255, 255));
+        btn_stopParticular.setText("Stop");
+        btn_stopParticular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        btn_stopParticular.setContentAreaFilled(false);
+        btn_stopParticular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_stopParticular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_stopActionPerformed(evt);
+                btn_stopParticularActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_stop, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 250, 100, 40));
-        getContentPane().add(lbl_msgsStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 190, 140, 30));
+        getContentPane().add(btn_stopParticular, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, 90, 40));
+        getContentPane().add(lbl_stopMoreThan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 250, 30));
 
         jSeparator11.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 180, 250, 10));
+        getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 250, 10));
 
-        t_cardNoForStop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_cardNoForStop.setForeground(new java.awt.Color(255, 255, 255));
-        t_cardNoForStop.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_cardNoForStop.setBorder(null);
-        t_cardNoForStop.setOpaque(false);
-        getContentPane().add(t_cardNoForStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, 250, 30));
+        t_cardNoToStopMoreThan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        t_cardNoToStopMoreThan.setForeground(new java.awt.Color(255, 255, 255));
+        t_cardNoToStopMoreThan.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t_cardNoToStopMoreThan.setBorder(null);
+        t_cardNoToStopMoreThan.setOpaque(false);
+        getContentPane().add(t_cardNoToStopMoreThan, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 250, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Card No");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 70, 30));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 70, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Stop Meal");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 90, 70, 30));
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 420, 10));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("More Than One Day");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 420, 30));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 420, 10));
 
-        lbl_startedToday.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_startedToday.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lbl_startedToday, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 80, 30));
-        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 420, 10));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Cards Stared Meal Today");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, 170, 30));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Total:");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 60, 30));
-
-        tbl_stoped.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tbl_stoped.setForeground(new java.awt.Color(255, 255, 255));
-        tbl_stoped.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Card No."
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbl_stoped.setRowHeight(30);
-        jScrollPane2.setViewportView(tbl_stoped);
-        if (tbl_stoped.getColumnModel().getColumnCount() > 0) {
-            tbl_stoped.getColumnModel().getColumn(0).setResizable(false);
-        }
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 410, 100, 220));
+        lbl_totalUncertain.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_totalUncertain.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(lbl_totalUncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 190, 80, 30));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Total:");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 400, 60, 30));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 190, 60, 30));
 
         lbl_stopedToday.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_stopedToday.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lbl_stopedToday, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 400, 80, 30));
-        getContentPane().add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 390, 420, 10));
+        getContentPane().add(lbl_stopedToday, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 570, 80, 30));
+        getContentPane().add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 420, 10));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Cards Stoped Meal Today");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 350, 170, 30));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Stop meal for all uncertain card");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, 420, 30));
+        getContentPane().add(date_mealDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 250, 30));
 
-        tbl_started.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tbl_started.setForeground(new java.awt.Color(255, 255, 255));
-        tbl_started.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Card No."
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        com_uncertain.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        com_uncertain.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Uncertain", "Particular Date" }));
+        com_uncertain.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                com_uncertainItemStateChanged(evt);
             }
         });
-        tbl_started.setRowHeight(30);
-        jScrollPane1.setViewportView(tbl_started);
-        if (tbl_started.getColumnModel().getColumnCount() > 0) {
-            tbl_started.getColumnModel().getColumn(0).setResizable(false);
-        }
+        getContentPane().add(com_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 250, 30));
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, 100, 220));
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Type");
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 70, 30));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Meal Date");
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 70, 30));
+
+        btn_uncertain.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_uncertain.setForeground(new java.awt.Color(255, 255, 255));
+        btn_uncertain.setText("Stop");
+        btn_uncertain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        btn_uncertain.setContentAreaFilled(false);
+        btn_uncertain.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_uncertain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_uncertainActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 340, 130, 40));
+        getContentPane().add(lbl_uncertain, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 290, 250, 30));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
         pack();
@@ -362,76 +295,86 @@ public class SubmitMeal extends javax.swing.JFrame {
         new AddMealView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_addMealMouseClicked
 
-    private void sideBtn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMealDetailsMouseClicked
+    private void sideBtn_stopMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_stopMealMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_sideBtn_addMealDetailsMouseClicked
+        new StopMealView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_stopMealMouseClicked
 
     private void sideBtn_addmmeber2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeber2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_sideBtn_addmmeber2MouseClicked
-
-    private void btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_startActionPerformed
+    String flag = "Uncertain";
+    private void btn_stopParticularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_stopParticularActionPerformed
         // TODO add your handling code here:
+        flag = com_uncertain.getSelectedItem().toString();
         int cardNo = 0;
-        int count = 0;
         try {
-            cardNo = Integer.parseInt(t_cardNoForStart.getText().trim());
+            cardNo = Integer.parseInt(t_cardNoToStopMoreThan.getText());
         } catch (NumberFormatException e) {
-            lbl_msgsStart.setText("Enter only digit");
-            lbl_msgsStart.setForeground(Color.red);
+            lbl_stopMoreThan.setText("Enter valid card No");
+            lbl_stopMoreThan.setForeground(Color.red);
         }
 
-        if (cardNo == 0 || cardNo < 0) {
-            lbl_msgsStart.setText("Enter valid");
-            lbl_msgsStart.setForeground(Color.red);
-        } else {
-            if (memberServices.isCardExists(cardNo)) {
-                if (mealManageService.updateStartStopMeal(cardNo, "on") > 0) {
-                    count++;
-                    addToTable(cardNo,tbl_started);
-                    lbl_startedToday.setText(count + "");
-                    lbl_msgsStart.setText("Started Meal For " + cardNo);
-                    lbl_msgsStart.setForeground(Color.GREEN);
-                }
+        if (cardNo > 0) {
+            if (flag.isEmpty()) {
+                lbl_stopMoreThan.setText("Select End date");
             } else {
-                lbl_msgsStart.setText("Card doesn't exists");
-                lbl_msgsStart.setForeground(Color.red);
+                if (flag.equals("Particular Date")) {
+                    Date startDate = new java.sql.Date(date_mealDate.getDate().getTime());
+                    if (dateList.contains(startDate.toString())) {
+                        String colName = mealHistoryServices.dateFormate(startDate);
+                        mealManageService.stopMeal(manager, colName, cardNo);
+                    } else {
+                        lbl_stopMoreThan.setText("Select this month date");
+                    }
+
+                } else {
+                    Date startDate = new java.sql.Date(date_mealDate.getDate().getTime());
+                    if (startDate != null) {
+                        if (dateList.contains(startDate.toString())) {
+                            String colName = mealHistoryServices.dateFormate(startDate);
+                            mealManageService.stopMeal(manager, colName, cardNo);
+                            mealHistoryServices.insertIntoUncertain(cardNo);
+                        } else {
+                            lbl_stopMoreThan.setText("Select this month date");
+                        }
+
+                    } else {
+                        lbl_stopMoreThan.setText("Select Meal Date");
+                        lbl_stopMoreThan.setForeground(Color.red);
+                    }
+                }
             }
-
+        } else {
+            lbl_stopMoreThan.setText("Enter valid No");
+            lbl_stopMoreThan.setForeground(Color.red);
         }
-    }//GEN-LAST:event_btn_startActionPerformed
 
-    private void btn_stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_stopActionPerformed
+    }//GEN-LAST:event_btn_stopParticularActionPerformed
+
+    private void com_uncertainItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_uncertainItemStateChanged
         // TODO add your handling code here:
-        int cardNo = 0;
-        int count = 0;
-        try {
-            cardNo = Integer.parseInt(t_cardNoForStop.getText().trim());
-        } catch (NumberFormatException e) {
-            lbl_msgsStop.setText("Enter only digit");
-            lbl_msgsStop.setForeground(Color.red);
-        }
+        
+      
+    }//GEN-LAST:event_com_uncertainItemStateChanged
 
-        if (cardNo == 0 || cardNo < 0) {
-            lbl_msgsStop.setText("Enter valid card");
-            lbl_msgsStop.setForeground(Color.red);
-        } else {
-            if (memberServices.isCardExists(cardNo)) {
-                if (mealManageService.updateStartStopMeal(cardNo, "off") > 0) {
-                    count++;
-                    addToTable(cardNo,tbl_stoped);
-                    lbl_stopedToday.setText(count + "");
-                    lbl_msgsStop.setText("Stoped Meal For " + cardNo);
-                    lbl_msgsStop.setForeground(Color.GREEN);
-                }
-            } else {
-                lbl_msgsStop.setText("Card doesn't exists");
-                lbl_msgsStop.setForeground(Color.red);
+    private void btn_uncertainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uncertainActionPerformed
+        // TODO add your handling code here:
+
+        Date startDate = new java.sql.Date(date_mealDate.getDate().getTime());
+        String colName = mealHistoryServices.dateFormate(startDate);
+
+        if (dateList.contains(startDate.toString())) {
+            for (int cardNo : uncetainCards) {
+                mealManageService.stopMeal(manager, colName, cardNo);
             }
-
+        } else {
+            lbl_uncertain.setText("Select this month date");
         }
-    }//GEN-LAST:event_btn_stopActionPerformed
-    private void addToTable(int cardNo,JTable tbl_name) {
+
+
+    }//GEN-LAST:event_btn_uncertainActionPerformed
+    private void addToTable(int cardNo, JTable tbl_name) {
         DefaultTableModel model = (DefaultTableModel) tbl_name.getModel();
 
         Object[] obj = new Object[1];
@@ -454,7 +397,6 @@ public class SubmitMeal extends javax.swing.JFrame {
 //
 //        //model.addRow(obj);
 //    }
-
     /**
      * @param args the command line arguments
      */
@@ -554,43 +496,35 @@ public class SubmitMeal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_start;
-    private javax.swing.JButton btn_stop;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JButton btn_stopParticular;
+    private javax.swing.JButton btn_uncertain;
+    private javax.swing.JComboBox<String> com_uncertain;
+    private com.toedter.calendar.JDateChooser date_mealDate;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel lbl_bg;
-    private javax.swing.JLabel lbl_msgsStart;
-    private javax.swing.JLabel lbl_msgsStop;
-    private javax.swing.JLabel lbl_startedToday;
+    private javax.swing.JLabel lbl_stopMoreThan;
     private javax.swing.JLabel lbl_stopedToday;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_title1;
+    private javax.swing.JLabel lbl_totalUncertain;
+    private javax.swing.JLabel lbl_uncertain;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addMeal;
-    private javax.swing.JLabel sideBtn_addMealDetails;
     private javax.swing.JLabel sideBtn_addmmeber2;
-    private javax.swing.JTextField t_cardNoForStart;
-    private javax.swing.JTextField t_cardNoForStop;
-    private javax.swing.JTable tbl_started;
-    private javax.swing.JTable tbl_stoped;
+    private javax.swing.JLabel sideBtn_stopMeal;
+    private javax.swing.JTextField t_cardNoToStopMoreThan;
     // End of variables declaration//GEN-END:variables
 }

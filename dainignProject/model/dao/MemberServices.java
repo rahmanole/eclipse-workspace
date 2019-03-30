@@ -2,7 +2,6 @@ package model.dao;
 
 import com.mysql.jdbc.Connection;
 import controller.pojo.Member;
-import controller.pojo.PersonalInfo;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +11,7 @@ import model.conn.ConnectionForDB;
 
 
 public class MemberServices {
+    SummaryService lastMonthSummaryService = new SummaryService();
     
     public static String tblCrtStmt = "create table IF NOT EXISTS member_info(id int(5)primary key auto_increment,"
             + "name varchar(55),mobile varchar(55),email varchar(55),dept_name varchar(55),reg_no varchar(55),"
@@ -42,7 +42,7 @@ public class MemberServices {
             ps.setString(9, member.getMembershipStaus());
             ps.setDate(10, new Date(System.currentTimeMillis()));
             ps.executeUpdate();
-            
+            lastMonthSummaryService.save(member.getCardNo());
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,24 +148,19 @@ public class MemberServices {
     }
     
     public List<Integer> getAllActiveCards(){
-        ArrayList<Integer> activeCardList = new ArrayList<>();
-        String sql = "select card_no from member_info where membership_status=?";
-        Member member = null;
+        ArrayList<Integer> uncertainCars = new ArrayList<>();
+        String sql = "select card_no from uncertain_cards";
         try {
             Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "active");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                
+                uncertainCars.add(rs.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        
-        return activeCardList;
-    }
-    
-
+        }        
+        return uncertainCars;
+    } 
 }
 

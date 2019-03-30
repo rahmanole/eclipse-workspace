@@ -16,10 +16,7 @@ import model.dao.RoleServices;
  * @author ccsl-pc
  */
 public class LogingPage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form LogingPage
-     */
+    
     RoleServices roleServices = new RoleServices();
     LoginServices loginServices = new LoginServices();
     ManagerService managerService = new ManagerService();

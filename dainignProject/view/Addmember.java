@@ -81,9 +81,6 @@ public class Addmember extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_sideBar = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        sideBtn_member1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -117,28 +114,22 @@ public class Addmember extends javax.swing.JFrame {
         btn_addMember = new javax.swing.JLabel();
         btn_editMember = new javax.swing.JLabel();
         btn_removeMember = new javax.swing.JLabel();
+        pnl_sideBar = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        sideBtn_addManager = new javax.swing.JLabel();
+        sideBtn_addAdmin = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        sideBtn_addmmeber = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        sideBtn_addmmeber1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        sideBtn_addDept = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
-        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setOpaque(true);
-        pnl_sideBar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
-
-        sideBtn_member1.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_member1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_member1.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_member1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_member1.setText("Member");
-        sideBtn_member1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_member1.setOpaque(true);
-        pnl_sideBar.add(sideBtn_member1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
-
-        getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -332,6 +323,96 @@ public class Addmember extends javax.swing.JFrame {
 
         getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 130, 130));
 
+        pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
+        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setOpaque(true);
+        pnl_sideBar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
+
+        sideBtn_addManager.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addManager.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addManager.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addManager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addManager.setText("Add Manager");
+        sideBtn_addManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addManager.setOpaque(true);
+        sideBtn_addManager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addManagerMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
+
+        sideBtn_addAdmin.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addAdmin.setText("Add Admin");
+        sideBtn_addAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addAdmin.setOpaque(true);
+        sideBtn_addAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addAdminMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
+
+        jLabel12.setOpaque(true);
+        pnl_sideBar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
+
+        sideBtn_addmmeber.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addmmeber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addmmeber.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addmmeber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addmmeber.setText("Add Member");
+        sideBtn_addmmeber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addmmeber.setOpaque(true);
+        sideBtn_addmmeber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addmmeberMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
+
+        jLabel13.setOpaque(true);
+        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
+
+        sideBtn_addmmeber1.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addmmeber1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addmmeber1.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addmmeber1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addmmeber1.setText("Add Member");
+        sideBtn_addmmeber1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addmmeber1.setOpaque(true);
+        sideBtn_addmmeber1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addmmeber1MouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addmmeber1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
+
+        jLabel14.setOpaque(true);
+        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
+
+        sideBtn_addDept.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addDept.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addDept.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addDept.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addDept.setText("Add Department");
+        sideBtn_addDept.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addDept.setOpaque(true);
+        sideBtn_addDept.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addDeptMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addDept, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, 40));
+
+        jLabel15.setOpaque(true);
+        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 10, 40));
+
+        getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
+
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
@@ -363,7 +444,7 @@ public class Addmember extends javax.swing.JFrame {
             lbl_msgs.setText("Fill out all the fields");
             lbl_msgs.setForeground(Color.red);
         } else {
-            if (memberServices.isCardExists(cardNo)) {
+            if (!memberServices.isCardExists(cardNo)) {
                 if (!memberServices.isEmailExists(email)) {
                     Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
 
@@ -386,6 +467,31 @@ public class Addmember extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_saveActionPerformed
+
+    private void sideBtn_addManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addManagerMouseClicked
+        // TODO add your handling code here:
+        new AddManager().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addManagerMouseClicked
+
+    private void sideBtn_addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdminMouseClicked
+        // TODO add your handling code here:
+        new AddAdminView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addAdminMouseClicked
+
+    private void sideBtn_addmmeberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeberMouseClicked
+        // TODO add your handling code here:
+        new Addmember().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
+
+    private void sideBtn_addmmeber1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeber1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sideBtn_addmmeber1MouseClicked
+
+    private void sideBtn_addDeptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addDeptMouseClicked
+        // TODO add your handling code here:
+
+        new  AddDeptView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addDeptMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -454,6 +560,10 @@ public class Addmember extends javax.swing.JFrame {
     private javax.swing.JPanel drpDown_member;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -475,7 +585,11 @@ public class Addmember extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_bg;
     private javax.swing.JLabel lbl_msgs;
     private javax.swing.JPanel pnl_sideBar;
-    private javax.swing.JLabel sideBtn_member1;
+    private javax.swing.JLabel sideBtn_addAdmin;
+    private javax.swing.JLabel sideBtn_addDept;
+    private javax.swing.JLabel sideBtn_addManager;
+    private javax.swing.JLabel sideBtn_addmmeber;
+    private javax.swing.JLabel sideBtn_addmmeber1;
     private javax.swing.JTextField t_cardNo;
     private javax.swing.JTextField t_cntNum;
     private javax.swing.JTextField t_email;

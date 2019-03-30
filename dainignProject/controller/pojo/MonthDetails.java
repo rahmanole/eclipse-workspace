@@ -20,11 +20,14 @@ public class MonthDetails {
     private int numberOfNormalDaymeals;
     private double normalMealRate;
     private double feastMealRate;
+    private double total_cost;
     private Date feastDate;
     private Date startDate;
+    private Date endDate;
     private List<Integer> cardNoList;
 
-    public MonthDetails(String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, Date feastDate,Date startDate) {
+    public MonthDetails(String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, double total_cost, Date feastDate, Date startDate 
+        ,Date endDate) {
         this.monthName = monthName;
         this.year = year;
         this.employee_fees = employee_fees;
@@ -34,11 +37,13 @@ public class MonthDetails {
         this.numberOfNormalDaymeals = numberOfNormalDaymeals;
         this.normalMealRate = normalMealRate;
         this.feastMealRate = feastMealRate;
+        this.total_cost = total_cost;
         this.feastDate = feastDate;
         this.startDate = startDate;
+        this.endDate = endDate;
     }
-    
-    public MonthDetails(int id, String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, Date feastDate,Date startDate) {
+
+    public MonthDetails(int id, String monthName, String year, double employee_fees, int totalDays, int totalFridays, double friDayMealRate, int numberOfNormalDaymeals, double normalMealRate, double feastMealRate, double total_cost, Date feastDate, Date startDate,Date endDate) {
         this.id = id;
         this.monthName = monthName;
         this.year = year;
@@ -49,12 +54,12 @@ public class MonthDetails {
         this.numberOfNormalDaymeals = numberOfNormalDaymeals;
         this.normalMealRate = normalMealRate;
         this.feastMealRate = feastMealRate;
+        this.total_cost = total_cost;
         this.feastDate = feastDate;
         this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    
-    
     public int getId() {
         return id;
     }
@@ -131,6 +136,14 @@ public class MonthDetails {
         return feastMealRate;
     }
 
+    public double getTotal_cost() {
+        return total_cost;
+    }
+
+    public void setTotal_cost(double total_cost) {
+        this.total_cost = total_cost;
+    }
+
     public void setFeastMealRate(double feastMealRate) {
         this.feastMealRate = feastMealRate;
     }
@@ -158,17 +171,14 @@ public class MonthDetails {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    
-    
-    
-    
-    
 
+    public Date getEndDate() {
+        return endDate;
+    }
 
-    
-
-    
-    
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
     
     
 

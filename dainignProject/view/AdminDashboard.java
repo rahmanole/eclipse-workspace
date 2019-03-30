@@ -5,23 +5,15 @@
  */
 package view;
 
-import controller.pojo.AssignedMonths;
-import controller.pojo.Department;
 import controller.pojo.Member;
-import controller.pojo.PersonalInfo;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
-import model.dao.MealDetailsServices;
 import model.dao.MemberServices;
-import model.dao.OffDaysServices;
-import model.dao.PersonalInfoServices;
 
 /**
  *
@@ -447,21 +439,26 @@ public class AdminDashboard extends javax.swing.JFrame {
             lbl_msgs.setText("Fill out all the fields");
             lbl_msgs.setForeground(Color.red);
         } else {
-            if (!memberServices.isEmailExists(email)) {
-                Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
+            if (!memberServices.isCardExists(cardNo)) {
+                if (!memberServices.isEmailExists(email)) {
+                    Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
 
-                if (memberServices.saveInfo(member) > 0) {
+                    if (memberServices.saveInfo(member) > 0) {
 
-                    lbl_msgs.setText("Info saved");
-                    lbl_msgs.setForeground(Color.GREEN);
+                        lbl_msgs.setText("Info saved");
+                        lbl_msgs.setForeground(Color.GREEN);
 
 //                    addToTable(member);
+                    } else {
+                        lbl_msgs.setText("Not saved");
+                        lbl_msgs.setForeground(Color.red);
+                    }
                 } else {
-                    lbl_msgs.setText("Not saved");
+                    lbl_msgs.setText("Email already exists");
                     lbl_msgs.setForeground(Color.red);
                 }
             } else {
-                lbl_msgs.setText("Email already exists");
+                lbl_msgs.setText("Card already exists");
                 lbl_msgs.setForeground(Color.red);
             }
         }
@@ -489,8 +486,8 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void sideBtn_addDeptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addDeptMouseClicked
         // TODO add your handling code here:
-        
-        new  AddDeptView().setVisible(true);
+
+        new AddDeptView().setVisible(true);
     }//GEN-LAST:event_sideBtn_addDeptMouseClicked
 //
 //    private void addToTable(Member member) {

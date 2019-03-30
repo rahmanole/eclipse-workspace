@@ -1,22 +1,26 @@
 package controller.pojo;
 
-import java.util.List;
+import java.sql.Date;
 
 
 public class Meal {
     private int id;
-    private String date;
-    private int totalMeals;
+    private Date date;
+    private int totalActiveMember;
+    private int totalOnMeals;
+    private int totalOffMeal;
     private String mealType;
     private double actual_expensess;
     private double spent_expenss;
     private double balance;
     private String itemDetails;
 
-    public Meal(int id, String date, int totalMeals, String mealType, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
+    public Meal(int id, Date date, int totalActiveMember, int totalOnMeals, int totalOffMeal, String mealType, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
         this.id = id;
         this.date = date;
-        this.totalMeals = totalMeals;
+        this.totalActiveMember = totalActiveMember;
+        this.totalOnMeals = totalOnMeals;
+        this.totalOffMeal = totalOffMeal;
         this.mealType = mealType;
         this.actual_expensess = actual_expensess;
         this.spent_expenss = spent_expenss;
@@ -24,15 +28,20 @@ public class Meal {
         this.itemDetails = itemDetails;
     }
 
-    public Meal(String date, int totalMeals, String mealType, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
+    public Meal(Date date, int totalActiveMember, int totalOnMeals, int totalOffMeal, String mealType, double actual_expensess, double spent_expenss, double balance, String itemDetails) {
         this.date = date;
-        this.totalMeals = totalMeals;
+        this.totalActiveMember = totalActiveMember;
+        this.totalOnMeals = totalOnMeals;
+        this.totalOffMeal = totalOffMeal;
         this.mealType = mealType;
         this.actual_expensess = actual_expensess;
         this.spent_expenss = spent_expenss;
         this.balance = balance;
         this.itemDetails = itemDetails;
     }
+
+    
+    
     
     
     public int getId() {
@@ -43,20 +52,36 @@ public class Meal {
         this.id = id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public int getTotalMeals() {
-        return totalMeals;
+    public int getTotalActiveMember() {
+        return totalActiveMember;
     }
 
-    public void setTotalMeals(int totalMeals) {
-        this.totalMeals = totalMeals;
+    public void setTotalActiveMember(int totalActiveMember) {
+        this.totalActiveMember = totalActiveMember;
+    }
+
+    public int getTotalOnMeals() {
+        return totalOnMeals;
+    }
+
+    public void setTotalOnMeals(int totalOnMeals) {
+        this.totalOnMeals = totalOnMeals;
+    }
+
+    public int getTotalOffMeal() {
+        return totalOffMeal;
+    }
+
+    public void setTotalOffMeal(int totalOffMeal) {
+        this.totalOffMeal = totalOffMeal;
     }
 
     public String getMealType() {
@@ -98,5 +123,8 @@ public class Meal {
     public void setItemDetails(String itemDetails) {
         this.itemDetails = itemDetails;
     }
+    
+    
+    
 }
      

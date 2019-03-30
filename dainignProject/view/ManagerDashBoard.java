@@ -1,32 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-import controller.pojo.AssignedMonths;
-import controller.pojo.Department;
 import controller.pojo.Manager;
 import controller.pojo.Member;
-import controller.pojo.PersonalInfo;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
 import model.dao.MemberServices;
 import model.dao.OffDaysServices;
-import model.dao.PersonalInfoServices;
 
-/**
- *
- * @author OLEE
- */
 public class ManagerDashBoard extends javax.swing.JFrame {
 
     /**
@@ -49,20 +35,10 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         LogingPage logingPage = new LogingPage();
         lbl_title.setText("Month Name:"+manager.getMonthName()+" "+manager.getYear());
         this.setTitle("Registrar Memebr");
-        t_name.setBackground(new Color(0, 0, 0, 0));
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
-        t_cntNum.setBackground(new Color(0, 0, 0, 0));
-        t_email.setBackground(new Color(0, 0, 0, 0));
-        t_regNo.setBackground(new Color(0, 0, 0, 0));
-        t_session.setBackground(new Color(0, 0, 0, 0));
-        com_depts.setBackground(new Color(0, 0, 0, 0));
-        com_type.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
 
-        for (String deptNames : deptNames) {
-            com_depts.addItem(deptNames);
-        }
     }
 
     private ManagerDashBoard() {
@@ -104,51 +80,14 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         sideBtn_addMealDetails = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        sideBtn_submitMeal = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        sideBtn_collectExpense = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        sideBtn_manageMeals = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         lbl_title = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        t_name = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
-        t_cntNum = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
-        t_email = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel6 = new javax.swing.JLabel();
-        t_regNo = new javax.swing.JTextField();
-        jSeparator6 = new javax.swing.JSeparator();
-        t_session = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jSeparator7 = new javax.swing.JSeparator();
-        lbl_msgs = new javax.swing.JLabel();
-        btn_save = new javax.swing.JButton();
-        com_depts = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        t_cardNo = new javax.swing.JTextField();
-        jSeparator9 = new javax.swing.JSeparator();
-        jLabel9 = new javax.swing.JLabel();
-        com_type = new javax.swing.JComboBox<>();
-        jSeparator10 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
-        drpDown_mealDetails = new javax.swing.JPanel();
-        btn_addMealDetails = new javax.swing.JLabel();
-        btn_editMealDetails = new javax.swing.JLabel();
-        btn_removeMealDetails = new javax.swing.JLabel();
-        drpDown_member = new javax.swing.JPanel();
-        btn_addMember = new javax.swing.JLabel();
-        btn_editMember = new javax.swing.JLabel();
-        btn_removeMember = new javax.swing.JLabel();
         lbl_title1 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
-        drpDown_mealDetails1 = new javax.swing.JPanel();
-        btn_addMealDetails1 = new javax.swing.JLabel();
-        btn_editMealDetails1 = new javax.swing.JLabel();
-        btn_removeMealDetails1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -169,10 +108,10 @@ public class ManagerDashBoard extends javax.swing.JFrame {
                 sideBtn_addmmeberMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 180, 40));
+        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 180, 40));
 
         jLabel13.setOpaque(true);
-        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 10, 40));
+        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 10, 40));
 
         sideBtn_addMontlyExpensess.setBackground(new java.awt.Color(51, 0, 153));
         sideBtn_addMontlyExpensess.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -186,10 +125,10 @@ public class ManagerDashBoard extends javax.swing.JFrame {
                 sideBtn_addMontlyExpensessMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addMontlyExpensess, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
+        pnl_sideBar.add(sideBtn_addMontlyExpensess, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 180, 40));
 
         jLabel14.setOpaque(true);
-        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
+        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 10, 40));
 
         sideBtn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
         sideBtn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -203,27 +142,44 @@ public class ManagerDashBoard extends javax.swing.JFrame {
                 sideBtn_addMealDetailsMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addMealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
+        pnl_sideBar.add(sideBtn_addMealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 180, 40));
 
         jLabel15.setOpaque(true);
-        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
+        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 10, 40));
 
-        sideBtn_submitMeal.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_submitMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_submitMeal.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_submitMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_submitMeal.setText("Submit Meals");
-        sideBtn_submitMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_submitMeal.setOpaque(true);
-        sideBtn_submitMeal.addMouseListener(new java.awt.event.MouseAdapter() {
+        sideBtn_collectExpense.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_collectExpense.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_collectExpense.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_collectExpense.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_collectExpense.setText("Collect Expense");
+        sideBtn_collectExpense.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_collectExpense.setOpaque(true);
+        sideBtn_collectExpense.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_submitMealMouseClicked(evt);
+                sideBtn_collectExpenseMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_submitMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
+        pnl_sideBar.add(sideBtn_collectExpense, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, 40));
 
-        jLabel16.setOpaque(true);
-        pnl_sideBar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
+        jLabel17.setOpaque(true);
+        pnl_sideBar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 10, 40));
+
+        sideBtn_manageMeals.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_manageMeals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_manageMeals.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_manageMeals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_manageMeals.setText("Manage Meal");
+        sideBtn_manageMeals.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_manageMeals.setOpaque(true);
+        sideBtn_manageMeals.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_manageMealsMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_manageMeals, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 180, 40));
+
+        jLabel18.setOpaque(true);
+        pnl_sideBar.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 10, 40));
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -233,244 +189,6 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         lbl_title.setText("Personal Information");
         getContentPane().add(lbl_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 170, 30));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1020, 20));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Name");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 70, 30));
-
-        t_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_name.setForeground(new java.awt.Color(255, 255, 255));
-        t_name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_name.setBorder(null);
-        t_name.setOpaque(false);
-        getContentPane().add(t_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 250, 30));
-
-        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 250, 10));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Mobile");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 70, 30));
-
-        t_cntNum.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_cntNum.setForeground(new java.awt.Color(255, 255, 255));
-        t_cntNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_cntNum.setBorder(null);
-        t_cntNum.setOpaque(false);
-        getContentPane().add(t_cntNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 250, 30));
-
-        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 250, 10));
-
-        t_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_email.setForeground(new java.awt.Color(255, 255, 255));
-        t_email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_email.setBorder(null);
-        t_email.setOpaque(false);
-        getContentPane().add(t_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 250, 30));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Email");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 70, 30));
-
-        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 250, 10));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Department");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 80, 30));
-
-        jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 250, 10));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Reg. No");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 80, 30));
-
-        t_regNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_regNo.setForeground(new java.awt.Color(255, 255, 255));
-        t_regNo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_regNo.setBorder(null);
-        t_regNo.setOpaque(false);
-        getContentPane().add(t_regNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 250, 30));
-
-        jSeparator6.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 250, 10));
-
-        t_session.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_session.setForeground(new java.awt.Color(255, 255, 255));
-        t_session.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_session.setBorder(null);
-        t_session.setOpaque(false);
-        getContentPane().add(t_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 420, 250, 30));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Session");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 80, 30));
-
-        jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 250, 10));
-        getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 250, 140, 30));
-
-        btn_save.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_save.setForeground(new java.awt.Color(255, 255, 255));
-        btn_save.setText("Save");
-        btn_save.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_save.setContentAreaFilled(false);
-        btn_save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_saveActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 300, 100, 40));
-
-        com_depts.setBackground(new java.awt.Color(255, 51, 51));
-        com_depts.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        com_depts.setForeground(new java.awt.Color(0, 102, 51));
-        com_depts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Department" }));
-        com_depts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(com_depts, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 250, 30));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Card No");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 110, 70, 30));
-
-        t_cardNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_cardNo.setForeground(new java.awt.Color(255, 255, 255));
-        t_cardNo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_cardNo.setBorder(null);
-        t_cardNo.setOpaque(false);
-        getContentPane().add(t_cardNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 110, 250, 30));
-
-        jSeparator9.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 140, 250, 10));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Type");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 190, 70, 30));
-
-        com_type.setBackground(new java.awt.Color(255, 51, 51));
-        com_type.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        com_type.setForeground(new java.awt.Color(0, 102, 51));
-        com_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select type", "Regular", "Extra" }));
-        com_type.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(com_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 190, 250, 30));
-
-        jSeparator10.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 220, 250, 10));
-
-        jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 10, 420));
-
-        btn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMealDetails.setText("Add Meal Details");
-        btn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMealDetails.setOpaque(true);
-        btn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_addMealDetailsMouseClicked(evt);
-            }
-        });
-
-        btn_editMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMealDetails.setText("Edit Meal Details");
-        btn_editMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMealDetails.setOpaque(true);
-
-        btn_removeMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMealDetails.setText("Remove a Meal");
-        btn_removeMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMealDetails.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_mealDetailsLayout = new javax.swing.GroupLayout(drpDown_mealDetails);
-        drpDown_mealDetails.setLayout(drpDown_mealDetailsLayout);
-        drpDown_mealDetailsLayout.setHorizontalGroup(
-            drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_mealDetailsLayout.createSequentialGroup()
-                .addGroup(drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_mealDetailsLayout.setVerticalGroup(
-            drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_mealDetailsLayout.createSequentialGroup()
-                .addComponent(btn_addMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_removeMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_mealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 130, 130));
-
-        btn_addMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMember.setText("Add Member");
-        btn_addMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMember.setOpaque(true);
-
-        btn_editMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMember.setText("Edit Info");
-        btn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMember.setOpaque(true);
-
-        btn_removeMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMember.setText("Remove Member");
-        btn_removeMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMember.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_memberLayout = new javax.swing.GroupLayout(drpDown_member);
-        drpDown_member.setLayout(drpDown_memberLayout);
-        drpDown_memberLayout.setHorizontalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addGroup(drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_memberLayout.setVerticalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 130, 180));
 
         lbl_title1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_title1.setForeground(new java.awt.Color(255, 255, 255));
@@ -485,103 +203,8 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
-        btn_addMealDetails1.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMealDetails1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMealDetails1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMealDetails1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMealDetails1.setText("Add Meal Details");
-        btn_addMealDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMealDetails1.setOpaque(true);
-        btn_addMealDetails1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_addMealDetails1MouseClicked(evt);
-            }
-        });
-
-        btn_editMealDetails1.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMealDetails1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMealDetails1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMealDetails1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMealDetails1.setText("Edit Meal Details");
-        btn_editMealDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMealDetails1.setOpaque(true);
-
-        btn_removeMealDetails1.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMealDetails1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMealDetails1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMealDetails1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMealDetails1.setText("Remove a Meal");
-        btn_removeMealDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMealDetails1.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_mealDetails1Layout = new javax.swing.GroupLayout(drpDown_mealDetails1);
-        drpDown_mealDetails1.setLayout(drpDown_mealDetails1Layout);
-        drpDown_mealDetails1Layout.setHorizontalGroup(
-            drpDown_mealDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_mealDetails1Layout.createSequentialGroup()
-                .addGroup(drpDown_mealDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_mealDetails1Layout.setVerticalGroup(
-            drpDown_mealDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_mealDetails1Layout.createSequentialGroup()
-                .addComponent(btn_addMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_removeMealDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_mealDetails1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 130, 130));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
-        // TODO add your handling code here:
-        String name = t_name.getText().trim();
-        String cnt_num = t_cntNum.getText().trim();
-        String email = t_email.getText().trim();
-        String deptName = com_depts.getSelectedItem().toString();
-        String regNo = t_regNo.getText().trim();
-        String session = t_session.getText().trim();
-        int cardNo = 0;
-        try {
-            cardNo = Integer.parseInt(t_cardNo.getText().trim());
-        } catch (NumberFormatException e) {
-            lbl_msgs.setText("Enter valid card no");
-            lbl_msgs.setForeground(Color.red);
-        }
-        String memberType = com_type.getSelectedItem().toString();
-
-        if (name.isEmpty() || cnt_num.isEmpty() || email.isEmpty() || deptName.isEmpty() || regNo.isEmpty() || session.isEmpty()) {
-            lbl_msgs.setText("Fill out all the fields");
-            lbl_msgs.setForeground(Color.red);
-        } else {
-            if (!memberServices.isEmailExists(email)) {
-                Member member = new Member(name, cnt_num, email, deptName, regNo, session, cardNo, memberType, "Inactive", new Date(System.currentTimeMillis()));
-
-                if (memberServices.saveInfo(member) > 0) {
-                    lbl_msgs.setText("Info saved");
-                    lbl_msgs.setForeground(Color.GREEN);
-                    OffDaysServices.createOffDaysRecordTable(cardNo);
-                    AssignedMonthsServices.createAssignedMonthsRecordTable(cardNo);
-//                    addToTable(member);
-                } else {
-                    lbl_msgs.setText("Not saved");
-                    lbl_msgs.setForeground(Color.red);
-                }
-            } else {
-                lbl_msgs.setText("Email already exists");
-                lbl_msgs.setForeground(Color.red);
-            }
-        }
-
-    }//GEN-LAST:event_btn_saveActionPerformed
 
     private void sideBtn_addmmeberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeberMouseClicked
         // TODO add your handling code here:
@@ -595,21 +218,18 @@ public class ManagerDashBoard extends javax.swing.JFrame {
 
     private void sideBtn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMealDetailsMouseClicked
         // TODO add your handling code here:
+        new MealDetailsView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_addMealDetailsMouseClicked
 
-    private void sideBtn_submitMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_submitMealMouseClicked
+    private void sideBtn_collectExpenseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_collectExpenseMouseClicked
+        // TODO add your handling code here:
+        new MonthlyExpenseView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_collectExpenseMouseClicked
+
+    private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
         // TODO add your handling code here:
         new SubmitMeal(manager).setVisible(true);
-    }//GEN-LAST:event_sideBtn_submitMealMouseClicked
-
-    private void btn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMealDetailsMouseClicked
-        // TODO add your handling code here:
-        new AddMealDetailsView(manager).setVisible(true);
-    }//GEN-LAST:event_btn_addMealDetailsMouseClicked
-
-    private void btn_addMealDetails1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMealDetails1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_addMealDetails1MouseClicked
+    }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -693,57 +313,20 @@ public class ManagerDashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btn_addMealDetails;
-    private javax.swing.JLabel btn_addMealDetails1;
-    private javax.swing.JLabel btn_addMember;
-    private javax.swing.JLabel btn_editMealDetails;
-    private javax.swing.JLabel btn_editMealDetails1;
-    private javax.swing.JLabel btn_editMember;
-    private javax.swing.JLabel btn_removeMealDetails;
-    private javax.swing.JLabel btn_removeMealDetails1;
-    private javax.swing.JLabel btn_removeMember;
-    private javax.swing.JButton btn_save;
-    private javax.swing.JComboBox<String> com_depts;
-    private javax.swing.JComboBox<String> com_type;
-    private javax.swing.JPanel drpDown_mealDetails;
-    private javax.swing.JPanel drpDown_mealDetails1;
-    private javax.swing.JPanel drpDown_member;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lbl_bg;
-    private javax.swing.JLabel lbl_msgs;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_title1;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addMealDetails;
     private javax.swing.JLabel sideBtn_addMontlyExpensess;
     private javax.swing.JLabel sideBtn_addmmeber;
-    private javax.swing.JLabel sideBtn_submitMeal;
-    private javax.swing.JTextField t_cardNo;
-    private javax.swing.JTextField t_cntNum;
-    private javax.swing.JTextField t_email;
-    private javax.swing.JTextField t_name;
-    private javax.swing.JTextField t_regNo;
-    private javax.swing.JTextField t_session;
+    private javax.swing.JLabel sideBtn_collectExpense;
+    private javax.swing.JLabel sideBtn_manageMeals;
     // End of variables declaration//GEN-END:variables
 }
