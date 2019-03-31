@@ -40,7 +40,6 @@ public class SubmitMeal extends javax.swing.JFrame {
         year = manager.getYear();
         this.manager = manager;
 
-        uncetainCards = MealStopService.getUncertainCardList();
         dateList = monthDetailsServices.getDateList(manager);
 
         lbl_title.setText("Month Name:" + manager.getMonthName() + " " + manager.getYear());

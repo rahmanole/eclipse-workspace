@@ -22,19 +22,20 @@ public class ManagerDashBoard extends javax.swing.JFrame {
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
+    LogingPage logingPage = new LogingPage();
     String monthName = "";
     String year = "";
-    Manager manager = null;
+    Manager manager = logingPage.manager;
+
     public ManagerDashBoard(Manager manager) {
 
         initComponents();
-        monthName = manager.getMonthName();
-        year = manager.getYear();      
         this.manager = manager;
-        
-        LogingPage logingPage = new LogingPage();
-        lbl_title.setText("Month Name:"+manager.getMonthName()+" "+manager.getYear());
-        this.setTitle("Registrar Memebr");
+        monthName = manager.getMonthName();
+        year = manager.getYear();
+
+        lbl_isManagerNull.setText("Month Name:" + manager.getMonthName() + " " + manager.getYear());
+        this.setTitle("Manager Dashboard");
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
@@ -44,8 +45,6 @@ public class ManagerDashBoard extends javax.swing.JFrame {
     private ManagerDashBoard() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
 
     private void designTable(JTable tableName) {
         tableName.getTableHeader().setForeground(new Color(255, 255, 255));
@@ -84,9 +83,10 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         sideBtn_manageMeals = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        lbl_title = new javax.swing.JLabel();
+        lbl_isManagerNull = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lbl_title1 = new javax.swing.JLabel();
+        lbl_title2 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -168,7 +168,7 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         sideBtn_manageMeals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sideBtn_manageMeals.setForeground(new java.awt.Color(255, 255, 255));
         sideBtn_manageMeals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_manageMeals.setText("Manage Meal");
+        sideBtn_manageMeals.setText("Add Next Day Meal");
         sideBtn_manageMeals.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sideBtn_manageMeals.setOpaque(true);
         sideBtn_manageMeals.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,18 +183,23 @@ public class ManagerDashBoard extends javax.swing.JFrame {
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
-        lbl_title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_title.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_title.setText("Personal Information");
-        getContentPane().add(lbl_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 170, 30));
+        lbl_isManagerNull.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_isManagerNull.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_isManagerNull.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_isManagerNull, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 170, 30));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1020, 20));
 
         lbl_title1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_title1.setForeground(new java.awt.Color(255, 255, 255));
         lbl_title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_title1.setText("Monthly Expenses ");
+        lbl_title1.setText("Manager Dashboard");
         getContentPane().add(lbl_title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 280, 30));
+
+        lbl_title2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_title2.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_title2.setText("Personal Information");
+        getContentPane().add(lbl_title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 170, 30));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -213,6 +218,7 @@ public class ManagerDashBoard extends javax.swing.JFrame {
 
     private void sideBtn_addMontlyExpensessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMontlyExpensessMouseClicked
         // TODO add your handling code here:
+
         new PrepareMonthView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_addMontlyExpensessMouseClicked
 
@@ -223,7 +229,12 @@ public class ManagerDashBoard extends javax.swing.JFrame {
 
     private void sideBtn_collectExpenseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_collectExpenseMouseClicked
         // TODO add your handling code here:
-        new MonthlyExpenseView(manager).setVisible(true);
+        if (manager == null) {
+            lbl_isManagerNull.setText("Manager null");
+        } else {
+            new MonthlyExpenseView(manager).setVisible(true);
+        }
+
     }//GEN-LAST:event_sideBtn_collectExpenseMouseClicked
 
     private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
@@ -307,7 +318,7 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManagerDashBoard( ).setVisible(true);
+                new ManagerDashBoard().setVisible(true);
             }
         });
     }
@@ -320,8 +331,9 @@ public class ManagerDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbl_bg;
-    private javax.swing.JLabel lbl_title;
+    private javax.swing.JLabel lbl_isManagerNull;
     private javax.swing.JLabel lbl_title1;
+    private javax.swing.JLabel lbl_title2;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addMealDetails;
     private javax.swing.JLabel sideBtn_addMontlyExpensess;

@@ -21,6 +21,7 @@ public class LogingPage extends javax.swing.JFrame {
     LoginServices loginServices = new LoginServices();
     ManagerService managerService = new ManagerService();
     Manager manager = null;
+    
     public LogingPage() {
         initComponents();
         setLocationRelativeTo(null);

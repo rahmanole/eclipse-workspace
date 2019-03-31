@@ -41,7 +41,7 @@ public class MealDayAndDateServices {
             ex.printStackTrace();
         }
     }
-
+    
     private static void dropTblDayWithDate() {
 
         String createTableDayWithDate = "drop table table_with_date";
@@ -55,7 +55,8 @@ public class MealDayAndDateServices {
             ex.printStackTrace();
         }
     }
-     public static int getDay(){
+    
+     public  int getDay(){
          int day = 0;
          String sql = "select day from table_with_date";
         try {
@@ -72,7 +73,7 @@ public class MealDayAndDateServices {
          return day;
      }
      
-     public static Date getDate(){
+     public  Date getDate(){
          Date date = null;
          String sql = "select meal_date from table_with_date";
         try {
@@ -112,7 +113,7 @@ public class MealDayAndDateServices {
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, day);
             ps.execute();
-            System.out.println("Table created");
+            System.out.println("Removed a day");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -140,5 +141,7 @@ public class MealDayAndDateServices {
             i++;
         }
     }
+    
+   
 
 }

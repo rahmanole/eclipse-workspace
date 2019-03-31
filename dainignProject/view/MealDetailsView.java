@@ -25,22 +25,22 @@ public class MealDetailsView extends javax.swing.JFrame {
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
     MealManageService mealManageService = new MealManageService();
     MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
-
+    MealDayAndDateServices mealDayAndDateServices = new MealDayAndDateServices();
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
     String monthName = "";
     String year = "";
     Manager manager = null;
     
-    static int day = MealDayAndDateServices.getDay();
-    static java.sql.Date meal_date = MealDayAndDateServices.getDate();
+    int day = mealDayAndDateServices.getDay();
+    java.sql.Date meal_date = mealDayAndDateServices.getDate();
     
     int totalActiveCards = mealManageService.totalCards();
     int totalOffCards = mealManageService.totaloffMeals();
     int totalOnCards = totalActiveCards - totalOffCards;
     
-    double normalMealRate = monthDetailsServices.getNormalMealRate(manager);
-    double fridayMealRate = monthDetailsServices.getFridayMealRate(manager);
-    double feasrMealRate = monthDetailsServices.getFeastMealRate(manager);
+    double normalMealRate = 0;
+    double fridayMealRate = 0;
+    double feasrMealRate = 0;
     double actualExpense = 0;
     
     public MealDetailsView(Manager manager) {
@@ -50,15 +50,23 @@ public class MealDetailsView extends javax.swing.JFrame {
         year = manager.getYear();      
         this.manager = manager;
         
-        lbl_mealDate.setText(meal_date.toString());
+        normalMealRate = monthDetailsServices.getNormalMealRate(manager);
+        fridayMealRate =monthDetailsServices.getFridayMealRate(manager);
+        feasrMealRate =monthDetailsServices.getFeastMealRate(manager);
+        
+        
+        
         lbl_title.setText("Month Name:"+manager.getMonthName()+" "+manager.getYear());
-        this.setTitle("Registrar Memebr");
+        
+        this.setTitle("Meal Details");
+        
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
         t_spentExpense.setBackground(new Color(0, 0, 0, 0));
         txt_itemDetails.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
-
+        
+        lbl_mealDate.setText(meal_date.toString());
         lbl_activeMember.setText(totalActiveCards+"");
         lbl_totalOnMeals.setText(totalOnCards+"");
         lbl_offMeals.setText(totalOffCards+"");
@@ -201,7 +209,7 @@ public class MealDetailsView extends javax.swing.JFrame {
         com_mealType.setBackground(new java.awt.Color(255, 51, 51));
         com_mealType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         com_mealType.setForeground(new java.awt.Color(0, 102, 51));
-        com_mealType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Meal Type", "Normal", "Friday", "Feast", "Friday & Feast" }));
+        com_mealType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Friday", "Feast", "Friday & Feast" }));
         com_mealType.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         com_mealType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -458,7 +466,7 @@ public class MealDetailsView extends javax.swing.JFrame {
             actualExpense = totalOnCards*normalMealRate+totalOnCards*feasrMealRate;
             lbl_actualExpense.setText(actualExpense+"");
         }else{
-            double mealRate = totalOnCards*feasrMealRate+totalOnCards*fridayMealRate+totalOnCards*normalMealRate;
+            double mealRate = (totalOnCards*feasrMealRate)+(totalOnCards*fridayMealRate)+(totalOnCards*normalMealRate);
             lbl_actualExpense.setText(mealRate+"");
         } 
     }//GEN-LAST:event_com_mealTypeItemStateChanged

@@ -110,7 +110,7 @@ public class MonthDetailsServices {
             ps.setString(2, manager.getYear());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                normalMealRate = rs.getDouble(9);
+                normalMealRate = rs.getDouble(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class MonthDetailsServices {
             ps.setString(2, manager.getYear());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                fridayMealRate = rs.getDouble(7);
+                fridayMealRate = rs.getDouble(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,7 +139,7 @@ public class MonthDetailsServices {
     
     public double getFeastMealRate(Manager manager){
         double feastMealRate = 0;
-        String sql = "select normal_mealRate from month_details where month_name=? and year=?";
+        String sql = "select feast_mealRate from month_details where month_name=? and year=?";
         
         try {
             Connection conn = ConnectionForDB.connect();
@@ -148,7 +148,7 @@ public class MonthDetailsServices {
             ps.setString(2, manager.getYear());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                feastMealRate = rs.getDouble(10);
+                feastMealRate = rs.getDouble(1);
             }
         } catch (Exception e) {
             e.printStackTrace();

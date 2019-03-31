@@ -21,8 +21,12 @@ import model.conn.ConnectionForDB;
  * @author OLEE
  */
 public class MealManageService {
+    static SummaryService summaryService = new SummaryService();
+
     public static String crtCMSTbl = "create table IF NOT EXISTS current_meal_status(id int(5) primary key auto_increment,"
             + "card_no int(5) unique,on_or_off varchar(5) default 'on')";
+    
+
 
     public int stopMeal(int cardNo) {        
         String stmt = "update current_meal_status where card_no=?";       
@@ -33,6 +37,8 @@ public class MealManageService {
             ps.setString(1, "off");
             ps.setInt(2, cardNo);
             ps.execute();
+            
+            
             
             return 1;
         } catch (SQLException ex) {
@@ -61,8 +67,8 @@ public class MealManageService {
         
         return -1;
     }
-
-    public int save(int cardNo) {
+//This method is used in add summary view.while adding summary the card will be added to current meal status table simultaneously
+    public  int save(int cardNo) {
         String stmt = "insert into current_meal_status(card_no,on_or_off) values(?,?)";
 
         try {
@@ -70,7 +76,7 @@ public class MealManageService {
 
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, cardNo);
-            ps.setString(1, "on");
+            ps.setString(2, "on");
             ps.execute();
             return 1;
         } catch (SQLException ex) {

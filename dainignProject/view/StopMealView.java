@@ -17,7 +17,6 @@ import model.dao.*;
 import model.dao.MealHistoryServices;
 import model.dao.MealManageService;
 import model.dao.MemberServices;
-import static view.StartMealView.day;
 
 public class StopMealView extends javax.swing.JFrame {
 
@@ -27,16 +26,16 @@ public class StopMealView extends javax.swing.JFrame {
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
     MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
     MealStopService mealStopService = new MealStopService();
-    
+    MealDayAndDateServices mealDayAndDateServices = new MealDayAndDateServices();
 
     String monthName = "";
     String year = "";
     Manager manager = null;
     List<Integer> uncetainCards = null;
     List<String> dateList = null;
-    
-    static int day = MealDayAndDateServices.getDay();
-    static Date meal_date = MealDayAndDateServices.getDate();
+
+    int day = mealDayAndDateServices.getDay();
+    Date meal_date = mealDayAndDateServices.getDate();
 
     public StopMealView(Manager manager) {
 
@@ -46,7 +45,7 @@ public class StopMealView extends javax.swing.JFrame {
         this.manager = manager;
 
         dateList = monthDetailsServices.getDateList(manager);
-        
+
         lbl_dayInStopMeal.setText("Day " + day + "");
         lbl_dateInStopMeal.setText("Date " + meal_date.toString());
 
@@ -358,14 +357,13 @@ public class StopMealView extends javax.swing.JFrame {
                 for (int cardNo : cardsToUpdateMeal) {
                     mealHistoryServices.updateStatusForNextMeal(cardNo, toDayDate, manager);
                 }
-                new StopMealView(manager).setVisible(true);
             } else {
                 lbl_nextBtnmsgs.setText("Keep selected this meal date");
                 lbl_nextBtnmsgs.setForeground(Color.red);
                 return;
             }
         }
-
+        mealDayAndDateServices.deleteFromDayWithDate(day);
         new MealDetailsView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_nextMouseClicked
 
@@ -409,22 +407,16 @@ public class StopMealView extends javax.swing.JFrame {
                 }
 
             } else {
-                if (startDate == null) {
-                    lbl_moreTheanOne.setText("Select date");
-                    return;
-                }
-                if (dateList.contains(mealHistoryServices.dateFormate(startDate))) {
-                    mealStopService.svae(cardNo, startDate);
-                    lbl_moreTheanOne.setText("Meal Stoped");
-                } else {
-                    lbl_moreTheanOne.setText("Select this month date");
-                }
+
+                mealStopService.svae(cardNo, meal_date);
+                lbl_moreTheanOne.setText("Meal Stoped");
 
             }
         } else {
             lbl_particularStop.setText("Enter valid No");
             lbl_particularStop.setForeground(Color.red);
         }
+
 
     }//GEN-LAST:event_btn_stopParticularActionPerformed
 

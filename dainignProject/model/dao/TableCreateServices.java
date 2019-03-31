@@ -17,7 +17,7 @@ public class TableCreateServices {
 //        createTable(MonthDetailsServices.tblCrtStmt);
 //        createTable(SummaryService.createTblStmt);
 //        createTable(MealStopService.offCardTbl);
-//        createTable(MealManageService.crtCMSTbl);
+        createTable(MealManageService.crtCMSTbl);
 //        createTable(MealDayAndDateServices.createTableDayWithDate);
     }
 

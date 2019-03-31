@@ -36,7 +36,7 @@ public class AddSummaryView extends javax.swing.JFrame {
     RoleServices roleServices = new RoleServices();
     SummaryService lastMonthSummaryService = new SummaryService();
     MemberServices memberServices = new MemberServices();
-    MealManageService memManageService = new MealManageService();
+    MealManageService mealManageService = new MealManageService();
 
     public AddSummaryView() {
         initComponents();
@@ -97,8 +97,6 @@ public class AddSummaryView extends javax.swing.JFrame {
         t_onDays = new javax.swing.JTextField();
         t_bumping = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
-        com_onOrOff = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
@@ -237,15 +235,6 @@ public class AddSummaryView extends javax.swing.JFrame {
         getContentPane().add(t_bumping, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 250, 30));
         getContentPane().add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 250, 10));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Current Status");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 100, 30));
-
-        com_onOrOff.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        com_onOrOff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "on", "off" }));
-        getContentPane().add(com_onOrOff, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 250, 30));
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Bumping");
@@ -265,7 +254,6 @@ public class AddSummaryView extends javax.swing.JFrame {
         int onDays = 0;
         int offDays = 0;
         double bumping = 0;
-        String status = com_onOrOff.getSelectedItem().toString();
         
         try {
             cardNo = Integer.parseInt(t_cardNo.getText().trim());
@@ -278,16 +266,16 @@ public class AddSummaryView extends javax.swing.JFrame {
             lbl_oprtnFeedbck.setForeground(Color.red);
         }
 
-        if (cardNo == 0 || onDays == 0 || offDays == 0 || bumping == 0) {
-            lbl_oprtnFeedbck.setText("Enter all data");
+        if (cardNo <0 || onDays < 0 || offDays < 0 || bumping < 0) {
+            lbl_oprtnFeedbck.setText("Enter valid data");
             lbl_oprtnFeedbck.setForeground(Color.red);
         } else {
             Summary lastMonthSummary = new Summary(cardNo, onDays, offDays, bumping);
             if (memberServices.isCardExists(cardNo)) {
                 if (lastMonthSummaryService.save(lastMonthSummary) > 0) {
+                    mealManageService.save(cardNo);
                     lbl_oprtnFeedbck.setText("Data saved for card no. " + cardNo);
                     lbl_oprtnFeedbck.setForeground(Color.WHITE);
-                    memManageService.save(cardNo);
                 } else {
                     lbl_oprtnFeedbck.setText("Data not saved for card no. " + cardNo);
                     lbl_oprtnFeedbck.setForeground(Color.red);
@@ -405,12 +393,10 @@ public class AddSummaryView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_save;
-    private javax.swing.JComboBox<String> com_onOrOff;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

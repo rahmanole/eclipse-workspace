@@ -36,21 +36,25 @@ public class StartMealView extends javax.swing.JFrame {
     MealStopService mealStopService = new MealStopService();
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
     MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
+    MealDayAndDateServices mealDayAndDateServices = new MealDayAndDateServices();
 
     String monthName = "";
     String year = "";
     Manager manager = null;
     List<String> dateList = null;
-    static int day = MealDayAndDateServices.getDay();
-    static Date meal_date = MealDayAndDateServices.getDate();
+    
+     int day = mealDayAndDateServices.getDay();
+     Date meal_date = mealDayAndDateServices.getDate();
 
     public StartMealView(Manager manager) {
 
         initComponents();
+        
+        this.manager = manager;
+        
         monthName = manager.getMonthName();
         year = manager.getYear();
-        this.manager = manager;
-
+        
         lbl_day.setText("Day " + day + "");
         lbl_date.setText("Date " + meal_date.toString());
 
@@ -413,7 +417,7 @@ public class StartMealView extends javax.swing.JFrame {
             toDayDate = new java.sql.Date(meal_date.getTime());
             if (dateList.contains(mealHistoryServices.dateFormate(toDayDate))) {
                 toDayDate = new java.sql.Date(meal_date.getTime() - 86400000);
-                mealStopService.removeAccordingToLastDate(meal_date);
+                mealStopService.removeAccordingToLastDate(toDayDate);
                 new StopMealView(manager).setVisible(true);
             } else {
                 lbl_msgsStart.setText("Keep selected this meal date");
