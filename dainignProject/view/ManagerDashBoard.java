@@ -228,7 +228,7 @@ public class ManagerDashBoard extends javax.swing.JFrame {
 
     private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
         // TODO add your handling code here:
-        new SubmitMeal(manager).setVisible(true);
+        new StartMealView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
 //
 //    private void addToTable(Member member) {

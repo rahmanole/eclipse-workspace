@@ -13,6 +13,8 @@ public class MonthlyExpensessServices {
 
     SummaryService summaryService = new SummaryService();
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
+    MealManageService mealManageService = new MealManageService();
+    List<Integer> cardListInHistoyAndSummaryTbl = summaryService.getCardList();
 
     public void createMontlyExpenseTable(Manager manager) {
 
@@ -29,7 +31,6 @@ public class MonthlyExpensessServices {
         String stmt = "insert into " + tblName + "(card_no,previsous_month_bumping,needtopay,payment_date) values(?,?,?,?)";
         try {
             Connection conn = ConnectionForDB.connect();
-
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, monthlyExpense.getCardNo());
             ps.setDouble(2, monthlyExpense.getPrevious_month_bumpingMoney());
@@ -37,9 +38,12 @@ public class MonthlyExpensessServices {
             ps.setDate(4, monthlyExpense.getPaymentDate());
 
             ps.executeUpdate();
-            summaryService.save(monthlyExpense.getCardNo());
-  
-             
+            int cardNo = monthlyExpense.getCardNo();
+            if(!cardListInHistoyAndSummaryTbl.contains(cardNo)){
+               summaryService.save(cardNo);
+               mealHistoryServices.save(cardNo,manager);
+               mealManageService.save(cardNo);
+            }             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

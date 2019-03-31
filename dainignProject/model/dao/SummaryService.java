@@ -21,21 +21,21 @@ import model.conn.ConnectionForDB;
 public class SummaryService {
 
     public static String createTblStmt = "create table IF NOT EXISTS summary(id int(5)primary key auto_increment,"
-            + "card_no int,onDays int,offDays int,bumping double)";
+            + "card_no int(5) unique,onDays int,offDays int,bumping double)";
     
 
 
-    public int save(Summary lastMonthSummary) {
+    public int save(Summary summary) {
         String insertStmt = "update summary set  onDays=?,offDays=?,bumping=? where card_no = ?";
 
         try {
             Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(insertStmt);
 
-            ps.setInt(1, lastMonthSummary.getOnDays());
-            ps.setInt(2, lastMonthSummary.getOffDays());
-            ps.setDouble(3, lastMonthSummary.getBumping());
-            ps.setInt(4, lastMonthSummary.getCardNo());
+            ps.setInt(1, summary.getOnDays());
+            ps.setInt(2, summary.getOffDays());
+            ps.setDouble(3, summary.getBumping());
+            ps.setInt(4, summary.getCardNo());
             ps.executeUpdate();
             return 1;
         } catch (Exception e) {

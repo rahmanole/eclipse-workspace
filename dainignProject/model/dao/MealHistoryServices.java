@@ -23,10 +23,11 @@ import model.conn.ConnectionForDB;
  */
 public class MealHistoryServices {
     static SummaryService summaryService = new SummaryService();
+    MealManageService mealManageService = new MealManageService();
 
     
 
-    public static void createMealHistoryTable(String month, String year, Date startDate, Date endDate) {
+    public void createMealHistoryTable(String month, String year, Date startDate, Date endDate) {
         String tblName = "meal_history_for_" + month + "_" + year;
         String tblCrtStmt = "create table IF NOT EXISTS " + tblName + "(id int(5)primary key auto_increment,"
                 + "card_no int)";
@@ -41,9 +42,7 @@ public class MealHistoryServices {
             List<Integer> cardListInSummaryTable = summaryService.getCardList();
             
             for(int cardNo:cardListInSummaryTable){
-                insertOneCard(cardNo,tblName);
-                
-                
+                save(cardNo,tblName);                                
             }
             
 
@@ -52,6 +51,24 @@ public class MealHistoryServices {
             ex.printStackTrace();
         }
 
+    }
+    
+    //check if any card exists in meal hostory table
+    public boolean isCardExists(int cardNo,Manager manager){
+        String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
+        String sql = "select * from " + tblName+ " where card_no=?";
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, cardNo);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static List<Integer> getCardList(Manager manager) {
@@ -71,11 +88,29 @@ public class MealHistoryServices {
 
         return cardList;
     }
+    
+    
 
     public static void main(String[] args) {
     }
+    
+    public static void save(int cardNo,String tblName) {
+        String stmt = "insert into " + tblName + "(card_no) values(?)";
+        try {
+            Connection conn = ConnectionForDB.connect();
 
-    public static void insertOneCard(int cardNo,String tblName) {
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, cardNo);
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    //This method is called from monthlt Exepnse collect table 
+    //if the card does not exists in meal history or summary table then the card will be add to this table
+    public static void save(int cardNo,Manager manager) {
+        String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
         String stmt = "insert into " + tblName + "(card_no) values(?)";
         try {
             Connection conn = ConnectionForDB.connect();
@@ -100,6 +135,8 @@ public class MealHistoryServices {
             ex.printStackTrace();
         }
     }
+    
+    
 
     public static String getMonth(int month) {
         String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -124,7 +161,7 @@ public class MealHistoryServices {
         return dates;
     }
 
-    public String dateFormate(java.util.Date date) {
+    public static String dateFormate(java.util.Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -161,6 +198,26 @@ public class MealHistoryServices {
         }
 
         return dates;
+    }
+    
+    public void updateStatusForNextMeal(int cardNo,Date date,Manager manager){
+        String colName = dateFormate(date);
+        String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
+        String sqlStmt = "update "+tblName+" set "+colName+"=? where card_no = ?";
+        
+        String status = mealManageService.getStatus(cardNo);
+        try {
+            Connection conn = ConnectionForDB.connect();
+
+            PreparedStatement ps = conn.prepareStatement(sqlStmt);
+            ps.setString(1, status);
+            ps.setInt(2,cardNo);
+            ps.executeUpdate();
+            System.out.println(date);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
     }
 
 }

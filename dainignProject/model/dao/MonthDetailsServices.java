@@ -96,4 +96,65 @@ public class MonthDetailsServices {
 
         return getDateList;
     }
+    
+    
+    
+    public double getNormalMealRate(Manager manager){
+        double normalMealRate = 0;
+        String sql = "select normal_mealRate from month_details where month_name=? and year=?";
+        
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, manager.getMonthName());
+            ps.setString(2, manager.getYear());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                normalMealRate = rs.getDouble(9);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return normalMealRate;
+    }
+    
+    public double getFridayMealRate(Manager manager){
+        double fridayMealRate = 0;
+        String sql = "select friday_mealRate from month_details where month_name=? and year=?";
+        
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, manager.getMonthName());
+            ps.setString(2, manager.getYear());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                fridayMealRate = rs.getDouble(7);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fridayMealRate;
+    }
+    
+    public double getFeastMealRate(Manager manager){
+        double feastMealRate = 0;
+        String sql = "select normal_mealRate from month_details where month_name=? and year=?";
+        
+        try {
+            Connection conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, manager.getMonthName());
+            ps.setString(2, manager.getYear());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                feastMealRate = rs.getDouble(10);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return feastMealRate;
+    }
+    
+    
 }

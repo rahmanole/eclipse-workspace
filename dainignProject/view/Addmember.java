@@ -45,6 +45,7 @@ public class Addmember extends javax.swing.JFrame {
         t_email.setBackground(new Color(0, 0, 0, 0));
         t_regNo.setBackground(new Color(0, 0, 0, 0));
         t_session.setBackground(new Color(0, 0, 0, 0));
+        t_cardNo.setBackground(new Color(0, 0, 0, 0));
         com_depts.setBackground(new Color(0, 0, 0, 0));
         com_type.setBackground(new Color(0, 0, 0, 0));
 

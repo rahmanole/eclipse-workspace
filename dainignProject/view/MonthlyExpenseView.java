@@ -503,7 +503,7 @@ public class MonthlyExpenseView extends javax.swing.JFrame {
 
     private void sideBtn_submitMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_submitMealMouseClicked
         // TODO add your handling code here:
-        new SubmitMeal(manager).setVisible(true);
+        new StopMealView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_submitMealMouseClicked
 
     private void btn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMealDetailsMouseClicked

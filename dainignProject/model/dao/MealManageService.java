@@ -22,12 +22,10 @@ import model.conn.ConnectionForDB;
  */
 public class MealManageService {
     public static String crtCMSTbl = "create table IF NOT EXISTS current_meal_status(id int(5) primary key auto_increment,"
-            + "card_no int,on_or_off varchar(5))";
+            + "card_no int(5) unique,on_or_off varchar(5) default 'on')";
 
-    public int stopMeal(int cardNo) {
-        
-        String stmt = "update current_meal_status where card_no=?";
-        
+    public int stopMeal(int cardNo) {        
+        String stmt = "update current_meal_status where card_no=?";       
         try {
             Connection conn = ConnectionForDB.connect();
             
@@ -65,13 +63,14 @@ public class MealManageService {
     }
 
     public int save(int cardNo) {
-        String stmt = "insert into last_day_meal_history(card_no) values(?)";
+        String stmt = "insert into current_meal_status(card_no,on_or_off) values(?,?)";
 
         try {
             Connection conn = ConnectionForDB.connect();
 
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, cardNo);
+            ps.setString(1, "on");
             ps.execute();
             return 1;
         } catch (SQLException ex) {
@@ -99,10 +98,29 @@ public class MealManageService {
 
         return -1;
     }
+    
+    public String getStatus(int cardNo) {
+        String offOrOn = "";
+        String stmt = "select on_or_off from current_meal_status where card_no=?";
+
+        try {
+            Connection conn = ConnectionForDB.connect();
+
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, cardNo);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                offOrOn = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return offOrOn;
+    }
 
     public List<Integer> cardList() {
         ArrayList<Integer> cardList = new ArrayList<>();
-        String stmt = "select card_no from last_day_meal_history";
+        String stmt = "select card_no from current_meal_status";
 
         try {
             Connection conn = ConnectionForDB.connect();
@@ -119,5 +137,59 @@ public class MealManageService {
         return cardList;
     }
     
+    public int prepareCMSTable() {
+        String stmt = "update current_meal_status set on_or_off=?";
+
+        try {
+            Connection conn = ConnectionForDB.connect();
+
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setString(1, "on");
+            ps.execute();
+            return 1;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return -1;
+    }
+    
+    public int totalCards(){
+        int totalCard = 0;
+        String stmt = "select count(card_no) from current_meal_status";
+        try {
+            Connection conn = ConnectionForDB.connect();
+
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ResultSet rs  = ps.executeQuery();
+            while(rs.next()){
+            totalCard = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return totalCard;
+    }
+    
+    public int totaloffMeals(){
+        int totalOffMeals = 0;
+        String stmt = "select count(card_no) from current_meal_status where on_or_off=?";
+        try {
+            Connection conn = ConnectionForDB.connect();
+
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setString(1,"off");
+            ResultSet rs  = ps.executeQuery();
+            
+            while(rs.next()){
+            totalOffMeals = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return totalOffMeals;
+    }
     
 }

@@ -25,7 +25,7 @@ public class ManagerService {
     
     MemberServices memberServices = new MemberServices();
     
-    public static String tblCrtStmt = "create table manager(id int(5) primary key auto_increment,card_no int(5),month_name varchar(10),"
+    public static String tblCrtStmt = "create table manager(id int(5) primary key auto_increment,card_no int(5) unique,month_name varchar(10),"
             + "year varchar(5),pin varchar(55))";
     
 

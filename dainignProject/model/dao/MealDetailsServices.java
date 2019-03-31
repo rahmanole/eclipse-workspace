@@ -16,7 +16,7 @@ import model.conn.ConnectionForDB;
  */
 public class MealDetailsServices {
 
-
+    MealManageService mealManageService = new MealManageService();
     
     
     
@@ -36,5 +36,12 @@ public class MealDetailsServices {
         }
     }
     
+    public int getActiveCards(){
+        return mealManageService.totalCards();
+    }
+    
+    public int getOffMeals(){
+        return mealManageService.totaloffMeals();
+    }
    
 }

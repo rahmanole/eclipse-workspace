@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import model.dao.DeptNmaesServices;
+import model.dao.MealDayAndDateServices;
 import model.dao.MealHistoryServices;
 import model.dao.MealDetailsServices;
 import model.dao.MealManageService;
@@ -41,6 +42,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
     MealManageService mealManageService = new MealManageService();
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
     MonthlyExpensessServices monthlyExpensessServices = new MonthlyExpensessServices();
+    MealDayAndDateServices mealDayAndDateServices = new MealDayAndDateServices();
 
     Manager manager = null;
     String monthName = "";
@@ -515,8 +517,10 @@ public class PrepareMonthView extends javax.swing.JFrame {
             if (monthDetailsServices.save(monthDetails) > 0) {
 
                 MealDetailsServices.createMealDetailsTable(monthName, year);
-                MealHistoryServices.createMealHistoryTable(monthName, year,startDate, endDate);
+                mealHistoryServices.createMealHistoryTable(monthName, year,startDate, endDate);
                 monthlyExpensessServices.createMontlyExpenseTable(manager);
+                MealDayAndDateServices.createTable();
+                mealDayAndDateServices.insertInDayWithDateTable(startDate, endDate);
 
                 lbl_msgs.setText("Successfully saved");
                 lbl_msgs.setForeground(Color.GREEN);
@@ -525,6 +529,9 @@ public class PrepareMonthView extends javax.swing.JFrame {
                 lbl_msgs.setForeground(Color.red);
             }
         }
+        
+        //Updating Day with Date table
+       
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void t_feastMealRateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_feastMealRateKeyReleased
@@ -532,10 +539,10 @@ public class PrepareMonthView extends javax.swing.JFrame {
         try {
             employee_fees = Double.parseDouble(t_empFees.getText().trim());
             totalDays = Integer.parseInt(t_totalDays.getText().trim());
-            totalFridays = Integer.parseInt(t_totalDays.getText().trim());;
+            totalFridays = Integer.parseInt(t_totalDays.getText().trim());
             friDayMealRate = Double.parseDouble(t_fridayMealRate.getText().trim());
-            numberOfNormalDaymeals = Integer.parseInt(t_totalNoramlDays.getText().trim());;;
-            normalMealRate = Double.parseDouble(t_normalMealRate.getText().trim());;
+            numberOfNormalDaymeals = Integer.parseInt(t_totalNoramlDays.getText().trim());
+            normalMealRate = Double.parseDouble(t_normalMealRate.getText().trim());
             feastMealRate = Double.parseDouble(t_feastMealRate.getText().trim());
 
         } catch (NumberFormatException e) {
@@ -569,7 +576,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
 
     private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
         // TODO add your handling code here:
-        new SubmitMeal(manager).setVisible(true);
+        new StopMealView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
 //
 //    private void addToTable(Member member) {

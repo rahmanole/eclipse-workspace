@@ -10,7 +10,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
+import model.dao.MealDayAndDateServices;
+import model.dao.MealManageService;
 import model.dao.MemberServices;
+import model.dao.MonthDetailsServices;
 import model.dao.OffDaysServices;
 
 public class MealDetailsView extends javax.swing.JFrame {
@@ -20,11 +23,26 @@ public class MealDetailsView extends javax.swing.JFrame {
      */
     MemberServices memberServices = new MemberServices();
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
+    MealManageService mealManageService = new MealManageService();
+    MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
     String monthName = "";
     String year = "";
     Manager manager = null;
+    
+    static int day = MealDayAndDateServices.getDay();
+    static java.sql.Date meal_date = MealDayAndDateServices.getDate();
+    
+    int totalActiveCards = mealManageService.totalCards();
+    int totalOffCards = mealManageService.totaloffMeals();
+    int totalOnCards = totalActiveCards - totalOffCards;
+    
+    double normalMealRate = monthDetailsServices.getNormalMealRate(manager);
+    double fridayMealRate = monthDetailsServices.getFridayMealRate(manager);
+    double feasrMealRate = monthDetailsServices.getFeastMealRate(manager);
+    double actualExpense = 0;
+    
     public MealDetailsView(Manager manager) {
 
         initComponents();
@@ -32,17 +50,20 @@ public class MealDetailsView extends javax.swing.JFrame {
         year = manager.getYear();      
         this.manager = manager;
         
-        LogingPage logingPage = new LogingPage();
+        lbl_mealDate.setText(meal_date.toString());
         lbl_title.setText("Month Name:"+manager.getMonthName()+" "+manager.getYear());
         this.setTitle("Registrar Memebr");
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
-
+        t_spentExpense.setBackground(new Color(0, 0, 0, 0));
+        txt_itemDetails.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
 
-        for (String deptNames : deptNames) {
-            com_depts.addItem(deptNames);
-        }
+        lbl_activeMember.setText(totalActiveCards+"");
+        lbl_totalOnMeals.setText(totalOnCards+"");
+        lbl_offMeals.setText(totalOffCards+"");
+        actualExpense = normalMealRate*2*totalActiveCards;
+        lbl_actualExpense.setText(actualExpense+"");
     }
 
     private MealDetailsView() {
@@ -77,15 +98,6 @@ public class MealDetailsView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_sideBar = new javax.swing.JPanel();
-        sideBtn_addmmeber = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        sideBtn_addMontlyExpensess = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        sideBtn_addMealDetails = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        sideBtn_submitMeal = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         lbl_title = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
@@ -97,113 +109,44 @@ public class MealDetailsView extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         lbl_msgs = new javax.swing.JLabel();
         btn_save = new javax.swing.JButton();
-        com_depts = new javax.swing.JComboBox<>();
+        com_mealType = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        t_cardNo = new javax.swing.JTextField();
+        t_spentExpense = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
-        drpDown_mealDetails = new javax.swing.JPanel();
-        btn_addMealDetails = new javax.swing.JLabel();
-        btn_editMealDetails = new javax.swing.JLabel();
-        btn_removeMealDetails = new javax.swing.JLabel();
-        drpDown_member = new javax.swing.JPanel();
-        btn_addMember = new javax.swing.JLabel();
-        btn_editMember = new javax.swing.JLabel();
-        btn_removeMember = new javax.swing.JLabel();
         lbl_title1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        lbl_activeMember = new javax.swing.JLabel();
+        lbl_actualExpense = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
-        lbl_activeMember1 = new javax.swing.JLabel();
-        lbl_activeMember2 = new javax.swing.JLabel();
-        lbl_activeMember3 = new javax.swing.JLabel();
-        t_session1 = new javax.swing.JTextField();
-        t_session2 = new javax.swing.JTextField();
+        lbl_balance = new javax.swing.JLabel();
+        lbl_totalOnMeals = new javax.swing.JLabel();
+        lbl_offMeals = new javax.swing.JLabel();
         jSeparator12 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        date_mealDetails = new com.toedter.calendar.JDateChooser();
+        txt_itemDetails = new javax.swing.JTextArea();
+        pnl_sideBar = new javax.swing.JPanel();
+        sideBtn_addmmeber = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        sideBtn_addMontlyExpensess = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        sideBtn_addMealDetails = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        sideBtn_collectExpense = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        sideBtn_manageMeals = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lbl_activeMember = new javax.swing.JLabel();
+        lbl_mealDate = new javax.swing.JLabel();
+        jSeparator13 = new javax.swing.JSeparator();
+        jSeparator14 = new javax.swing.JSeparator();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
-        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        sideBtn_addmmeber.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addmmeber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addmmeber.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addmmeber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addmmeber.setText("Add Member");
-        sideBtn_addmmeber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addmmeber.setOpaque(true);
-        sideBtn_addmmeber.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addmmeberMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 180, 40));
-
-        jLabel13.setOpaque(true);
-        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 10, 40));
-
-        sideBtn_addMontlyExpensess.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addMontlyExpensess.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addMontlyExpensess.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addMontlyExpensess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addMontlyExpensess.setText("Preapre Month");
-        sideBtn_addMontlyExpensess.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addMontlyExpensess.setOpaque(true);
-        sideBtn_addMontlyExpensess.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addMontlyExpensessMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addMontlyExpensess, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
-
-        jLabel14.setOpaque(true);
-        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
-
-        sideBtn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addMealDetails.setText("Meal Details");
-        sideBtn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addMealDetails.setOpaque(true);
-        sideBtn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addMealDetailsMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addMealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
-
-        jLabel15.setOpaque(true);
-        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
-
-        sideBtn_submitMeal.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_submitMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_submitMeal.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_submitMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_submitMeal.setText("Submit Meals");
-        sideBtn_submitMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_submitMeal.setOpaque(true);
-        sideBtn_submitMeal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_submitMealMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_submitMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
-
-        jLabel16.setOpaque(true);
-        pnl_sideBar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
-
-        getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
         lbl_title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_title.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,7 +166,7 @@ public class MealDetailsView extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Meal Type");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 80, 30));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 80, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,7 +179,7 @@ public class MealDetailsView extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Actual Expenses");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 110, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 110, 30));
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 250, 10));
@@ -255,24 +198,34 @@ public class MealDetailsView extends javax.swing.JFrame {
         });
         getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 480, 100, 40));
 
-        com_depts.setBackground(new java.awt.Color(255, 51, 51));
-        com_depts.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        com_depts.setForeground(new java.awt.Color(0, 102, 51));
-        com_depts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Meal Type", "Normal", "Friday", "Feast" }));
-        com_depts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(com_depts, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 250, 30));
+        com_mealType.setBackground(new java.awt.Color(255, 51, 51));
+        com_mealType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        com_mealType.setForeground(new java.awt.Color(0, 102, 51));
+        com_mealType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Meal Type", "Normal", "Friday", "Feast", "Friday & Feast" }));
+        com_mealType.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        com_mealType.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                com_mealTypeItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(com_mealType, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 250, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Spent expense");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 110, 100, 30));
 
-        t_cardNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_cardNo.setForeground(new java.awt.Color(255, 255, 255));
-        t_cardNo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_cardNo.setBorder(null);
-        t_cardNo.setOpaque(false);
-        getContentPane().add(t_cardNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 110, 250, 30));
+        t_spentExpense.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        t_spentExpense.setForeground(new java.awt.Color(255, 255, 255));
+        t_spentExpense.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        t_spentExpense.setBorder(null);
+        t_spentExpense.setOpaque(false);
+        t_spentExpense.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                t_spentExpenseKeyReleased(evt);
+            }
+        });
+        getContentPane().add(t_spentExpense, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 110, 250, 30));
 
         jSeparator9.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 140, 250, 10));
@@ -284,107 +237,6 @@ public class MealDetailsView extends javax.swing.JFrame {
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 20, 450));
-
-        btn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMealDetails.setText("Add Meal Details");
-        btn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMealDetails.setOpaque(true);
-        btn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_addMealDetailsMouseClicked(evt);
-            }
-        });
-
-        btn_editMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMealDetails.setText("Edit Meal Details");
-        btn_editMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMealDetails.setOpaque(true);
-
-        btn_removeMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMealDetails.setText("Remove a Meal");
-        btn_removeMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMealDetails.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_mealDetailsLayout = new javax.swing.GroupLayout(drpDown_mealDetails);
-        drpDown_mealDetails.setLayout(drpDown_mealDetailsLayout);
-        drpDown_mealDetailsLayout.setHorizontalGroup(
-            drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_mealDetailsLayout.createSequentialGroup()
-                .addGroup(drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_mealDetailsLayout.setVerticalGroup(
-            drpDown_mealDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_mealDetailsLayout.createSequentialGroup()
-                .addComponent(btn_addMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_removeMealDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_mealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 130, 130));
-
-        btn_addMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMember.setText("Add Member");
-        btn_addMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMember.setOpaque(true);
-
-        btn_editMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMember.setText("Edit Info");
-        btn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMember.setOpaque(true);
-
-        btn_removeMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMember.setText("Remove Member");
-        btn_removeMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMember.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_memberLayout = new javax.swing.GroupLayout(drpDown_member);
-        drpDown_member.setLayout(drpDown_memberLayout);
-        drpDown_memberLayout.setHorizontalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addGroup(drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_memberLayout.setVerticalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 130, 180));
 
         lbl_title1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_title1.setForeground(new java.awt.Color(255, 255, 255));
@@ -402,55 +254,150 @@ public class MealDetailsView extends javax.swing.JFrame {
         jLabel10.setText("Active Members");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 100, 30));
 
-        lbl_activeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_activeMember.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lbl_activeMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 250, 30));
+        lbl_actualExpense.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_actualExpense.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_actualExpense.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_actualExpense, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 250, 30));
 
         jSeparator11.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 250, 10));
+        getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 250, 10));
 
-        lbl_activeMember1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_activeMember1.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lbl_activeMember1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 250, 30));
+        lbl_balance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_balance.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_balance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_balance, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 180, 250, 30));
 
-        lbl_activeMember2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_activeMember2.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lbl_activeMember2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 250, 30));
+        lbl_totalOnMeals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_totalOnMeals.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_totalOnMeals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_totalOnMeals, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 250, 30));
 
-        lbl_activeMember3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_activeMember3.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lbl_activeMember3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, 250, 30));
-
-        t_session1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_session1.setForeground(new java.awt.Color(255, 255, 255));
-        t_session1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_session1.setBorder(null);
-        t_session1.setOpaque(false);
-        getContentPane().add(t_session1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 420, 250, 30));
-
-        t_session2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        t_session2.setForeground(new java.awt.Color(255, 255, 255));
-        t_session2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        t_session2.setBorder(null);
-        t_session2.setOpaque(false);
-        getContentPane().add(t_session2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 180, 250, 30));
+        lbl_offMeals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_offMeals.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_offMeals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_offMeals, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, 250, 30));
 
         jSeparator12.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 210, 250, 10));
+        getContentPane().add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 410, 250, 10));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Balance");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 190, 70, 30));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt_itemDetails.setColumns(20);
+        txt_itemDetails.setRows(5);
+        txt_itemDetails.setBorder(null);
+        txt_itemDetails.setOpaque(false);
+        jScrollPane1.setViewportView(txt_itemDetails);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 280, 250, 130));
 
-        date_mealDetails.setOpaque(false);
-        getContentPane().add(date_mealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 250, 30));
+        pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
+        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        sideBtn_addmmeber.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addmmeber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addmmeber.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addmmeber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addmmeber.setText("Add Member");
+        sideBtn_addmmeber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addmmeber.setOpaque(true);
+        sideBtn_addmmeber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addmmeberMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 180, 40));
+
+        jLabel13.setOpaque(true);
+        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 10, 40));
+
+        sideBtn_addMontlyExpensess.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addMontlyExpensess.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addMontlyExpensess.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addMontlyExpensess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addMontlyExpensess.setText("Preapre Month");
+        sideBtn_addMontlyExpensess.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addMontlyExpensess.setOpaque(true);
+        sideBtn_addMontlyExpensess.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addMontlyExpensessMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addMontlyExpensess, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 180, 40));
+
+        jLabel14.setOpaque(true);
+        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 10, 40));
+
+        sideBtn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_addMealDetails.setText("Meal Details");
+        sideBtn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addMealDetails.setOpaque(true);
+        sideBtn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addMealDetailsMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_addMealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 180, 40));
+
+        jLabel15.setOpaque(true);
+        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 10, 40));
+
+        sideBtn_collectExpense.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_collectExpense.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_collectExpense.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_collectExpense.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_collectExpense.setText("Collect Expense");
+        sideBtn_collectExpense.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_collectExpense.setOpaque(true);
+        sideBtn_collectExpense.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_collectExpenseMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_collectExpense, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, 40));
+
+        jLabel17.setOpaque(true);
+        pnl_sideBar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 10, 40));
+
+        sideBtn_manageMeals.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_manageMeals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_manageMeals.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_manageMeals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_manageMeals.setText("Manage Meal");
+        sideBtn_manageMeals.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_manageMeals.setOpaque(true);
+        sideBtn_manageMeals.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_manageMealsMouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_manageMeals, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 180, 40));
+
+        jLabel18.setOpaque(true);
+        pnl_sideBar.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 10, 40));
+
+        getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
+
+        lbl_activeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_activeMember.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_activeMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_activeMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 250, 30));
+
+        lbl_mealDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_mealDate.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_mealDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_mealDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 250, 30));
+
+        jSeparator13.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 250, 10));
+
+        jSeparator14.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 210, 250, 10));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -480,17 +427,58 @@ public class MealDetailsView extends javax.swing.JFrame {
 
     private void sideBtn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMealDetailsMouseClicked
         // TODO add your handling code here:
+        new MealDetailsView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_addMealDetailsMouseClicked
 
-    private void sideBtn_submitMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_submitMealMouseClicked
+    private void sideBtn_collectExpenseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_collectExpenseMouseClicked
         // TODO add your handling code here:
-        new SubmitMeal(manager).setVisible(true);
-    }//GEN-LAST:event_sideBtn_submitMealMouseClicked
+        new MonthlyExpenseView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_collectExpenseMouseClicked
 
-    private void btn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMealDetailsMouseClicked
+    private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
         // TODO add your handling code here:
-        new AddMealDetailsView(manager).setVisible(true);
-    }//GEN-LAST:event_btn_addMealDetailsMouseClicked
+        new StartMealView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
+     
+    private void com_mealTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_mealTypeItemStateChanged
+        // TODO add your handling code here:
+        String mealType = com_mealType.getSelectedItem().toString();
+       
+        if(mealType.equals("Normal")){
+            
+            actualExpense = totalOnCards*2*normalMealRate;
+            lbl_actualExpense.setText(actualExpense+"");
+            
+        }else if(mealType.equals("Friday")){
+            
+            actualExpense = totalOnCards*fridayMealRate+totalOnCards*normalMealRate;
+            lbl_actualExpense.setText(actualExpense+"");
+            
+        }else if(mealType.equals("Feast")){
+            actualExpense = totalOnCards*normalMealRate+totalOnCards*feasrMealRate;
+            lbl_actualExpense.setText(actualExpense+"");
+        }else{
+            double mealRate = totalOnCards*feasrMealRate+totalOnCards*fridayMealRate+totalOnCards*normalMealRate;
+            lbl_actualExpense.setText(mealRate+"");
+        } 
+    }//GEN-LAST:event_com_mealTypeItemStateChanged
+
+    private void t_spentExpenseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_spentExpenseKeyReleased
+        // TODO add your handling code here:
+        double spentExpense = 0;
+        try {
+            spentExpense = Double.parseDouble(t_spentExpense.getText().trim());
+            if(spentExpense<0){
+                lbl_balance.setText("Spent expense can not be negative");
+            }else{
+               lbl_balance.setText((actualExpense-spentExpense)+""); 
+            }
+            
+        } catch (NumberFormatException e) {
+            lbl_msgs.setText("Enter valid card No");
+            lbl_msgs.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_t_spentExpenseKeyReleased
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -606,23 +594,15 @@ public class MealDetailsView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btn_addMealDetails;
-    private javax.swing.JLabel btn_addMember;
-    private javax.swing.JLabel btn_editMealDetails;
-    private javax.swing.JLabel btn_editMember;
-    private javax.swing.JLabel btn_removeMealDetails;
-    private javax.swing.JLabel btn_removeMember;
     private javax.swing.JButton btn_save;
-    private javax.swing.JComboBox<String> com_depts;
-    private com.toedter.calendar.JDateChooser date_mealDetails;
-    private javax.swing.JPanel drpDown_mealDetails;
-    private javax.swing.JPanel drpDown_member;
+    private javax.swing.JComboBox<String> com_mealType;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -634,27 +614,30 @@ public class MealDetailsView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl_activeMember;
-    private javax.swing.JLabel lbl_activeMember1;
-    private javax.swing.JLabel lbl_activeMember2;
-    private javax.swing.JLabel lbl_activeMember3;
+    private javax.swing.JLabel lbl_actualExpense;
+    private javax.swing.JLabel lbl_balance;
     private javax.swing.JLabel lbl_bg;
+    private javax.swing.JLabel lbl_mealDate;
     private javax.swing.JLabel lbl_msgs;
+    private javax.swing.JLabel lbl_offMeals;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_title1;
+    private javax.swing.JLabel lbl_totalOnMeals;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addMealDetails;
     private javax.swing.JLabel sideBtn_addMontlyExpensess;
     private javax.swing.JLabel sideBtn_addmmeber;
-    private javax.swing.JLabel sideBtn_submitMeal;
-    private javax.swing.JTextField t_cardNo;
-    private javax.swing.JTextField t_session1;
-    private javax.swing.JTextField t_session2;
+    private javax.swing.JLabel sideBtn_collectExpense;
+    private javax.swing.JLabel sideBtn_manageMeals;
+    private javax.swing.JTextField t_spentExpense;
+    private javax.swing.JTextArea txt_itemDetails;
     // End of variables declaration//GEN-END:variables
 }
