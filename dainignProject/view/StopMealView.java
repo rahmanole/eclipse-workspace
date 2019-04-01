@@ -50,7 +50,7 @@ public class StopMealView extends javax.swing.JFrame {
         lbl_dateInStopMeal.setText("Date " + meal_date.toString());
 
         lbl_title.setText("Month Name:" + manager.getMonthName() + " " + manager.getYear());
-        this.setTitle("Registrar Memebr");
+        this.setTitle("Stop Meal");
 
         t_cardNoToStopMoreThan.setBackground(new Color(0, 0, 0, 0));
         t_cardNoToStopOneDay.setBackground(new Color(0, 0, 0, 0));
@@ -344,26 +344,6 @@ public class StopMealView extends javax.swing.JFrame {
         for (int offCard : offCards) {
             mealStopService.stopMeal(offCard);
         }
-
-        List<Integer> cardsToUpdateMeal = mealManageService.cardList();
-
-        Date toDayDate = null;
-        if (meal_date == null) {
-            lbl_nextBtnmsgs.setText("Select date");
-            return;
-        } else {
-            toDayDate = new java.sql.Date(meal_date.getTime());
-            if (dateList.contains(mealHistoryServices.dateFormate(toDayDate))) {
-                for (int cardNo : cardsToUpdateMeal) {
-                    mealHistoryServices.updateStatusForNextMeal(cardNo, toDayDate, manager);
-                }
-            } else {
-                lbl_nextBtnmsgs.setText("Keep selected this meal date");
-                lbl_nextBtnmsgs.setForeground(Color.red);
-                return;
-            }
-        }
-        mealDayAndDateServices.deleteFromDayWithDate(day);
         new MealDetailsView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_nextMouseClicked
 
@@ -392,20 +372,14 @@ public class StopMealView extends javax.swing.JFrame {
             Date endDate = null;
             if (flag.equals("Particular Date")) {
 
-                if (meal_date == null || date_endDate.getDate() == null) {
-                    lbl_moreTheanOne.setText("Select date");
+                if (date_endDate.getDate() == null) {
+                    lbl_moreTheanOne.setText("Select end date");
                     return;
                 } else {
-                    startDate = new java.sql.Date(meal_date.getTime());
                     endDate = new java.sql.Date(date_endDate.getDate().getTime());
-                }
-                if (dateList.contains(mealHistoryServices.dateFormate(startDate)) && dateList.contains(mealHistoryServices.dateFormate(startDate))) {
                     mealStopService.svae(cardNo, startDate, endDate);
                     lbl_moreTheanOne.setText("Meal Stoped");
-                } else {
-                    lbl_moreTheanOne.setText("Select this month date");
                 }
-
             } else {
 
                 mealStopService.svae(cardNo, meal_date);

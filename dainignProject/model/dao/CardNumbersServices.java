@@ -19,7 +19,7 @@ public class CardNumbersServices {
     public static String sql = "create table card_numbers(id int(5) primary key auto_increment,card_no int(5),status varchar(10))";
     
     public static void main(String[] args) {
-        TableCreateServices.createTable(sql);
+        HelperServices.createTable(sql);
     }
     
     public void save(CardNumbers cardNumbers){

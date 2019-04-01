@@ -12,8 +12,11 @@ import java.awt.Color;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import model.conn.ConnectionForDB;
 
@@ -31,8 +34,9 @@ public class ManagerService {
 
     public boolean isManagerAssignedForThisMonth(String month,String year) {
         String sql = "select * from manager where month_name=? and year =?";
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, month);
             ps.setString(2,year);
@@ -42,6 +46,12 @@ public class ManagerService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return false;
     }
@@ -49,10 +59,12 @@ public class ManagerService {
     public int save(Manager manager, JLabel lbl) {
         String insert = "insert into manager(card_no,month_name,year,pin) values(?,?,?,?)";
         
+       Connection conn = null;
         try {
+            
             if (memberServices.isCardExists(manager.getCardNo())) {
                 if (!memberServices.isCardAtive(manager.getCardNo())) {
-                    Connection conn = ConnectionForDB.connect();
+                    conn = ConnectionForDB.connect();
                     PreparedStatement ps = conn.prepareStatement(insert);
                     ps.setInt(1, manager.getCardNo());
                     ps.setString(2, manager.getMonthName());
@@ -74,6 +86,12 @@ public class ManagerService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return -1;
     }
@@ -82,8 +100,10 @@ public class ManagerService {
         List<Manager> list = new ArrayList<>();
         
         String sql = "select * from manager";
+        
+         Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
@@ -92,6 +112,12 @@ public class ManagerService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return list;
         
@@ -100,8 +126,10 @@ public class ManagerService {
     public Manager getManagerByPin(String pin) {
         Manager manager = null;
         String sql = "select * from manager where pin=?";
+        
+         Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pin);
             ResultSet rs = ps.executeQuery();
@@ -111,6 +139,12 @@ public class ManagerService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return manager;
         

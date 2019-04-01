@@ -31,12 +31,19 @@ public class DeptNmaesServices {
     public void save(String dept_name) {
         String insert = "insert into dept_names(dept_name) values(?)";
 
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(insert);
             ps.setString(1, dept_name);
             ps.execute();
         } catch (Exception e) {
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 //Retieving Dept ID by Name    
@@ -45,8 +52,9 @@ public class DeptNmaesServices {
         Department dept = null;
         String retrive = "select * from dept_names where id=?";
 
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(retrive);
             ps.setString(1, dept_name);
             ResultSet rs = ps.executeQuery();
@@ -57,6 +65,12 @@ public class DeptNmaesServices {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return dept;
@@ -67,8 +81,9 @@ public class DeptNmaesServices {
         Department dept = null;
         String retrive = "select * from dept_names where id=?";
 
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(retrive);
             ps.setInt(1, dept_id);
             ResultSet rs = ps.executeQuery();
@@ -79,6 +94,12 @@ public class DeptNmaesServices {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return dept;
@@ -89,8 +110,9 @@ public class DeptNmaesServices {
         List<String> deptList = new ArrayList<>();
         String retrive = "select dept_name from dept_names";
 
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(retrive);
             ResultSet rs = ps.executeQuery();
 
@@ -100,6 +122,12 @@ public class DeptNmaesServices {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return deptList;
@@ -107,10 +135,10 @@ public class DeptNmaesServices {
 
     //Check if exits any dept name
     public boolean isDeptNameExists(String dept_name) {
+        Connection conn = null;
         try {
+            conn = ConnectionForDB.connect();
             String delete = "select * from dept_names where dept_name=?";
-
-            Connection conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(delete);
             ps.setString(1, dept_name);
             ResultSet rs = ps.executeQuery();
@@ -121,6 +149,12 @@ public class DeptNmaesServices {
 
         } catch (SQLException ex) {
             Logger.getLogger(DeptNmaesServices.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return false;

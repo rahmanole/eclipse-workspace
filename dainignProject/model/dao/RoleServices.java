@@ -9,8 +9,11 @@ import com.mysql.jdbc.Connection;
 import controller.pojo.Role;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import model.conn.ConnectionForDB;
 
@@ -29,8 +32,9 @@ public class RoleServices {
     public int save(Role role, JLabel lbl) {
         String insert = "insert into role(email,role_name,pin) values(?,?,?)";
 
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(insert);
             ps.setString(1, role.getEmail());
             ps.setString(2, role.getRoleNmae());
@@ -39,14 +43,22 @@ public class RoleServices {
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return -1;
     }
     
     public boolean isEmailExists(String email){
         String sql = "select * from role where email = ?";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
@@ -55,6 +67,12 @@ public class RoleServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return false;
     }
@@ -62,8 +80,10 @@ public class RoleServices {
     public List<String> getPinList(){
         List<String> pinList = new ArrayList<>();
         String sql = "select pin from role";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -71,6 +91,12 @@ public class RoleServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return pinList;
     }
@@ -78,8 +104,10 @@ public class RoleServices {
     public String getRoleNameByPin(String pin){
         String roleName = "admin";
         String sql = "select role_name from role where pin = ?";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pin);
             ResultSet rs = ps.executeQuery();
@@ -88,6 +116,12 @@ public class RoleServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return roleName;
     }

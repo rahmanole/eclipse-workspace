@@ -5,6 +5,9 @@
  */
 package controller.pojo;
 
+import java.sql.Date;
+import java.util.List;
+
 /**
  *
  * @author OLEE
@@ -13,24 +16,60 @@ public class Summary {
     private int id;
     private int cardNo;
     private int onDays;
-    private int offDays;
+    private int normalOffDays;
+    private int fridayOffMeal;
+    private boolean wasFeastOn;
+    private int totalOffMeal;
     private double bumping;
+    private List<Date> offDates;
 
-    public Summary(int id, int cardNo, int onDays, int offDays, double bumping) {
+    public Summary(int id, int cardNo, int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping,List<Date> offDates) {
         this.id = id;
         this.cardNo = cardNo;
         this.onDays = onDays;
-        this.offDays = offDays;
+        this.normalOffDays = normalOffDays;
+        this.fridayOffMeal = fridayOffMeal;
+        this.wasFeastOn = wasFeastOn;
+        this.totalOffMeal = totalOffMeal;
         this.bumping = bumping;
+        this.offDates = offDates;
     }
 
-    public Summary(int cardNo, int onDays, int offDays, double bumping) {
+    public Summary(int cardNo, int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping,List<Date> offDates) {
         this.cardNo = cardNo;
         this.onDays = onDays;
-        this.offDays = offDays;
+        this.normalOffDays = normalOffDays;
+        this.fridayOffMeal = fridayOffMeal;
+        this.wasFeastOn = wasFeastOn;
+        this.totalOffMeal = totalOffMeal;
+        this.bumping = bumping;
+        this.offDates = offDates;
+    }
+
+    public Summary(int cardNo, int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping) {
+        this.cardNo = cardNo;
+        this.onDays = onDays;
+        this.normalOffDays = normalOffDays;
+        this.fridayOffMeal = fridayOffMeal;
+        this.wasFeastOn = wasFeastOn;
+        this.totalOffMeal = totalOffMeal;
         this.bumping = bumping;
     }
     
+    
+
+    public Summary(int cardNo, int onDays, int totalOffMeal, double bumping) {
+        this.cardNo = cardNo;
+        this.onDays = onDays;
+        this.totalOffMeal = totalOffMeal;
+        this.bumping = bumping;
+    }
+    
+    
+    
+    
+    
+
     public int getId() {
         return id;
     }
@@ -55,12 +94,36 @@ public class Summary {
         this.onDays = onDays;
     }
 
-    public int getOffDays() {
-        return offDays;
+    public int getNormalOffDays() {
+        return normalOffDays;
     }
 
-    public void setOffDays(int offDays) {
-        this.offDays = offDays;
+    public void setNormalOffDays(int normalOffDays) {
+        this.normalOffDays = normalOffDays;
+    }
+
+    public int getFridayOffMeal() {
+        return fridayOffMeal;
+    }
+
+    public void setFridayOffMeal(int fridayOffMeal) {
+        this.fridayOffMeal = fridayOffMeal;
+    }
+
+    public boolean getWasFeastOn() {
+        return wasFeastOn;
+    }
+
+    public void setWasFeastOn(boolean wasFeastOn) {
+        this.wasFeastOn = wasFeastOn;
+    }
+
+    public int getTotalOffMeal() {
+        return totalOffMeal;
+    }
+
+    public void setTotalOffMeal(int totalOffMeal) {
+        this.totalOffMeal = totalOffMeal;
     }
 
     public double getBumping() {
@@ -70,7 +133,8 @@ public class Summary {
     public void setBumping(double bumping) {
         this.bumping = bumping;
     }
-    
-    
-    
+
+    public Summary(List<Date> offDates) {
+        this.offDates = offDates;
+    }
 }

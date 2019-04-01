@@ -1,16 +1,22 @@
 package view;
 
 import controller.pojo.Manager;
+import controller.pojo.Meal;
 import controller.pojo.Member;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import model.dao.AssignedMonthsServices;
 import model.dao.DeptNmaesServices;
 import model.dao.MealDayAndDateServices;
+import model.dao.MealDetailsServices;
+import model.dao.MealHistoryServices;
 import model.dao.MealManageService;
 import model.dao.MemberServices;
 import model.dao.MonthDetailsServices;
@@ -26,59 +32,57 @@ public class MealDetailsView extends javax.swing.JFrame {
     MealManageService mealManageService = new MealManageService();
     MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
     MealDayAndDateServices mealDayAndDateServices = new MealDayAndDateServices();
-    ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
+    MealHistoryServices mealHistoryServices = new MealHistoryServices();
+
     String monthName = "";
     String year = "";
     Manager manager = null;
-    
+
     int day = mealDayAndDateServices.getDay();
     java.sql.Date meal_date = mealDayAndDateServices.getDate();
-    
+
     int totalActiveCards = mealManageService.totalCards();
     int totalOffCards = mealManageService.totaloffMeals();
     int totalOnCards = totalActiveCards - totalOffCards;
-    
+    MealDetailsServices mealDetailsServices = new MealDetailsServices();
+
     double normalMealRate = 0;
     double fridayMealRate = 0;
     double feasrMealRate = 0;
     double actualExpense = 0;
-    
+
     public MealDetailsView(Manager manager) {
 
         initComponents();
         monthName = manager.getMonthName();
-        year = manager.getYear();      
+        year = manager.getYear();
         this.manager = manager;
-        
+
         normalMealRate = monthDetailsServices.getNormalMealRate(manager);
-        fridayMealRate =monthDetailsServices.getFridayMealRate(manager);
-        feasrMealRate =monthDetailsServices.getFeastMealRate(manager);
-        
-        
-        
-        lbl_title.setText("Month Name:"+manager.getMonthName()+" "+manager.getYear());
-        
+        fridayMealRate = monthDetailsServices.getFridayMealRate(manager);
+        feasrMealRate = monthDetailsServices.getFeastMealRate(manager);
+
+        lbl_title.setText("Month Name:" + manager.getMonthName() + " " + manager.getYear());
+
         this.setTitle("Meal Details");
-        
+
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
         t_spentExpense.setBackground(new Color(0, 0, 0, 0));
         txt_itemDetails.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
-        
+
         lbl_mealDate.setText(meal_date.toString());
-        lbl_activeMember.setText(totalActiveCards+"");
-        lbl_totalOnMeals.setText(totalOnCards+"");
-        lbl_offMeals.setText(totalOffCards+"");
-        actualExpense = normalMealRate*2*totalActiveCards;
-        lbl_actualExpense.setText(actualExpense+"");
+        lbl_totalMeals.setText(totalActiveCards + "");
+        lbl_totalOnMeals.setText(totalOnCards + "");
+        lbl_offMeals.setText(totalOffCards + "");
+        actualExpense = normalMealRate * 2 * totalOnCards;
+        lbl_actualExpense.setText(actualExpense + "");
     }
 
     private MealDetailsView() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
 
     private void designTable(JTable tableName) {
         tableName.getTableHeader().setForeground(new Color(255, 255, 255));
@@ -146,7 +150,7 @@ public class MealDetailsView extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         sideBtn_manageMeals = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        lbl_activeMember = new javax.swing.JLabel();
+        lbl_totalMeals = new javax.swing.JLabel();
         lbl_mealDate = new javax.swing.JLabel();
         jSeparator13 = new javax.swing.JSeparator();
         jSeparator14 = new javax.swing.JSeparator();
@@ -191,7 +195,7 @@ public class MealDetailsView extends javax.swing.JFrame {
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 250, 10));
-        getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 430, 140, 30));
+        getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 430, 140, 30));
 
         btn_save.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_save.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,7 +208,7 @@ public class MealDetailsView extends javax.swing.JFrame {
                 btn_saveActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 480, 100, 40));
+        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 480, 100, 40));
 
         com_mealType.setBackground(new java.awt.Color(255, 51, 51));
         com_mealType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -240,7 +244,7 @@ public class MealDetailsView extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Items");
+        jLabel9.setText("Menu");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 270, 70, 30));
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -259,7 +263,7 @@ public class MealDetailsView extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Active Members");
+        jLabel10.setText("Total Meal");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 100, 30));
 
         lbl_actualExpense.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -391,10 +395,10 @@ public class MealDetailsView extends javax.swing.JFrame {
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
-        lbl_activeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_activeMember.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_activeMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lbl_activeMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 250, 30));
+        lbl_totalMeals.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_totalMeals.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_totalMeals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lbl_totalMeals, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 250, 30));
 
         lbl_mealDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_mealDate.setForeground(new java.awt.Color(255, 255, 255));
@@ -419,7 +423,58 @@ public class MealDetailsView extends javax.swing.JFrame {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         // TODO add your handling code here:
-        
+        double spentExpense = 0;
+        try {
+            if (spentExpense < 0) {
+                lbl_msgs.setText("You have entered negative number");
+                lbl_msgs.setForeground(Color.red);
+            } else {
+                spentExpense = Integer.parseInt(t_spentExpense.getText().trim());
+            }
+        } catch (NumberFormatException e) {
+            lbl_msgs.setText("Enter only number");
+            lbl_msgs.setForeground(Color.red);
+        }
+
+        String menu = txt_itemDetails.getText().trim();
+
+        if (spentExpense == 0) {
+            lbl_msgs.setText("Enter Spent expense");
+            lbl_msgs.setForeground(Color.red);
+            return;
+        }
+
+        if (menu.isEmpty()) {
+            lbl_msgs.setText("Enter Menu Details");
+            lbl_msgs.setForeground(Color.red);
+            return;
+        } else {
+            int totalActiveMember = Integer.parseInt(lbl_totalMeals.getText().trim());
+            int totalOnMeals = Integer.parseInt(lbl_totalOnMeals.getText().trim());
+            int totalOffMeal = Integer.parseInt(lbl_offMeals.getText().trim());
+            String mealType = com_mealType.getSelectedItem().toString();
+            double actual_expensess = Double.parseDouble(lbl_actualExpense.getText().trim());
+            double balance = actual_expensess - spentExpense;
+            
+            Meal meal = new Meal(meal_date, totalActiveMember, totalOnMeals, totalOffMeal, mealType, actual_expensess, spentExpense, balance, mealType);
+
+            if (mealDetailsServices.updateMealDetails(meal, manager) > 0) {
+                lbl_msgs.setText("Wait....");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MealDetailsView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                List<Integer> cardsToUpdateMeal = mealManageService.cardList();
+                for (int cardNo : cardsToUpdateMeal) {
+                    mealHistoryServices.updateStatusForNextMeal(cardNo, meal_date, manager);
+                }
+                mealDayAndDateServices.deleteFromDayWithDate(day);
+                mealManageService.prepareCMSTable();
+                lbl_msgs.setText("Details saved");
+            }
+        }
+
 
     }//GEN-LAST:event_btn_saveActionPerformed
 
@@ -447,41 +502,42 @@ public class MealDetailsView extends javax.swing.JFrame {
         // TODO add your handling code here:
         new StartMealView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
-     
+
     private void com_mealTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_mealTypeItemStateChanged
         // TODO add your handling code here:
         String mealType = com_mealType.getSelectedItem().toString();
-       
-        if(mealType.equals("Normal")){
-            
-            actualExpense = totalOnCards*2*normalMealRate;
-            lbl_actualExpense.setText(actualExpense+"");
-            
-        }else if(mealType.equals("Friday")){
-            
-            actualExpense = totalOnCards*fridayMealRate+totalOnCards*normalMealRate;
-            lbl_actualExpense.setText(actualExpense+"");
-            
-        }else if(mealType.equals("Feast")){
-            actualExpense = totalOnCards*normalMealRate+totalOnCards*feasrMealRate;
-            lbl_actualExpense.setText(actualExpense+"");
-        }else{
-            double mealRate = (totalOnCards*feasrMealRate)+(totalOnCards*fridayMealRate)+(totalOnCards*normalMealRate);
-            lbl_actualExpense.setText(mealRate+"");
-        } 
+        actualExpense = 0;
+        if (mealType.equals("Normal")) {
+
+            actualExpense = totalOnCards * 2 * normalMealRate;
+            lbl_actualExpense.setText(actualExpense + "");
+
+        } else if (mealType.equals("Friday")) {
+
+            actualExpense = totalOnCards * fridayMealRate + totalOnCards * normalMealRate;
+            lbl_actualExpense.setText(actualExpense + "");
+
+        } else if (mealType.equals("Feast")) {
+            actualExpense = totalOnCards * 2 * normalMealRate + totalOnCards * feasrMealRate;
+            lbl_actualExpense.setText(actualExpense + "");
+        } else {
+            double mealRate = (totalOnCards * feasrMealRate) + (totalOnCards * fridayMealRate) + (totalOnCards * normalMealRate);
+            lbl_actualExpense.setText(mealRate + "");
+        }
     }//GEN-LAST:event_com_mealTypeItemStateChanged
 
     private void t_spentExpenseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_spentExpenseKeyReleased
         // TODO add your handling code here:
         double spentExpense = 0;
         try {
+            actualExpense = Double.parseDouble(lbl_actualExpense.getText());
             spentExpense = Double.parseDouble(t_spentExpense.getText().trim());
-            if(spentExpense<0){
+            if (spentExpense < 0) {
                 lbl_balance.setText("Spent expense can not be negative");
-            }else{
-               lbl_balance.setText((actualExpense-spentExpense)+""); 
+            } else {
+                lbl_balance.setText((actualExpense - spentExpense) + "");
             }
-            
+
         } catch (NumberFormatException e) {
             lbl_msgs.setText("Enter valid card No");
             lbl_msgs.setForeground(Color.red);
@@ -596,7 +652,7 @@ public class MealDetailsView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MealDetailsView( ).setVisible(true);
+                new MealDetailsView().setVisible(true);
             }
         });
     }
@@ -629,7 +685,6 @@ public class MealDetailsView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JLabel lbl_activeMember;
     private javax.swing.JLabel lbl_actualExpense;
     private javax.swing.JLabel lbl_balance;
     private javax.swing.JLabel lbl_bg;
@@ -638,6 +693,7 @@ public class MealDetailsView extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_offMeals;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_title1;
+    private javax.swing.JLabel lbl_totalMeals;
     private javax.swing.JLabel lbl_totalOnMeals;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addMealDetails;

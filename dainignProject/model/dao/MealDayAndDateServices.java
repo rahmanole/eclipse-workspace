@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.conn.ConnectionForDB;
 
 /**
@@ -26,41 +28,55 @@ public class MealDayAndDateServices {
             + "day int(2),meal_date date)";
 
     public static void createTable() {
-
-    
-
         String createTableDayWithDate = "create table IF NOT EXISTS table_with_date(id int(5) primary key auto_increment,"
                 + "day int(2),meal_date date)";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
 
             PreparedStatement ps = conn.prepareStatement(createTableDayWithDate);
             ps.execute();
             System.out.println("Table created");
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
     private static void dropTblDayWithDate() {
 
         String createTableDayWithDate = "drop table table_with_date";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(createTableDayWithDate);
             ps.execute();
             System.out.println("Table created");
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
      public  int getDay(){
          int day = 0;
          String sql = "select day from table_with_date";
+        
+         Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -69,6 +85,12 @@ public class MealDayAndDateServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
          return day;
      }
@@ -76,8 +98,10 @@ public class MealDayAndDateServices {
      public  Date getDate(){
          Date date = null;
          String sql = "select meal_date from table_with_date";
+        
+         Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -86,14 +110,22 @@ public class MealDayAndDateServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
          return date;
      }
      
     public void inserInDayWithDate(int day, Date meal_date) {
         String stmt = "insert into table_with_date(day,meal_date) values(?,?)";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
 
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, day);
@@ -102,13 +134,20 @@ public class MealDayAndDateServices {
             System.out.println("Table created");
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     public void deleteFromDayWithDate(int day) {
         String stmt = "delete from table_with_date where day=?";
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
 
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, day);
@@ -116,6 +155,12 @@ public class MealDayAndDateServices {
             System.out.println("Removed a day");
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -140,6 +185,28 @@ public class MealDayAndDateServices {
             inserInDayWithDate(i, date);
             i++;
         }
+    }
+    
+    public boolean isAnyRemainingDate(){
+        String sql = "select * from table_with_date";
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
     
    

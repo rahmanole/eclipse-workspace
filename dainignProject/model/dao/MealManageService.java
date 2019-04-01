@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.conn.ConnectionForDB;
 
 /**
@@ -30,8 +32,10 @@ public class MealManageService {
 
     public int stopMeal(int cardNo) {        
         String stmt = "update current_meal_status where card_no=?";       
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1, "off");
@@ -43,6 +47,12 @@ public class MealManageService {
             return 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return -1;
@@ -52,9 +62,10 @@ public class MealManageService {
         String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
         String stmt = "update "+tblName+" set "+colName+"=? where card_no=?";
         
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-            
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1, "on");
             ps.setInt(2, cardNo);
@@ -63,6 +74,12 @@ public class MealManageService {
             return 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return -1;
@@ -71,9 +88,10 @@ public class MealManageService {
     public  int save(int cardNo) {
         String stmt = "insert into current_meal_status(card_no,on_or_off) values(?,?)";
 
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, cardNo);
             ps.setString(2, "on");
@@ -81,6 +99,12 @@ public class MealManageService {
             return 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return -1;
@@ -89,9 +113,10 @@ public class MealManageService {
     public int updateStartStopMeal(int cardNo, String flag) {
         String stmt = "update last_day_meal_history set on_or_off=? where card_no=?";
 
+       
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1, flag);
             ps.setInt(2, cardNo);
@@ -100,6 +125,12 @@ public class MealManageService {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return -1;
@@ -109,9 +140,10 @@ public class MealManageService {
         String offOrOn = "";
         String stmt = "select on_or_off from current_meal_status where card_no=?";
 
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, cardNo);
             ResultSet rs = ps.executeQuery();
@@ -120,6 +152,12 @@ public class MealManageService {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return offOrOn;
     }
@@ -128,9 +166,10 @@ public class MealManageService {
         ArrayList<Integer> cardList = new ArrayList<>();
         String stmt = "select card_no from current_meal_status";
 
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -138,6 +177,12 @@ public class MealManageService {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         Collections.sort(cardList);
         return cardList;
@@ -146,15 +191,22 @@ public class MealManageService {
     public int prepareCMSTable() {
         String stmt = "update current_meal_status set on_or_off=?";
 
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1, "on");
             ps.execute();
             return 1;
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return -1;
@@ -163,9 +215,10 @@ public class MealManageService {
     public int totalCards(){
         int totalCard = 0;
         String stmt = "select count(card_no) from current_meal_status";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ResultSet rs  = ps.executeQuery();
             while(rs.next()){
@@ -173,6 +226,12 @@ public class MealManageService {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return totalCard;
@@ -181,9 +240,10 @@ public class MealManageService {
     public int totaloffMeals(){
         int totalOffMeals = 0;
         String stmt = "select count(card_no) from current_meal_status where on_or_off=?";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
-
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1,"off");
             ResultSet rs  = ps.executeQuery();
@@ -193,6 +253,12 @@ public class MealManageService {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return totalOffMeals;

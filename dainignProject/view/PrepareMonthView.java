@@ -11,8 +11,6 @@ import java.awt.Color;
 import java.time.Month;
 import java.time.YearMonth;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JLabel;
@@ -43,6 +41,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
     MonthlyExpensessServices monthlyExpensessServices = new MonthlyExpensessServices();
     MealDayAndDateServices mealDayAndDateServices = new MealDayAndDateServices();
+    MealDetailsServices mealDetailsServices = new MealDetailsServices();
 
     Manager manager = null;
     String monthName = "";
@@ -62,7 +61,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
         //t_friDays.setText(totalFridays()+"");
         lbl_title.setText("Month Name:" + manager.getMonthName() + " " + manager.getYear());
 
-        this.setTitle("Registrar Memebr");
+        this.setTitle("Prepare Month");
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
         t_feastMealRate.setBackground(new Color(0, 0, 0, 0));
         t_totalDays.setBackground(new Color(0, 0, 0, 0));
@@ -515,13 +514,16 @@ public class PrepareMonthView extends javax.swing.JFrame {
             lbl_msgs.setText("Wait");
             lbl_msgs.setForeground(Color.white);
             if (monthDetailsServices.save(monthDetails) > 0) {
-
-                MealDetailsServices.createMealDetailsTable(monthName, year);
+                
+                lbl_msgs.setText("Waitt");
+                lbl_msgs.setForeground(Color.red);
+                
+                MealDetailsServices.createMealDetailsTable(monthName, year,manager);
                 mealHistoryServices.createMealHistoryTable(monthName, year,startDate, endDate);
                 monthlyExpensessServices.createMontlyExpenseTable(manager);
                 MealDayAndDateServices.createTable();
                 mealDayAndDateServices.insertInDayWithDateTable(startDate, endDate);
-
+                
                 lbl_msgs.setText("Successfully saved");
                 lbl_msgs.setForeground(Color.GREEN);
             } else {

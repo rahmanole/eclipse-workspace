@@ -7,6 +7,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.conn.ConnectionForDB;
 
 public class MonthlyExpensessServices {
@@ -23,14 +25,16 @@ public class MonthlyExpensessServices {
         String creatTblStmt = "create table IF NOT EXISTS " + tblName + "(id int(5)primary key auto_increment,"
                 + "card_no int,previsous_month_bumping double,needtopay double,payment_date date)";
 
-        TableCreateServices.createTable(creatTblStmt);
+        HelperServices.createTable(creatTblStmt);
     }
 
     public void saveMonthlyExpense(MonthlyExpense monthlyExpense, Manager manager) {
         String tblName = "monthly_expense_" + manager.getMonthName() + "_" + manager.getYear();
         String stmt = "insert into " + tblName + "(card_no,previsous_month_bumping,needtopay,payment_date) values(?,?,?,?)";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setInt(1, monthlyExpense.getCardNo());
             ps.setDouble(2, monthlyExpense.getPrevious_month_bumpingMoney());
@@ -46,6 +50,12 @@ public class MonthlyExpensessServices {
             }             
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

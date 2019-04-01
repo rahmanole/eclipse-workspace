@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.conn.ConnectionForDB;
 
 /**
@@ -21,7 +23,7 @@ import model.conn.ConnectionForDB;
  * @author OLEE
  */
 public class MonthDetailsServices {
-    MealHistoryServices mealHistoryServices = new MealHistoryServices();
+    //MealHistoryServices mealHistoryServices = new MealHistoryServices();
 
     private static final String TBL_NAME_PREFIX = "meal_records_of_";
 
@@ -34,8 +36,9 @@ public class MonthDetailsServices {
         String inserStmt = "insert into month_details(month_name,year,employee_fees,total_days,total_fridays,friday_mealRate,"
                 + "total_normalDaymeals,normal_mealRate,feast_mealRate,total_cost,feast_date,start_date,end_date) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
+       Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
 
             PreparedStatement ps = conn.prepareStatement(inserStmt);
             ps.setString(1, month.getMonthName());
@@ -56,14 +59,22 @@ public class MonthDetailsServices {
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return -1;
     }
 
     public double getThisMonthExpense(Manager manager) {
         String sql = "select total_cost from month_details where month_name=? and year=?";
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, manager.getMonthName());
             ps.setString(2, manager.getYear());
@@ -73,6 +84,12 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return 0;
@@ -81,17 +98,52 @@ public class MonthDetailsServices {
     public List<String> getDateList(Manager manager) {
         String sql = "select * from month_details where month_name=? and year=?";
         List<String> getDateList = new ArrayList<>();
+        
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, manager.getMonthName());
             ps.setString(2, manager.getYear());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                getDateList = mealHistoryServices.getDateList(rs.getDate(13), rs.getDate(14));
+                getDateList = HelperServices.getDateList(rs.getDate(13), rs.getDate(14));
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return getDateList;
+    }
+    
+    public static List<Date> getActualDateListOfMonth(Manager manager) {
+        String sql = "select * from month_details where month_name=? and year=?";
+        List<Date> getDateList = new ArrayList<>();
+        
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, manager.getMonthName());
+            ps.setString(2, manager.getYear());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                getDateList = MealDayAndDateServices.getActualDateList(rs.getDate(13), rs.getDate(14));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return getDateList;
@@ -103,8 +155,9 @@ public class MonthDetailsServices {
         double normalMealRate = 0;
         String sql = "select normal_mealRate from month_details where month_name=? and year=?";
         
+       Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, manager.getMonthName());
             ps.setString(2, manager.getYear());
@@ -114,6 +167,12 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return normalMealRate;
     }
@@ -122,8 +181,9 @@ public class MonthDetailsServices {
         double fridayMealRate = 0;
         String sql = "select friday_mealRate from month_details where month_name=? and year=?";
         
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, manager.getMonthName());
             ps.setString(2, manager.getYear());
@@ -133,6 +193,12 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return fridayMealRate;
     }
@@ -141,8 +207,9 @@ public class MonthDetailsServices {
         double feastMealRate = 0;
         String sql = "select feast_mealRate from month_details where month_name=? and year=?";
         
+        Connection conn = null;
         try {
-            Connection conn = ConnectionForDB.connect();
+            conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, manager.getMonthName());
             ps.setString(2, manager.getYear());
@@ -152,6 +219,12 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return feastMealRate;
     }

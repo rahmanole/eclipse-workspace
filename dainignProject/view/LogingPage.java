@@ -16,12 +16,12 @@ import model.dao.RoleServices;
  * @author ccsl-pc
  */
 public class LogingPage extends javax.swing.JFrame {
-    
+
     RoleServices roleServices = new RoleServices();
     LoginServices loginServices = new LoginServices();
     ManagerService managerService = new ManagerService();
     Manager manager = null;
-    
+
     public LogingPage() {
         initComponents();
         setLocationRelativeTo(null);
@@ -118,6 +118,7 @@ public class LogingPage extends javax.swing.JFrame {
             lbl_logMsgs.setForeground(Color.RED);
             return;
         }
+
         if (pin.equals("")) {
             lbl_logMsgs.setText("Enter Password!!");
             lbl_logMsgs.setForeground(Color.RED);
@@ -128,9 +129,18 @@ public class LogingPage extends javax.swing.JFrame {
             if (loginServices.isUsrPassMatched(pin, email)) {
                 if (roleServices.getRoleNameByPin(pin).equalsIgnoreCase("manager")) {
                     manager = managerService.getManagerByPin(pin);
-                    new ManagerDashBoard(manager).setVisible(true);
-                }else{
+                    if (manager == null) {
+                        lbl_logMsgs.setText("Manager does not exists!!");
+                        lbl_logMsgs.setForeground(Color.RED);
+
+                    } else {
+                        new ManagerDashBoard(manager).setVisible(true);
+                    }
+
+                    this.setVisible(false);
+                } else {
                     new AdminDashboard().setVisible(true);
+                    this.setVisible(false);
                 }
             } else {
                 lbl_logMsgs.setText("Invalid password");

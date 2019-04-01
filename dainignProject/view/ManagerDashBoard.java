@@ -77,7 +77,7 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         sideBtn_addMontlyExpensess = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        sideBtn_addMealDetails = new javax.swing.JLabel();
+        sideBtn_editMeal = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         sideBtn_collectExpense = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -87,6 +87,7 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lbl_title1 = new javax.swing.JLabel();
         lbl_title2 = new javax.swing.JLabel();
+        lbl_creatMonthFirst = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -130,19 +131,19 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         jLabel14.setOpaque(true);
         pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 10, 40));
 
-        sideBtn_addMealDetails.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addMealDetails.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addMealDetails.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addMealDetails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addMealDetails.setText("Meal Details");
-        sideBtn_addMealDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addMealDetails.setOpaque(true);
-        sideBtn_addMealDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+        sideBtn_editMeal.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_editMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_editMeal.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_editMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_editMeal.setText("Edit Meal Details");
+        sideBtn_editMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_editMeal.setOpaque(true);
+        sideBtn_editMeal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addMealDetailsMouseClicked(evt);
+                sideBtn_editMealMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addMealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 180, 40));
+        pnl_sideBar.add(sideBtn_editMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 180, 40));
 
         jLabel15.setOpaque(true);
         pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 10, 40));
@@ -199,7 +200,13 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         lbl_title2.setForeground(new java.awt.Color(255, 255, 255));
         lbl_title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_title2.setText("Personal Information");
-        getContentPane().add(lbl_title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 170, 30));
+        getContentPane().add(lbl_title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 170, 30));
+
+        lbl_creatMonthFirst.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_creatMonthFirst.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_creatMonthFirst.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_creatMonthFirst.setText("Personal Information");
+        getContentPane().add(lbl_creatMonthFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 170, 30));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -222,10 +229,9 @@ public class ManagerDashBoard extends javax.swing.JFrame {
         new PrepareMonthView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_addMontlyExpensessMouseClicked
 
-    private void sideBtn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMealDetailsMouseClicked
+    private void sideBtn_editMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMealMouseClicked
         // TODO add your handling code here:
-        new MealDetailsView(manager).setVisible(true);
-    }//GEN-LAST:event_sideBtn_addMealDetailsMouseClicked
+    }//GEN-LAST:event_sideBtn_editMealMouseClicked
 
     private void sideBtn_collectExpenseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_collectExpenseMouseClicked
         // TODO add your handling code here:
@@ -239,7 +245,13 @@ public class ManagerDashBoard extends javax.swing.JFrame {
 
     private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
         // TODO add your handling code here:
-        new StartMealView(manager).setVisible(true);
+            try {
+            new StartMealView(manager).setVisible(true);
+        } catch (Exception e) {
+             lbl_isManagerNull.setText("Create your month first");
+        }
+            
+       
     }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
 //
 //    private void addToTable(Member member) {
@@ -331,14 +343,15 @@ public class ManagerDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbl_bg;
+    private javax.swing.JLabel lbl_creatMonthFirst;
     private javax.swing.JLabel lbl_isManagerNull;
     private javax.swing.JLabel lbl_title1;
     private javax.swing.JLabel lbl_title2;
     private javax.swing.JPanel pnl_sideBar;
-    private javax.swing.JLabel sideBtn_addMealDetails;
     private javax.swing.JLabel sideBtn_addMontlyExpensess;
     private javax.swing.JLabel sideBtn_addmmeber;
     private javax.swing.JLabel sideBtn_collectExpense;
+    private javax.swing.JLabel sideBtn_editMeal;
     private javax.swing.JLabel sideBtn_manageMeals;
     // End of variables declaration//GEN-END:variables
 }

@@ -406,26 +406,12 @@ public class StartMealView extends javax.swing.JFrame {
         new AddMealView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_addMealMouseClicked
 
-
     private void sideBtn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_nextMouseClicked
         // TODO add your handling code here:
-        Date toDayDate = null;
-        if (meal_date == null) {
-            lbl_msgsStart.setText("Select date");
-            return;
-        } else {
-            toDayDate = new java.sql.Date(meal_date.getTime());
-            if (dateList.contains(mealHistoryServices.dateFormate(toDayDate))) {
-                toDayDate = new java.sql.Date(meal_date.getTime() - 86400000);
+                Date toDayDate = new java.sql.Date(meal_date.getTime() - 86400000);
                 mealStopService.removeAccordingToLastDate(toDayDate);
                 new StopMealView(manager).setVisible(true);
-            } else {
-                lbl_msgsStart.setText("Keep selected this meal date");
-                lbl_msgsStart.setForeground(Color.red);
-            }
-        }
-
-
+       
     }//GEN-LAST:event_sideBtn_nextMouseClicked
 
 
@@ -435,7 +421,6 @@ public class StartMealView extends javax.swing.JFrame {
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         // TODO add your handling code here:
-        mealManageService.prepareCMSTable();
         pnl_selectType.setVisible(false);
     }//GEN-LAST:event_btn_nextActionPerformed
     private void addToTable(int cardNo, JTable tbl_name) {
