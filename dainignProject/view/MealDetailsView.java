@@ -456,7 +456,7 @@ public class MealDetailsView extends javax.swing.JFrame {
             double actual_expensess = Double.parseDouble(lbl_actualExpense.getText().trim());
             double balance = actual_expensess - spentExpense;
             
-            Meal meal = new Meal(meal_date, totalActiveMember, totalOnMeals, totalOffMeal, mealType, actual_expensess, spentExpense, balance, mealType);
+            Meal meal = new Meal(meal_date, totalActiveMember, totalOnMeals, totalOffMeal, mealType, actual_expensess, spentExpense, balance, menu);
 
             if (mealDetailsServices.updateMealDetails(meal, manager) > 0) {
                 lbl_msgs.setText("Wait....");

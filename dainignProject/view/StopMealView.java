@@ -368,7 +368,6 @@ public class StopMealView extends javax.swing.JFrame {
         }
 
         if (cardNo > 0) {
-            Date startDate = null;
             Date endDate = null;
             if (flag.equals("Particular Date")) {
 
@@ -377,7 +376,7 @@ public class StopMealView extends javax.swing.JFrame {
                     return;
                 } else {
                     endDate = new java.sql.Date(date_endDate.getDate().getTime());
-                    mealStopService.svae(cardNo, startDate, endDate);
+                    mealStopService.svae(cardNo, meal_date, endDate);
                     lbl_moreTheanOne.setText("Meal Stoped");
                 }
             } else {

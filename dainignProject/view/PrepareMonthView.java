@@ -511,12 +511,11 @@ public class PrepareMonthView extends javax.swing.JFrame {
             lbl_msgs.setForeground(Color.red);
         } else {
             MonthDetails monthDetails = new MonthDetails(monthName, year, employee_fees, totalDays, totalFridays, friDayMealRate, numberOfNormalDaymeals, normalMealRate, feastMealRate, totalCost, feastDate, startDate, endDate);
-            lbl_msgs.setText("Wait");
-            lbl_msgs.setForeground(Color.white);
+            lbl_msgs.setText("Wait...");
+            lbl_msgs.setForeground(Color.red);
             if (monthDetailsServices.save(monthDetails) > 0) {
                 
-                lbl_msgs.setText("Waitt");
-                lbl_msgs.setForeground(Color.red);
+                
                 
                 MealDetailsServices.createMealDetailsTable(monthName, year,manager);
                 mealHistoryServices.createMealHistoryTable(monthName, year,startDate, endDate);

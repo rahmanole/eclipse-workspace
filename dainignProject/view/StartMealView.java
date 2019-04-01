@@ -42,19 +42,19 @@ public class StartMealView extends javax.swing.JFrame {
     String year = "";
     Manager manager = null;
     List<String> dateList = null;
-    
-     int day = mealDayAndDateServices.getDay();
-     Date meal_date = mealDayAndDateServices.getDate();
+
+    int day = mealDayAndDateServices.getDay();
+    Date meal_date = mealDayAndDateServices.getDate();
 
     public StartMealView(Manager manager) {
 
         initComponents();
-        
+
         this.manager = manager;
-        
+
         monthName = manager.getMonthName();
         year = manager.getYear();
-        
+
         lbl_day.setText("Day " + day + "");
         lbl_date.setText("Date " + meal_date.toString());
 
@@ -394,6 +394,14 @@ public class StartMealView extends javax.swing.JFrame {
                 lbl_msgsStart.setForeground(Color.GREEN);
 
             } else {
+
+                if (mealManageService.getStatus(cardNo).equals("off")) {
+                    mealManageService.startMeal(cardNo);
+                    lbl_msgsStart.setText("Meal started again for " + cardNo);
+                    lbl_msgsStart.setForeground(Color.red);
+                    return;
+                }
+
                 lbl_msgsStart.setText("Meal was not stoped for " + cardNo);
                 lbl_msgsStart.setForeground(Color.red);
             }
@@ -408,10 +416,10 @@ public class StartMealView extends javax.swing.JFrame {
 
     private void sideBtn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_nextMouseClicked
         // TODO add your handling code here:
-                Date toDayDate = new java.sql.Date(meal_date.getTime() - 86400000);
-                mealStopService.removeAccordingToLastDate(toDayDate);
-                new StopMealView(manager).setVisible(true);
-       
+        Date toDayDate = new java.sql.Date(meal_date.getTime() - 86400000);
+        mealStopService.removeAccordingToLastDate(toDayDate);
+        new StopMealView(manager).setVisible(true);
+
     }//GEN-LAST:event_sideBtn_nextMouseClicked
 
 

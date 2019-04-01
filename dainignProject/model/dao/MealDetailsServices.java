@@ -124,7 +124,7 @@ public class MealDetailsServices {
         
         String status = "";
         String tblName = "meal_details_for_"+manager.getMonthName()+"_"+manager.getYear();
-        String stmt = "select meal_date from "+ tblName+" where cardNo = ?";
+        String stmt = "select meal_type from "+ tblName+" where meal_date = ?";
         
         Connection conn = null;
         try {

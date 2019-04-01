@@ -175,7 +175,7 @@ public class MealDayAndDateServices {
             dates.add(new java.sql.Date(cal.getTime().getTime()));
             cal.add(Calendar.DATE, 1);
         }
-
+        dates.add(new java.sql.Date(cal.getTime().getTime()));
         return dates;
     }
 

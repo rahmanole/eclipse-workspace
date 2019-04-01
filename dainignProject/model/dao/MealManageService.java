@@ -7,6 +7,7 @@ package model.dao;
 
 import com.mysql.jdbc.Connection;
 import controller.pojo.Manager;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,9 +59,8 @@ public class MealManageService {
         return -1;
     }
     
-    public int startMeal(Manager manager,String colName,int cardNo) {
-        String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
-        String stmt = "update "+tblName+" set "+colName+"=? where card_no=?";
+    public int startMeal(int cardNo) {
+        String stmt = "update current_meal_status set on_or_off=? where card_no=?";
         
         
         Connection conn = null;
@@ -68,6 +68,7 @@ public class MealManageService {
             conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(stmt);
             ps.setString(1, "on");
+             ps.setInt(2, cardNo);
             ps.setInt(2, cardNo);
             ps.execute();
             
@@ -262,6 +263,33 @@ public class MealManageService {
         }
         
         return totalOffMeals;
+    }
+    
+    public String getMealStatus(int cardNo) {
+
+        String status = "";
+        String stmt = "select on_or_off from  current_meal_status where cardNo = ?";
+
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(stmt);
+            ps.setInt(1, cardNo);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                status = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return status;
     }
     
 }

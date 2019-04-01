@@ -15,6 +15,7 @@ import java.util.List;
 public class Summary {
     private int id;
     private int cardNo;
+    private int totalMeals;
     private int onDays;
     private int normalOffDays;
     private int fridayOffMeal;
@@ -23,9 +24,10 @@ public class Summary {
     private double bumping;
     private List<Date> offDates;
 
-    public Summary(int id, int cardNo, int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping,List<Date> offDates) {
+    public Summary(int id, int cardNo, int totalMeals,int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping,List<Date> offDates) {
         this.id = id;
         this.cardNo = cardNo;
+        this.totalMeals = totalMeals;
         this.onDays = onDays;
         this.normalOffDays = normalOffDays;
         this.fridayOffMeal = fridayOffMeal;
@@ -35,8 +37,9 @@ public class Summary {
         this.offDates = offDates;
     }
 
-    public Summary(int cardNo, int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping,List<Date> offDates) {
+    public Summary(int cardNo,  int totalMeals,int onDays,int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping,List<Date> offDates) {
         this.cardNo = cardNo;
+        this.totalMeals = totalMeals;
         this.onDays = onDays;
         this.normalOffDays = normalOffDays;
         this.fridayOffMeal = fridayOffMeal;
@@ -46,14 +49,31 @@ public class Summary {
         this.offDates = offDates;
     }
 
-    public Summary(int cardNo, int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping) {
+    public Summary(int cardNo,int totalMeals, int onDays, int normalOffDays, int fridayOffMeal, boolean wasFeastOn, int totalOffMeal, double bumping) {
         this.cardNo = cardNo;
+        this.totalMeals = totalMeals;
         this.onDays = onDays;
         this.normalOffDays = normalOffDays;
         this.fridayOffMeal = fridayOffMeal;
         this.wasFeastOn = wasFeastOn;
         this.totalOffMeal = totalOffMeal;
         this.bumping = bumping;
+    }
+
+    public int getTotalMeals() {
+        return totalMeals;
+    }
+
+    public void setTotalMeals(int totalMeals) {
+        this.totalMeals = totalMeals;
+    }
+
+    public List<Date> getOffDates() {
+        return offDates;
+    }
+
+    public void setOffDates(List<Date> offDates) {
+        this.offDates = offDates;
     }
     
     

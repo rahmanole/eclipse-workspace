@@ -29,8 +29,7 @@ public class MealHistoryServices {
     MealManageService mealManageService = new MealManageService();
     MealDetailsServices mealDetailsServices = new MealDetailsServices();
     MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
-    
-    
+
     public void createMealHistoryTable(String month, String year, Date startDate, Date endDate) {
         String tblName = "meal_history_for_" + month + "_" + year;
         String tblCrtStmt = "create table IF NOT EXISTS " + tblName + "(id int(5)primary key auto_increment,"
@@ -182,8 +181,6 @@ public class MealHistoryServices {
         }
     }
 
-    
-
     private static void updateMealDate(Date date, String tblName) {
         String stmt = "update " + tblName + "set meal_date=?";
 
@@ -253,8 +250,8 @@ public class MealHistoryServices {
 
         String status = "";
         String colName = HelperServices.dateFormate(date);
-        String tblName = "meal_details_for_" + manager.getMonthName() + "_" + manager.getYear();
-        String stmt = "select " + colName + " from " + tblName + " where cardNo = ?";
+        String tblName = "meal_history_for_" + manager.getMonthName() + "_" + manager.getYear();
+        String stmt = "select " + colName + " from " + tblName + " where card_no = ?";
 
         Connection conn = null;
         try {
@@ -279,9 +276,9 @@ public class MealHistoryServices {
     }
 
     //Analyze meal history
-    public Summary getSummary(int cardNo, Date date, Manager manager) {
+    public Summary getSummary(int cardNo, Manager manager) {
         Summary summary = null;
-
+        int totalMeals = 0;
         int totalOnMeal = 0;
         int normalOff = 0;
         int fridayOff = 0;
@@ -293,38 +290,48 @@ public class MealHistoryServices {
         double fridayMealRate = monthDetailsServices.getFridayMealRate(manager);
         double feastMealRate = monthDetailsServices.getFeastMealRate(manager);
 
-        String status = getMealStatus(cardNo, date, manager);
+        List<Date> allDateOfThisMonth = MonthDetailsServices.getActualDateListOfMonth(manager);
+        System.out.println(allDateOfThisMonth);
 
-        if (status.equals("on")) {
-            totalOnMeal++;
-        } else if (status.equals("off")) {
-            String type = mealDetailsServices.getMealType(date, manager);
-            if (type.equals("Normal")) {
-                normalOff += 2;
-                bumping += 2 * normalMealRate;
-            } else if (type.equals("Friday")) {
-                fridayOff++;
-                normalOff++;
+        for (Date date : allDateOfThisMonth) {
+            
+            String status = getMealStatus(cardNo, date, manager);
+            if (status.equals("on")) {
+                totalMeals++;
+                totalOnMeal++;
+            } else if (status.equals("off")) {
+                totalMeals++;
+                String type = mealDetailsServices.getMealType(date, manager);
+                if (type.equals("Normal")) {
+                    normalOff += 2;
+                    bumping += 2 * normalMealRate;
+                } else if (type.equals("Friday")) {
+                    fridayOff++;
+                    normalOff++;
 
-                bumping += (normalMealRate + fridayMealRate);
+                    bumping += (normalMealRate + fridayMealRate);
 
-            } else if (type.equals("Friday & Feast")) {
-                fridayOff++;
-                normalOff++;
-                wasFestOn = true;
-                bumping += (normalMealRate + fridayMealRate + feastMealRate);
+                } else if (type.equals("Friday & Feast")) {
+                    System.out.println("Feast off");
+                    fridayOff++;
+                    normalOff++;
+                    wasFestOn = true;
+                    bumping += (normalMealRate + fridayMealRate + feastMealRate);
+                } else {
+                    System.out.println("Feast off");
+                    wasFestOn = true;
+                    normalOff += 2;
+                    bumping += (2 * normalMealRate + feastMealRate);
+                }
+                offDates.add(date);
             } else {
-                wasFestOn = true;
-                normalOff += 2;
-                bumping += (2 * normalMealRate + feastMealRate);
+
             }
-            offDates.add(date);
-        } else {
 
         }
-
-        summary = new Summary(cardNo, totalOnMeal, normalOff, fridayOff, wasFestOn, offDates.size(), bumping);
-
+        
+        summary = new Summary(cardNo,totalMeals*2, fridayOff, normalOff, fridayOff, wasFestOn, offDates.size()*2, bumping, offDates);
+       
         return summary;
     }
 
