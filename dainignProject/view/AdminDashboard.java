@@ -5,10 +5,8 @@
  */
 package view;
 
-import controller.pojo.Member;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -79,8 +77,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         sideBtn_summary = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        sideBtn_summary1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        com_monthName = new javax.swing.JComboBox<>();
+        com_monthName1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -192,14 +196,49 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel16.setOpaque(true);
         pnl_sideBar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 10, 40));
 
+        jLabel17.setOpaque(true);
+        pnl_sideBar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 10, 40));
+
+        sideBtn_summary1.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_summary1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_summary1.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_summary1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_summary1.setText("View Monthly Report");
+        sideBtn_summary1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_summary1.setOpaque(true);
+        sideBtn_summary1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_summary1MouseClicked(evt);
+            }
+        });
+        pnl_sideBar.add(sideBtn_summary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 180, 40));
+
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Personal Information");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 620, 30));
+        jLabel2.setText("Month Name");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 80, 30));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1020, 20));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Personal Information");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 620, 30));
+
+        com_monthName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        com_monthName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        getContentPane().add(com_monthName, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 120, 30));
+
+        com_monthName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        com_monthName1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Year", "2019", "2020", "2021", "2022" }));
+        getContentPane().add(com_monthName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 120, 30));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Year");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 80, 30));
 
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -240,6 +279,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         new AddSummaryView().setVisible(true);
     }//GEN-LAST:event_sideBtn_summaryMouseClicked
+
+    private void sideBtn_summary1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_summary1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sideBtn_summary1MouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -307,13 +350,18 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> com_monthName;
+    private javax.swing.JComboBox<String> com_monthName1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbl_bg;
     private javax.swing.JPanel pnl_sideBar;
@@ -323,5 +371,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel sideBtn_addmmeber;
     private javax.swing.JLabel sideBtn_addmmeber1;
     private javax.swing.JLabel sideBtn_summary;
+    private javax.swing.JLabel sideBtn_summary1;
     // End of variables declaration//GEN-END:variables
 }

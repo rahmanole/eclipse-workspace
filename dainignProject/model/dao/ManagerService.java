@@ -150,4 +150,31 @@ public class ManagerService {
         
     }
     
+    public Manager getManagerByMonthYear(String monthName,String year){
+        Manager manager = null;
+        String sql = "select * from manager where month_name=? and year=?";
+        
+         Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, monthName);
+            ps.setString(2, year);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                manager = new Manager(rs.getInt(1), rs.getInt(2),rs.getString(3), rs.getString(4),rs.getString(5));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return manager;
+    }
+    
 }

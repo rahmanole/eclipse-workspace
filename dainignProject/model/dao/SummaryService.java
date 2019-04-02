@@ -6,10 +6,7 @@
 package model.dao;
 
 import com.mysql.jdbc.Connection;
-import controller.pojo.Manager;
-import controller.pojo.Member;
 import controller.pojo.Summary;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

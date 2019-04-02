@@ -130,6 +130,7 @@ public class LogingPage extends javax.swing.JFrame {
 
                     } else {
                         new ManagerDashBoard(manager).setVisible(true);
+                         this.setVisible(false);
                     }
 
                     this.setVisible(false);

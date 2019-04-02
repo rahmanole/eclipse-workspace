@@ -5,13 +5,9 @@
  */
 package view;
 
-import com.sun.javafx.scene.control.skin.FXVK;
-import controller.pojo.Manager;
 import controller.pojo.Role;
 import java.awt.Color;
 import java.awt.Font;
-
-import java.util.ArrayList;
 
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JLabel;
@@ -19,9 +15,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.dao.DeptNmaesServices;
-import model.dao.ManagerService;
 import model.dao.RoleServices;
-import sun.font.FontFamily;
 
 /**
  *
@@ -221,7 +215,7 @@ public class AddAdminView extends javax.swing.JFrame {
         String email = t_eamil.getText().trim();
 
         String roleName = com_role.getSelectedItem().toString();
-        String pin = generatePin();
+        String pin = generatePin().toLowerCase();
 
         if (email.isEmpty() || roleName.equals("Select role")) {
             lbl_oprtnFeedbck.setText("Enter all data");
