@@ -1,6 +1,7 @@
 package view;
 
 import controller.pojo.Manager;
+import controller.pojo.MonthReport;
 import controller.pojo.Summary;
 import java.awt.Color;
 import java.sql.Date;
@@ -23,6 +24,7 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
     DeptNmaesServices deptNmaesServices = new DeptNmaesServices();
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
     ManagerService managerService = new ManagerService();
+    MonthReportService monthReportService = new MonthReportService();
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
     LogingPage logingPage = new LogingPage();
@@ -33,7 +35,6 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
 
         this.setTitle("Montly Report");
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
-        t_cardNo.setBackground(new Color(0, 0, 0, 0));
 
         designTable(tbl_report);
 
@@ -141,7 +142,7 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
         tbl_report.setRowHeight(30);
         jScrollPane1.setViewportView(tbl_report);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 90, 360, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 90, 360, 420));
 
         lbl_isManagerNull.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_isManagerNull.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,26 +221,16 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
         
         String monthName = com_monthName.getSelectedItem().toString();
         String year = com_year.getSelectedItem().toString();
-        Manager manager = managerService.getManagerByMonthYear(monthName, year);        
-        int cardNo = 0;
+        List<Manager> managerList = managerService.getManagerByMonthYear(monthName, year);     
         
-        try {
-            cardNo = Integer.parseInt(t_cardNo.getText().trim());
 
-        } catch (NumberFormatException e) {
-            lbl_msgs.setText("Enter only number");
-            lbl_msgs.setForeground(Color.red);
-            return;
-        }
-
-        if (mealHistoryServices.isCardExists(cardNo, manager)) {
-            Summary report = mealHistoryServices.getSummary(cardNo, manager);
+        if (monthReportService.isMonthExists(monthName, year)) {
+            MonthReport report = monthReportService.getMonthReport(managerList, year);
             
-            Object[][] values = {{"Card No.",report.getCardNo()},{"Total Meal",report.getTotalMeals()},{"Total On Meal",report.getTotalMeals()-report.getTotalOffMeal()},
-                {"Normal Off Meal",report.getNormalOffDays()},{"Friday Off",report.getFridayOffMeal()},{"Feast",report.getWasFeastOn()?"Was off":"Was on"},
-                {"Total Off Meal",report.getTotalOffMeal()},{"Remaining Balance",report.getBumping()}};
-            
-
+            Object[][] values = {{"TotalMember",report.getTotalMember()},{"Total On Meal",report.getTotalOnMeal()},{"Total off Meal",report.getTotalOffMeal()},
+                {"Normal Off Meal",report.getTotalNormalOffMeal()},{"Friday Off Meals",report.getTotalFridayOffMeal()},{"Feast Off",report.getTotalFeastOffMeal()},
+                {"Total Expense Collected",report.getTotalExpenseCollection()},{"Total Spent expense",report.getTotalSpent()},
+            {"Total Balance",report.getBalance()},{"Manager One",report.getManagerOneCardNo()},{"Manager Two",report.getManagerTwoCardNo()}};
             
             DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
             model.setRowCount(0);

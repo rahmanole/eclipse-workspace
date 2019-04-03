@@ -150,8 +150,8 @@ public class ManagerService {
         
     }
     
-    public Manager getManagerByMonthYear(String monthName,String year){
-        Manager manager = null;
+    public List<Manager> getManagerByMonthYear(String monthName,String year){
+        List<Manager> managerList = new ArrayList<>();
         String sql = "select * from manager where month_name=? and year=?";
         
          Connection conn = null;
@@ -163,7 +163,7 @@ public class ManagerService {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                manager = new Manager(rs.getInt(1), rs.getInt(2),rs.getString(3), rs.getString(4),rs.getString(5));
+                managerList.add(new Manager(rs.getInt(1), rs.getInt(2),rs.getString(3), rs.getString(4),rs.getString(5)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,7 +174,7 @@ public class ManagerService {
                 Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return manager;
+        return managerList;
     }
     
 }

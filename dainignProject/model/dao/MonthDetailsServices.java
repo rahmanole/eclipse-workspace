@@ -229,5 +229,32 @@ public class MonthDetailsServices {
         return feastMealRate;
     }
     
+    public double getTotalExpense(Manager manager) {
+        String tblName = "meal_details_for_" + manager.getMonthName() + "_" + manager.getYear();
+        String sql = "select total_cost from month_details";
+        
+        double total_cost = 0;
+
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+             total_cost = rs.getDouble(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return total_cost;
+    }
+    
     
 }
