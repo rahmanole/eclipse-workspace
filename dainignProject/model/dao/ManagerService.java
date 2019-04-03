@@ -7,9 +7,7 @@ package model.dao;
 
 import com.mysql.jdbc.Connection;
 import controller.pojo.Manager;
-import controller.pojo.Member;
 import java.awt.Color;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,18 +26,19 @@ public class ManagerService {
     
     MemberServices memberServices = new MemberServices();
     
-    public static String tblCrtStmt = "create table manager(id int(5) primary key auto_increment,card_no int(5) unique,month_name varchar(10),"
+    public static String tblCrtStmt = "create table manager(id int(5) primary key auto_increment,card_no int(5),month_name varchar(10),"
             + "year varchar(5),pin varchar(55))";
     
 
-    public boolean isManagerAssignedForThisMonth(String month,String year) {
-        String sql = "select * from manager where month_name=? and year =?";
+    public boolean isThisCardAssignedForThisMonth(String month,String year,int cardNo) {
+        String sql = "select * from manager where month_name=? and year =? and card_no=?";
         Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, month);
             ps.setString(2,year);
+            ps.setInt(3, cardNo);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return true;

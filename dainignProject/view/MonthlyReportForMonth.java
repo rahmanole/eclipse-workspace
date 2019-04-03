@@ -80,7 +80,7 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         pnl_sideBar = new javax.swing.JPanel();
-        sideBtn_summary = new javax.swing.JLabel();
+        sideBtn_reportForAmonth = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         sideBtn_summary1 = new javax.swing.JLabel();
@@ -170,19 +170,19 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
         pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
         pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sideBtn_summary.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_summary.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_summary.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_summary.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_summary.setText("Of A Member");
-        sideBtn_summary.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_summary.setOpaque(true);
-        sideBtn_summary.addMouseListener(new java.awt.event.MouseAdapter() {
+        sideBtn_reportForAmonth.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_reportForAmonth.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_reportForAmonth.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_reportForAmonth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_reportForAmonth.setText("For A Member");
+        sideBtn_reportForAmonth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_reportForAmonth.setOpaque(true);
+        sideBtn_reportForAmonth.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_summaryMouseClicked(evt);
+                sideBtn_reportForAmonthMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_summary, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
+        pnl_sideBar.add(sideBtn_reportForAmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
 
         jLabel16.setOpaque(true);
         pnl_sideBar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
@@ -241,17 +241,18 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
             
             
         } else {
-            lbl_msgs.setText("This card was not in this month");
+            lbl_msgs.setText("This month doesn't exists");
             lbl_msgs.setForeground(Color.red);
 
         }
 
     }//GEN-LAST:event_btn_detailsActionPerformed
 
-    private void sideBtn_summaryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_summaryMouseClicked
+    private void sideBtn_reportForAmonthMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_reportForAmonthMouseClicked
         // TODO add your handling code here:
-        new AddSummaryView().setVisible(true);
-    }//GEN-LAST:event_sideBtn_summaryMouseClicked
+        new MonthlyReportForStudent().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_sideBtn_reportForAmonthMouseClicked
 
     private void sideBtn_summary1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_summary1MouseClicked
         // TODO add your handling code here:
@@ -1356,7 +1357,7 @@ public class MonthlyReportForMonth extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_title1;
     private javax.swing.JLabel lbl_title2;
     private javax.swing.JPanel pnl_sideBar;
-    private javax.swing.JLabel sideBtn_summary;
+    private javax.swing.JLabel sideBtn_reportForAmonth;
     private javax.swing.JLabel sideBtn_summary1;
     private javax.swing.JTable tbl_report;
     // End of variables declaration//GEN-END:variables

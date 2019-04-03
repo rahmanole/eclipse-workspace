@@ -56,7 +56,7 @@ public class MonthReportService {
 
     public MonthReport getMonthReport(List<Manager> managerList, String onOrOff) {
         Manager manager = managerList.get(0);
-        int totalActiveMember = mealHistoryServices.getCardList(manager).size();
+        int totalActiveMember = MealHistoryServices.getCardList(manager).size();
         int totalOnMeal = 0;
         int totalOffMeal = 0;
         int totalNormalOffMeal = 0;
@@ -72,12 +72,12 @@ public class MonthReportService {
             
             String colName = HelperServices.dateFormate(date);
             String mealType = mealDetailsServices.getMealType(date, manager);
-            int OnMealsOfADay = totalOnOffMealCount(manager, colName, "off");
+            int OnMealsOfADay = 2*totalOnOffMealCount(manager, colName, "on");
             
             totalOnMeal += OnMealsOfADay;
             
             int OffMealsOfADay = totalOnOffMealCount(manager, colName, "off");
-
+            totalOffMeal += 2*OffMealsOfADay;
             if (mealType.equals("Normal")) {
 
                 totalNormalOffMeal += 2 * OffMealsOfADay;
@@ -97,7 +97,6 @@ public class MonthReportService {
                 totalFridayOffMeal += OffMealsOfADay;
                 totalFeastOffMeal += OffMealsOfADay;
             }
-
         }
         
   

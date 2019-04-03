@@ -29,7 +29,7 @@ import model.dao.MonthlyExpensessServices;
  *
  * @author OLEE
  */
-public class PrepareMonthView extends javax.swing.JFrame {
+public class UpdateMonthView extends javax.swing.JFrame {
 
     /**
      * Creates new form PersonalInfo
@@ -47,7 +47,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
     String monthName = "";
     String year = "";
 
-    public PrepareMonthView(Manager manager) {
+    public UpdateMonthView(Manager manager) {
 
         initComponents();
         this.manager = manager;
@@ -74,9 +74,23 @@ public class PrepareMonthView extends javax.swing.JFrame {
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
 
+        MonthDetails monthDetails = monthDetailsServices.getMonthDetails(manager);
+
+        t_empFees.setText(monthDetails.getEmployee_fees()+"");
+        t_totalDays.setText(monthDetails.getTotalDays()+"");
+        t_totalDays.setText(monthDetails.getTotalDays()+"");
+        t_fridayMealRate.setText(monthDetails.getFriDayMealRate()+"");
+        t_totalNoramlDays.setText(monthDetails.getNumberOfNormalDaymeals()+"");
+        t_normalMealRate.setText(monthDetails.getNormalMealRate()+"");
+        t_feastMealRate.setText(monthDetails.getFeastMealRate()+"");
+        lbl_totalMonthlyCost.setText(monthDetails.getTotal_cost()+"");
+        date_feastDate.setDate(monthDetails.getFeastDate());
+        date_startDate.setDate(monthDetails.getStartDate());
+        date_endDate.setDate(monthDetails.getEndDate());
+
     }
 
-    private PrepareMonthView() {
+    private UpdateMonthView() {
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -131,7 +145,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         lbl_msgs = new javax.swing.JLabel();
-        btn_save = new javax.swing.JButton();
+        btn_updateMonth = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         t_totalNoramlDays = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
@@ -254,20 +268,20 @@ public class PrepareMonthView extends javax.swing.JFrame {
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 250, 10));
-        getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 510, 140, 30));
+        getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 480, 250, 30));
 
-        btn_save.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_save.setForeground(new java.awt.Color(255, 255, 255));
-        btn_save.setText("Save");
-        btn_save.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btn_save.setContentAreaFilled(false);
-        btn_save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_save.addActionListener(new java.awt.event.ActionListener() {
+        btn_updateMonth.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_updateMonth.setForeground(new java.awt.Color(255, 255, 255));
+        btn_updateMonth.setText("Save");
+        btn_updateMonth.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        btn_updateMonth.setContentAreaFilled(false);
+        btn_updateMonth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_updateMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_saveActionPerformed(evt);
+                btn_updateMonthActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 560, 100, 40));
+        getContentPane().add(btn_updateMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 530, 100, 40));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -463,7 +477,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
         sideBtn_updateMonth.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sideBtn_updateMonth.setForeground(new java.awt.Color(255, 255, 255));
         sideBtn_updateMonth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_updateMonth.setText("Preapre Month");
+        sideBtn_updateMonth.setText("Update Month");
         sideBtn_updateMonth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sideBtn_updateMonth.setOpaque(true);
         sideBtn_updateMonth.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -496,7 +510,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
     double normalMealRate = 0;
     double feastMealRate = 0;
 
-    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+    private void btn_updateMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateMonthActionPerformed
         // TODO add your handling code here:
 
         List<Integer> cardList = memberServices.getAllActiveCards();
@@ -520,6 +534,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
             //return;
         }
         double totalCost = Double.parseDouble(lbl_totalMonthlyCost.getText());
+        
         Date feastDate = new java.sql.Date(date_feastDate.getDate().getTime());
         Date startDate = new java.sql.Date(date_startDate.getDate().getTime());
         Date endDate = new java.sql.Date(date_endDate.getDate().getTime());
@@ -533,15 +548,13 @@ public class PrepareMonthView extends javax.swing.JFrame {
             lbl_msgs.setText("Wait...");
             lbl_msgs.setForeground(Color.red);
             if (monthDetailsServices.save(monthDetails) > 0) {
-                
-                
-                
-                MealDetailsServices.createMealDetailsTable(monthName, year,manager);
-                mealHistoryServices.createMealHistoryTable(monthName, year,startDate, endDate);
+
+                MealDetailsServices.createMealDetailsTable(monthName, year, manager);
+                mealHistoryServices.createMealHistoryTable(monthName, year, startDate, endDate);
                 monthlyExpensessServices.createMontlyExpenseTable(manager);
                 MealDayAndDateServices.createTable();
                 mealDayAndDateServices.insertInDayWithDateTable(startDate, endDate);
-                
+
                 lbl_msgs.setText("Successfully saved");
                 lbl_msgs.setForeground(Color.GREEN);
             } else {
@@ -549,10 +562,10 @@ public class PrepareMonthView extends javax.swing.JFrame {
                 lbl_msgs.setForeground(Color.red);
             }
         }
-        
+
         //Updating Day with Date table
-       
-    }//GEN-LAST:event_btn_saveActionPerformed
+
+    }//GEN-LAST:event_btn_updateMonthActionPerformed
 
     private void t_feastMealRateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_feastMealRateKeyReleased
         // TODO add your handling code here:
@@ -581,7 +594,7 @@ public class PrepareMonthView extends javax.swing.JFrame {
 
     private void sideBtn_addMontlyExpensessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMontlyExpensessMouseClicked
         // TODO add your handling code here:
-        new PrepareMonthView(manager).setVisible(true);
+        new UpdateMonthView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_addMontlyExpensessMouseClicked
 
     private void sideBtn_addMealDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addMealDetailsMouseClicked
@@ -637,21 +650,85 @@ public class PrepareMonthView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrepareMonthView.class
+            java.util.logging.Logger.getLogger(UpdateMonthView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrepareMonthView.class
+            java.util.logging.Logger.getLogger(UpdateMonthView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrepareMonthView.class
+            java.util.logging.Logger.getLogger(UpdateMonthView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrepareMonthView.class
+            java.util.logging.Logger.getLogger(UpdateMonthView.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -720,13 +797,13 @@ public class PrepareMonthView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrepareMonthView().setVisible(true);
+                new UpdateMonthView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_save;
+    private javax.swing.JButton btn_updateMonth;
     private com.toedter.calendar.JDateChooser date_endDate;
     private com.toedter.calendar.JDateChooser date_feastDate;
     private com.toedter.calendar.JDateChooser date_startDate;

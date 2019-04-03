@@ -9,9 +9,7 @@ import controller.pojo.Manager;
 import controller.pojo.Role;
 import java.awt.Color;
 import java.awt.Font;
-
-import java.util.ArrayList;
-
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -19,15 +17,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.dao.DeptNmaesServices;
 import model.dao.ManagerService;
-import model.dao.MealDetailsServices;
-import model.dao.MealHistoryServices;
 import model.dao.RoleServices;
-import sun.font.FontFamily;
 
-/**
- *
- * @author OLEE
- */
 public class AddManager extends javax.swing.JFrame {
 
     /**
@@ -54,7 +45,7 @@ public class AddManager extends javax.swing.JFrame {
         tableName.getTableHeader().setForeground(Color.black);
         ((DefaultTableCellRenderer) tableName.getDefaultRenderer(Object.class)).setOpaque(false);
 
-        tableName.setBackground(new Color(0, 0, 0));
+        tableName.setBackground(new Color(0, 0, 0,0));
         jScrollPane1.setBackground(new Color(0, 0, 0, 0));
         jScrollPane1.getViewport().setOpaque(false);
         tableName.setShowGrid(true);
@@ -270,20 +261,26 @@ public class AddManager extends javax.swing.JFrame {
             lbl_oprtnFeedbck.setText("Enter all data");
             lbl_oprtnFeedbck.setForeground(Color.red);
         } else {
+            List<Manager> managerList = managerService.getManagerByMonthYear(month, year);
             Manager manager = new Manager(cardNo, month, year, pin);
 
-            if (!managerService.isManagerAssignedForThisMonth(month, year)) {
-                if (managerService.save(manager, lbl_oprtnFeedbck) > 0) {
-                    addToTable(manager);
-                    Role role = new Role(email, "manager", pin);
-                    roleServices.save(role, lbl_bg);
-                    lbl_oprtnFeedbck.setText("PIN Code: " + pin.toUpperCase());
-                    lbl_oprtnFeedbck.setForeground(Color.WHITE);
-                    lbl_oprtnFeedbck.setFont(new Font("Serif", Font.PLAIN, 14));
-
+            if (managerList.size() < 2) {
+                if (managerService.isThisCardAssignedForThisMonth(month, year, cardNo)) {
+                    lbl_oprtnFeedbck.setText("This manager already aasinged for this month");
+                    lbl_oprtnFeedbck.setForeground(Color.red);
+                } else {
+                    if (managerService.save(manager, lbl_oprtnFeedbck) > 0) {
+                        addToTable(manager);
+                        Role role = new Role(email, "manager", pin);
+                        roleServices.save(role, lbl_bg);
+                        lbl_oprtnFeedbck.setText("PIN Code: " + pin.toUpperCase());
+                        lbl_oprtnFeedbck.setForeground(Color.WHITE);
+                        lbl_oprtnFeedbck.setFont(new Font("Serif", Font.PLAIN, 14));
+                    }
                 }
+
             } else {
-                lbl_oprtnFeedbck.setText("manager Already assign ed for this month");
+                lbl_oprtnFeedbck.setText("Two Manager added For This Month");
                 lbl_oprtnFeedbck.setForeground(Color.red);
             }
 

@@ -36,7 +36,7 @@ public class MonthDetailsServices {
         String inserStmt = "insert into month_details(month_name,year,employee_fees,total_days,total_fridays,friday_mealRate,"
                 + "total_normalDaymeals,normal_mealRate,feast_mealRate,total_cost,feast_date,start_date,end_date) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-       Connection conn = null;
+        Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
 
@@ -59,7 +59,7 @@ public class MonthDetailsServices {
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -71,7 +71,7 @@ public class MonthDetailsServices {
 
     public double getThisMonthExpense(Manager manager) {
         String sql = "select total_cost from month_details where month_name=? and year=?";
-        
+
         Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
@@ -84,7 +84,7 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -98,7 +98,7 @@ public class MonthDetailsServices {
     public List<String> getDateList(Manager manager) {
         String sql = "select * from month_details where month_name=? and year=?";
         List<String> getDateList = new ArrayList<>();
-        
+
         Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
@@ -111,7 +111,7 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -121,11 +121,49 @@ public class MonthDetailsServices {
 
         return getDateList;
     }
-    
+
+    public int updateMonth(MonthDetails monthDetails) {
+        String updateStmt = "update month_details set employee_fees=?,total_days=?,total_fridays=?,friday_mealRate=?,"
+                + "total_normalDaymeals=?,normal_mealRate=?,feast_mealRate=?,total_cost=?,feast_date=?,start_date=?,end_date=? where month_name=? and year=?";
+
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+
+            PreparedStatement ps = conn.prepareStatement(updateStmt);
+            ps.setString(12, monthDetails.getMonthName());
+            ps.setString(13, monthDetails.getYear());
+            ps.setDouble(1, monthDetails.getEmployee_fees());
+            ps.setInt(2, monthDetails.getTotalDays());
+            ps.setInt(3, monthDetails.getTotalFridays());
+            ps.setDouble(4, monthDetails.getFriDayMealRate());
+            ps.setInt(5, monthDetails.getNumberOfNormalDaymeals());
+            ps.setDouble(6, monthDetails.getNormalMealRate());
+            ps.setDouble(7, monthDetails.getFeastMealRate());
+            ps.setDouble(8, monthDetails.getTotal_cost());
+            ps.setDate(9, monthDetails.getFeastDate());
+            ps.setDate(10, monthDetails.getStartDate());
+            ps.setDate(11, monthDetails.getEndDate());
+            ps.executeUpdate();
+
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return -1;
+    }
+
     public static List<Date> getActualDateListOfMonth(Manager manager) {
         String sql = "select * from month_details where month_name=? and year=?";
         List<Date> getDateList = new ArrayList<>();
-        
+
         Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
@@ -138,7 +176,7 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -148,14 +186,12 @@ public class MonthDetailsServices {
 
         return getDateList;
     }
-    
-    
-    
-    public double getNormalMealRate(Manager manager){
+
+    public double getNormalMealRate(Manager manager) {
         double normalMealRate = 0;
         String sql = "select normal_mealRate from month_details where month_name=? and year=?";
-        
-       Connection conn = null;
+
+        Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -167,7 +203,7 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -176,11 +212,11 @@ public class MonthDetailsServices {
         }
         return normalMealRate;
     }
-    
-    public double getFridayMealRate(Manager manager){
+
+    public double getFridayMealRate(Manager manager) {
         double fridayMealRate = 0;
         String sql = "select friday_mealRate from month_details where month_name=? and year=?";
-        
+
         Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
@@ -193,7 +229,7 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -202,11 +238,11 @@ public class MonthDetailsServices {
         }
         return fridayMealRate;
     }
-    
-    public double getFeastMealRate(Manager manager){
+
+    public double getFeastMealRate(Manager manager) {
         double feastMealRate = 0;
         String sql = "select feast_mealRate from month_details where month_name=? and year=?";
-        
+
         Connection conn = null;
         try {
             conn = ConnectionForDB.connect();
@@ -219,7 +255,7 @@ public class MonthDetailsServices {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -228,11 +264,11 @@ public class MonthDetailsServices {
         }
         return feastMealRate;
     }
-    
+
     public double getTotalExpense(Manager manager) {
         String tblName = "meal_details_for_" + manager.getMonthName() + "_" + manager.getYear();
         String sql = "select total_cost from month_details";
-        
+
         double total_cost = 0;
 
         Connection conn = null;
@@ -242,7 +278,7 @@ public class MonthDetailsServices {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-             total_cost = rs.getDouble(1);
+                total_cost = rs.getDouble(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -255,6 +291,33 @@ public class MonthDetailsServices {
         }
         return total_cost;
     }
-    
-    
+
+    public MonthDetails getMonthDetails(Manager manager) {
+        MonthDetails monthDetails = null;
+        String sql = "select * from month_details where month_name=? and year=?";
+
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, manager.getMonthName());
+            ps.setString(2, manager.getYear());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                monthDetails = new MonthDetails(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7), rs.getInt(8), rs.getDouble(9), rs.getDouble(10), rs.getDouble(11), rs.getDate(11), rs.getDate(12), rs.getDate(13));                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return monthDetails;
+    }
+
 }

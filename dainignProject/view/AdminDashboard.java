@@ -78,7 +78,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         sideBtn_summary = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        sideBtn_summary1 = new javax.swing.JLabel();
+        sideBtn_monthlyReport = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
@@ -199,19 +199,19 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel17.setOpaque(true);
         pnl_sideBar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 10, 40));
 
-        sideBtn_summary1.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_summary1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_summary1.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_summary1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_summary1.setText("View Monthly Report");
-        sideBtn_summary1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_summary1.setOpaque(true);
-        sideBtn_summary1.addMouseListener(new java.awt.event.MouseAdapter() {
+        sideBtn_monthlyReport.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_monthlyReport.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_monthlyReport.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_monthlyReport.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_monthlyReport.setText("View Monthly Report");
+        sideBtn_monthlyReport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_monthlyReport.setOpaque(true);
+        sideBtn_monthlyReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_summary1MouseClicked(evt);
+                sideBtn_monthlyReportMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_summary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 180, 40));
+        pnl_sideBar.add(sideBtn_monthlyReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 180, 40));
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -280,9 +280,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         new AddSummaryView().setVisible(true);
     }//GEN-LAST:event_sideBtn_summaryMouseClicked
 
-    private void sideBtn_summary1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_summary1MouseClicked
+    private void sideBtn_monthlyReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_monthlyReportMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_sideBtn_summary1MouseClicked
+        new MonthlyReportForMonth().setVisible(true);
+        
+    }//GEN-LAST:event_sideBtn_monthlyReportMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -370,7 +372,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel sideBtn_addManager;
     private javax.swing.JLabel sideBtn_addmmeber;
     private javax.swing.JLabel sideBtn_addmmeber1;
+    private javax.swing.JLabel sideBtn_monthlyReport;
     private javax.swing.JLabel sideBtn_summary;
-    private javax.swing.JLabel sideBtn_summary1;
     // End of variables declaration//GEN-END:variables
 }

@@ -190,7 +190,7 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
         sideBtn_summary.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sideBtn_summary.setForeground(new java.awt.Color(255, 255, 255));
         sideBtn_summary.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_summary.setText("Of A Member");
+        sideBtn_summary.setText("For A Member");
         sideBtn_summary.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sideBtn_summary.setOpaque(true);
         sideBtn_summary.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -210,7 +210,7 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
         sideBtn_summary1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sideBtn_summary1.setForeground(new java.awt.Color(255, 255, 255));
         sideBtn_summary1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_summary1.setText("A Month");
+        sideBtn_summary1.setText("For A Month");
         sideBtn_summary1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sideBtn_summary1.setOpaque(true);
         sideBtn_summary1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -237,7 +237,7 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
         
         String monthName = com_monthName.getSelectedItem().toString();
         String year = com_year.getSelectedItem().toString();
-        Manager manager = managerService.getManagerByMonthYear(monthName, year);        
+        Manager manager = managerService.getManagerByMonthYear(monthName, year).get(0);        
         int cardNo = 0;
         
         try {
