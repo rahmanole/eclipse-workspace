@@ -129,7 +129,7 @@ public class LogingPage extends javax.swing.JFrame {
                         lbl_logMsgs.setForeground(Color.RED);
 
                     } else {
-                        new ManagerDashBoard(manager).setVisible(true);
+                        new ManagerDashboard(manager).setVisible(true);
                          this.setVisible(false);
                     }
 

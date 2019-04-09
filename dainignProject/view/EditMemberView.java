@@ -7,6 +7,7 @@ package view;
 
 import controller.pojo.AssignedMonths;
 import controller.pojo.Department;
+import controller.pojo.Manager;
 import controller.pojo.Member;
 import controller.pojo.PersonalInfo;
 import java.awt.Color;
@@ -38,11 +39,14 @@ public class EditMemberView extends javax.swing.JFrame {
     private int id = 0;
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
-
-    public EditMemberView() {
+    
+    Manager manager;
+    
+    public EditMemberView(Manager manager) {
 
         initComponents();
         setLocationRelativeTo(null);
+        this.manager = manager;
         this.setTitle("Registrar Memebr");
         t_crdNotoSrch.setBackground(new Color(0, 0, 0, 0));
         t_name.setBackground(new Color(0, 0, 0, 0));
@@ -62,7 +66,9 @@ public class EditMemberView extends javax.swing.JFrame {
             com_depts.addItem(deptNames);
         }
     }
-
+    public EditMemberView() {
+        
+    }
     private void designTable(JTable tableName) {
         tableName.getTableHeader().setForeground(new Color(255, 255, 255));
         tableName.getTableHeader().setBackground(Color.BLACK);
@@ -92,6 +98,8 @@ public class EditMemberView extends javax.swing.JFrame {
         pnl_sideBar = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         sideBtn_member1 = new javax.swing.JLabel();
+        sideBtn_member2 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -130,10 +138,6 @@ public class EditMemberView extends javax.swing.JFrame {
         lbl_msgs = new javax.swing.JLabel();
         jSeparator12 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
-        drpDown_member = new javax.swing.JPanel();
-        btn_addMember = new javax.swing.JLabel();
-        btn_editMember = new javax.swing.JLabel();
-        btn_removeMember = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,10 +154,22 @@ public class EditMemberView extends javax.swing.JFrame {
         sideBtn_member1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sideBtn_member1.setForeground(new java.awt.Color(255, 255, 255));
         sideBtn_member1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_member1.setText("Member");
+        sideBtn_member1.setText("Add Member");
         sideBtn_member1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sideBtn_member1.setOpaque(true);
         pnl_sideBar.add(sideBtn_member1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
+
+        sideBtn_member2.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_member2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_member2.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_member2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_member2.setText("Delete Member");
+        sideBtn_member2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_member2.setOpaque(true);
+        pnl_sideBar.add(sideBtn_member2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
+
+        jLabel14.setOpaque(true);
+        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -346,64 +362,10 @@ public class EditMemberView extends javax.swing.JFrame {
         jSeparator11.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 250, 10));
 
-        btn_addMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMember.setText("Add Member");
-        btn_addMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMember.setOpaque(true);
-        btn_addMember.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_addMemberMouseClicked(evt);
-            }
-        });
-
-        btn_editMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMember.setText("Edit Info");
-        btn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMember.setOpaque(true);
-
-        btn_removeMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMember.setText("Remove Member");
-        btn_removeMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMember.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_memberLayout = new javax.swing.GroupLayout(drpDown_member);
-        drpDown_member.setLayout(drpDown_memberLayout);
-        drpDown_memberLayout.setHorizontalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addGroup(drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_memberLayout.setVerticalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 130, 130));
-
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_bg.setIcon(new javax.swing.ImageIcon("C:\\Users\\OLEE\\Desktop\\asset\\Untitled Export\\251850.jpg")); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
@@ -479,11 +441,6 @@ public class EditMemberView extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void btn_addMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMemberMouseClicked
-        // TODO add your handling code here:
-        new Addmember().setVisible(true);
-    }//GEN-LAST:event_btn_addMemberMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -551,19 +508,16 @@ public class EditMemberView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btn_addMember;
-    private javax.swing.JLabel btn_editMember;
-    private javax.swing.JLabel btn_removeMember;
     private javax.swing.JButton btn_srch;
     private javax.swing.JButton btn_update;
     private javax.swing.JComboBox<String> com_depts;
     private javax.swing.JComboBox<String> com_type;
-    private javax.swing.JPanel drpDown_member;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -590,6 +544,7 @@ public class EditMemberView extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_msgsSrch;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_member1;
+    private javax.swing.JLabel sideBtn_member2;
     private javax.swing.JTextField t_cardNo;
     private javax.swing.JTextField t_cntNum;
     private javax.swing.JTextField t_crdNotoSrch;

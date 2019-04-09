@@ -99,7 +99,7 @@ public class SummaryService {
             ps.setInt(1,cardNo);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                lastMonthSummary = new Summary(rs.getInt(1), rs.getInt(3),rs.getInt(7), rs.getDouble(8));
+                lastMonthSummary = new Summary(rs.getInt(1), rs.getInt(3),rs.getInt(4), rs.getDouble(5));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -12,6 +12,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.conn.ConnectionForDB;
@@ -199,5 +201,80 @@ public class MealDetailsServices {
         return balance;
     }
     
+     
+     public List<Date> getDateList(Manager manager) {
+        String tblName = "meal_details_for_" + manager.getMonthName() + "_" + manager.getYear();
+        String sql = "select * from " + tblName;
+        
+        List<Date> dateList = new ArrayList<>();
+
+        Connection conn = null;
+        
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                dateList.add(rs.getDate(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return dateList;
+    }
     
+    public Meal getMealByDate(Date date,Manager manager){
+        Meal meal = null;
+        
+        String tblName = "meal_details_for_" + manager.getMonthName() + "_" + manager.getYear();
+        String sql = "select * from " + tblName+" where meal_date=?";
+        
+        double spentExpense = 0;
+
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDate(1,date);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+             meal = new Meal(date, rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return meal;
+    } 
+    
+    public double getMealRateByDate(Date date,Manager manager){
+        double mealRate = 0;
+        
+        getMealType(date, manager);
+        if(getMealType(date, manager).equals("Normal")){
+            mealRate = 2*monthDetailsServices.getNormalMealRate(manager);
+        }else if(getMealType(date, manager).equals("Friday")){
+            mealRate = monthDetailsServices.getNormalMealRate(manager)+monthDetailsServices.getFridayMealRate(manager);
+        }else if(getMealType(date, manager).equals("Feast")){
+            mealRate = monthDetailsServices.getFeastMealRate(manager)+2*monthDetailsServices.getNormalMealRate(manager);
+        }else{
+            mealRate = monthDetailsServices.getFeastMealRate(manager)+monthDetailsServices.getNormalMealRate(manager)+monthDetailsServices.getFridayMealRate(manager);
+        }
+        
+        return mealRate;
+    }
 }

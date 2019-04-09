@@ -6,6 +6,7 @@
 package view;
 
 
+import controller.pojo.Manager;
 import controller.pojo.Member;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -33,11 +34,12 @@ public class Addmember extends javax.swing.JFrame {
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
     
+    Manager manager = null;
 
-    public Addmember() {
+    public Addmember(Manager manager) {
 
         initComponents();
-
+        this.manager = manager;
         this.setTitle("Registrar Memebr");
         t_name.setBackground(new Color(0, 0, 0, 0));
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
@@ -54,6 +56,10 @@ public class Addmember extends javax.swing.JFrame {
         for (String deptNames : deptNames) {
             com_depts.addItem(deptNames);
         }
+    }
+    
+    public Addmember() {
+    
     }
 
     private void designTable(JTable tableName) {
@@ -111,21 +117,11 @@ public class Addmember extends javax.swing.JFrame {
         com_type = new javax.swing.JComboBox<>();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
-        drpDown_member = new javax.swing.JPanel();
-        btn_addMember = new javax.swing.JLabel();
-        btn_editMember = new javax.swing.JLabel();
-        btn_removeMember = new javax.swing.JLabel();
         pnl_sideBar = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        sideBtn_addManager = new javax.swing.JLabel();
+        sideBtn_editMember = new javax.swing.JLabel();
         sideBtn_addAdmin = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        sideBtn_addmmeber = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        sideBtn_addmmeber1 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        sideBtn_addDept = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -276,79 +272,31 @@ public class Addmember extends javax.swing.JFrame {
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 10, 420));
 
-        btn_addMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMember.setText("Add Member");
-        btn_addMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMember.setOpaque(true);
-
-        btn_editMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMember.setText("Edit Info");
-        btn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMember.setOpaque(true);
-
-        btn_removeMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMember.setText("Remove Member");
-        btn_removeMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMember.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_memberLayout = new javax.swing.GroupLayout(drpDown_member);
-        drpDown_member.setLayout(drpDown_memberLayout);
-        drpDown_memberLayout.setHorizontalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addGroup(drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_memberLayout.setVerticalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 130, 130));
-
         pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
         pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setOpaque(true);
         pnl_sideBar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
 
-        sideBtn_addManager.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addManager.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addManager.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addManager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addManager.setText("Add Manager");
-        sideBtn_addManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addManager.setOpaque(true);
-        sideBtn_addManager.addMouseListener(new java.awt.event.MouseAdapter() {
+        sideBtn_editMember.setBackground(new java.awt.Color(51, 0, 153));
+        sideBtn_editMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sideBtn_editMember.setForeground(new java.awt.Color(255, 255, 255));
+        sideBtn_editMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sideBtn_editMember.setText("Edit Member");
+        sideBtn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_editMember.setOpaque(true);
+        sideBtn_editMember.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addManagerMouseClicked(evt);
+                sideBtn_editMemberMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
+        pnl_sideBar.add(sideBtn_editMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
 
         sideBtn_addAdmin.setBackground(new java.awt.Color(51, 0, 153));
         sideBtn_addAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sideBtn_addAdmin.setForeground(new java.awt.Color(255, 255, 255));
         sideBtn_addAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addAdmin.setText("Add Admin");
+        sideBtn_addAdmin.setText("Delete Member");
         sideBtn_addAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sideBtn_addAdmin.setOpaque(true);
         sideBtn_addAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -360,57 +308,6 @@ public class Addmember extends javax.swing.JFrame {
 
         jLabel12.setOpaque(true);
         pnl_sideBar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
-
-        sideBtn_addmmeber.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addmmeber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addmmeber.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addmmeber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addmmeber.setText("Add Member");
-        sideBtn_addmmeber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addmmeber.setOpaque(true);
-        sideBtn_addmmeber.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addmmeberMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
-
-        jLabel13.setOpaque(true);
-        pnl_sideBar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
-
-        sideBtn_addmmeber1.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addmmeber1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addmmeber1.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addmmeber1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addmmeber1.setText("Add Member");
-        sideBtn_addmmeber1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addmmeber1.setOpaque(true);
-        sideBtn_addmmeber1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addmmeber1MouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addmmeber1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 40));
-
-        jLabel14.setOpaque(true);
-        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 10, 40));
-
-        sideBtn_addDept.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addDept.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addDept.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addDept.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addDept.setText("Add Department");
-        sideBtn_addDept.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addDept.setOpaque(true);
-        sideBtn_addDept.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addDeptMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addDept, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 180, 40));
-
-        jLabel15.setOpaque(true);
-        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 10, 40));
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -468,30 +365,15 @@ public class Addmember extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_saveActionPerformed
 
-    private void sideBtn_addManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addManagerMouseClicked
+    private void sideBtn_editMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMemberMouseClicked
         // TODO add your handling code here:
-        new AddManager().setVisible(true);
-    }//GEN-LAST:event_sideBtn_addManagerMouseClicked
+        new EditMemberView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_editMemberMouseClicked
 
     private void sideBtn_addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdminMouseClicked
         // TODO add your handling code here:
         new AddAdminView().setVisible(true);
     }//GEN-LAST:event_sideBtn_addAdminMouseClicked
-
-    private void sideBtn_addmmeberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeberMouseClicked
-        // TODO add your handling code here:
-        new Addmember().setVisible(true);
-    }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
-
-    private void sideBtn_addmmeber1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeber1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sideBtn_addmmeber1MouseClicked
-
-    private void sideBtn_addDeptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addDeptMouseClicked
-        // TODO add your handling code here:
-
-        new  AddDeptView().setVisible(true);
-    }//GEN-LAST:event_sideBtn_addDeptMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -551,19 +433,12 @@ public class Addmember extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btn_addMember;
-    private javax.swing.JLabel btn_editMember;
-    private javax.swing.JLabel btn_removeMember;
     private javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> com_depts;
     private javax.swing.JComboBox<String> com_type;
-    private javax.swing.JPanel drpDown_member;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -586,10 +461,7 @@ public class Addmember extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_msgs;
     private javax.swing.JPanel pnl_sideBar;
     private javax.swing.JLabel sideBtn_addAdmin;
-    private javax.swing.JLabel sideBtn_addDept;
-    private javax.swing.JLabel sideBtn_addManager;
-    private javax.swing.JLabel sideBtn_addmmeber;
-    private javax.swing.JLabel sideBtn_addmmeber1;
+    private javax.swing.JLabel sideBtn_editMember;
     private javax.swing.JTextField t_cardNo;
     private javax.swing.JTextField t_cntNum;
     private javax.swing.JTextField t_email;
