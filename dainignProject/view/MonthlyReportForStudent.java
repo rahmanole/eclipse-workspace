@@ -30,7 +30,7 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
     public MonthlyReportForStudent() {
 
         initComponents();
-
+        this.setLocationRelativeTo(null);
         this.setTitle("Montly Report");
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
         t_cardNo.setBackground(new Color(0, 0, 0, 0));
@@ -38,7 +38,6 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
         designTable(tbl_report);
 
     }
-
 
     private void designTable(JTable tableName) {
         tableName.getTableHeader().setForeground(new Color(255, 255, 255));
@@ -226,6 +225,7 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
@@ -234,12 +234,12 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
 
     private void btn_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detailsActionPerformed
         // TODO add your handling code here:
-        
+
         String monthName = com_monthName.getSelectedItem().toString();
         String year = com_year.getSelectedItem().toString();
-        Manager manager = managerService.getManagerByMonthYear(monthName, year).get(0);        
+        Manager manager = managerService.getManagerByMonthYear(monthName, year).get(0);
         int cardNo = 0;
-        
+
         try {
             cardNo = Integer.parseInt(t_cardNo.getText().trim());
 
@@ -251,21 +251,17 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
 
         if (mealHistoryServices.isCardExists(cardNo, manager)) {
             Summary report = mealHistoryServices.getSummary(cardNo, manager);
-            
-            Object[][] values = {{"Card No.",report.getCardNo()},{"Total Meal",report.getTotalMeals()},{"Total On Meal",report.getTotalMeals()-report.getTotalOffMeal()},
-                {"Normal Off Meal",report.getNormalOffDays()},{"Friday Off",report.getFridayOffMeal()},{"Feast",report.getWasFeastOn()?"Was off":"Was on"},
-                {"Total Off Meal",report.getTotalOffMeal()},{"Remaining Balance",report.getBumping()}};
-            
 
-            
+            Object[][] values = {{"Card No.", report.getCardNo()}, {"Total Meal", report.getTotalMeals()}, {"Total On Meal", report.getTotalMeals() - report.getTotalOffMeal()},
+            {"Normal Off Meal", report.getNormalOffDays()}, {"Friday Off", report.getFridayOffMeal()}, {"Feast", report.getWasFeastOn() ? "Was off" : "Was on"},
+            {"Total Off Meal", report.getTotalOffMeal()}, {"Remaining Balance", report.getBumping()}};
+
             DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
             model.setRowCount(0);
-            for(Object[] value:values){
+            for (Object[] value : values) {
                 addToTable(value);
             }
-            
-            
-            
+
         } else {
             lbl_msgs.setText("This card was not in this month");
             lbl_msgs.setForeground(Color.red);
@@ -282,7 +278,7 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
     private void sideBtn_summary1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_summary1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_sideBtn_summary1MouseClicked
-    
+
     private void addToTable(Object[] values) {
         DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
 
@@ -292,7 +288,7 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
         obj[1] = values[1];
         model.addRow(obj);
     }
-    
+
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
 //
@@ -307,7 +303,6 @@ public class MonthlyReportForStudent extends javax.swing.JFrame {
 //
 //        //model.addRow(obj);
 //    }
-
     /**
      * @param args the command line arguments
      */

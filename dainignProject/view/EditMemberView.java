@@ -42,9 +42,10 @@ public class EditMemberView extends javax.swing.JFrame {
     
     Manager manager;
     
-    public EditMemberView(Manager manager) {
+    public EditMemberView() {
 
         initComponents();
+        
         setLocationRelativeTo(null);
         this.manager = manager;
         this.setTitle("Registrar Memebr");
@@ -65,9 +66,6 @@ public class EditMemberView extends javax.swing.JFrame {
         for (String deptNames : deptNames) {
             com_depts.addItem(deptNames);
         }
-    }
-    public EditMemberView() {
-        
     }
     private void designTable(JTable tableName) {
         tableName.getTableHeader().setForeground(new Color(255, 255, 255));
@@ -140,7 +138,7 @@ public class EditMemberView extends javax.swing.JFrame {
         jSeparator11 = new javax.swing.JSeparator();
         lbl_bg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -366,6 +364,7 @@ public class EditMemberView extends javax.swing.JFrame {
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 

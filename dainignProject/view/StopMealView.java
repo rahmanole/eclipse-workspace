@@ -40,6 +40,7 @@ public class StopMealView extends javax.swing.JFrame {
     public StopMealView(Manager manager) {
 
         initComponents();
+        this.setLocationRelativeTo(null);
         monthName = manager.getMonthName();
         year = manager.getYear();
         this.manager = manager;
@@ -54,8 +55,16 @@ public class StopMealView extends javax.swing.JFrame {
 
         t_cardNoToStopMoreThan.setBackground(new Color(0, 0, 0, 0));
         t_cardNoToStopOneDay.setBackground(new Color(0, 0, 0, 0));
+        
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
-
+        
+        sideBtn_home.setBackground(new Color(0, 0, 0, 0));
+        sideBtn_prePareMonth.setBackground(new Color(0, 0, 0, 0));
+        sideBtn_collectExpense.setBackground(new Color(0, 0, 0, 0));
+        sideBtn_addmmeber.setBackground(new Color(0, 0, 0, 0));
+        sideBtn_editMeal.setBackground(new Color(0, 0, 0, 0));
+        sideBtn_report.setBackground(new Color(0, 0, 0, 0));
+        
         lbl_endDateTitle.setVisible(false);
         date_endDate.setVisible(false);
 
@@ -91,12 +100,6 @@ public class StopMealView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_sideBar = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        sideBtn_stopMeal = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        sideBtn_startMeal = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         lbl_title = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lbl_title1 = new javax.swing.JLabel();
@@ -125,53 +128,32 @@ public class StopMealView extends javax.swing.JFrame {
         lbl_nextBtnmsgs = new javax.swing.JLabel();
         lbl_dayInStopMeal = new javax.swing.JLabel();
         lbl_dateInStopMeal = new javax.swing.JLabel();
+        pnl_sideBar = new javax.swing.JPanel();
+        sideBtn_home = new javax.swing.JPanel();
+        ind_home = new javax.swing.JLabel();
+        lbl_home = new javax.swing.JLabel();
+        sideBtn_prePareMonth = new javax.swing.JPanel();
+        lbl_ddd = new javax.swing.JLabel();
+        ind_prepMonth = new javax.swing.JLabel();
+        sideBtn_manageMeals = new javax.swing.JPanel();
+        lbl_sss = new javax.swing.JLabel();
+        ind_editMeal = new javax.swing.JLabel();
+        sideBtn_collectExpense = new javax.swing.JPanel();
+        lbl_exp = new javax.swing.JLabel();
+        ind_collectEx = new javax.swing.JLabel();
+        sideBtn_editMeal = new javax.swing.JPanel();
+        lbl_fff = new javax.swing.JLabel();
+        sideBtn_report = new javax.swing.JPanel();
+        lbl_rr = new javax.swing.JLabel();
+        ind_report = new javax.swing.JLabel();
+        sideBtn_addmmeber = new javax.swing.JPanel();
+        lbl_ccc = new javax.swing.JLabel();
+        ind_addMember = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
-        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel14.setOpaque(true);
-        pnl_sideBar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
-
-        sideBtn_stopMeal.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_stopMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_stopMeal.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_stopMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_stopMeal.setText("Stop Meal");
-        sideBtn_stopMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_stopMeal.setOpaque(true);
-        sideBtn_stopMeal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_stopMealMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_stopMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
-
-        jLabel15.setOpaque(true);
-        pnl_sideBar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
-
-        sideBtn_startMeal.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_startMeal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_startMeal.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_startMeal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_startMeal.setText("Start Meal");
-        sideBtn_startMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_startMeal.setOpaque(true);
-        sideBtn_startMeal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_startMealMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_startMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 40));
-
-        jLabel16.setOpaque(true);
-        pnl_sideBar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 10, 40));
-
-        getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
         lbl_title.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_title.setForeground(new java.awt.Color(255, 255, 255));
@@ -326,10 +308,172 @@ public class StopMealView extends javax.swing.JFrame {
         lbl_dateInStopMeal.setText("Date");
         getContentPane().add(lbl_dateInStopMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 120, 30));
 
+        pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
+        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        sideBtn_home.setBackground(new java.awt.Color(51, 51, 51));
+        sideBtn_home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ind_home.setOpaque(true);
+        sideBtn_home.add(ind_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 10, 40));
+
+        lbl_home.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_home.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_home.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Home_22px_3.png"))); // NOI18N
+        lbl_home.setText("Home");
+        lbl_home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_home.setIconTextGap(20);
+        lbl_home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_homeMouseClicked(evt);
+            }
+        });
+        sideBtn_home.add(lbl_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+
+        pnl_sideBar.add(sideBtn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 200, 40));
+
+        sideBtn_prePareMonth.setBackground(new java.awt.Color(0, 153, 102));
+        sideBtn_prePareMonth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_prePareMonth.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_prePareMonthMouseClicked(evt);
+            }
+        });
+        sideBtn_prePareMonth.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_ddd.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_ddd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_ddd.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ddd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Today_22px.png"))); // NOI18N
+        lbl_ddd.setText("Preapre Month");
+        lbl_ddd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_ddd.setIconTextGap(20);
+        sideBtn_prePareMonth.add(lbl_ddd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+        sideBtn_prePareMonth.add(ind_prepMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+
+        pnl_sideBar.add(sideBtn_prePareMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 200, 40));
+
+        sideBtn_manageMeals.setBackground(new java.awt.Color(51, 51, 51));
+        sideBtn_manageMeals.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_manageMeals.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_manageMealsMouseClicked(evt);
+            }
+        });
+        sideBtn_manageMeals.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_sss.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_sss.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_sss.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_sss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Cutlery_22px.png"))); // NOI18N
+        lbl_sss.setText("Add Next Meal");
+        lbl_sss.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_sss.setIconTextGap(20);
+        sideBtn_manageMeals.add(lbl_sss, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+
+        ind_editMeal.setBackground(new java.awt.Color(255, 255, 255));
+        ind_editMeal.setOpaque(true);
+        sideBtn_manageMeals.add(ind_editMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+
+        pnl_sideBar.add(sideBtn_manageMeals, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 200, 40));
+
+        sideBtn_collectExpense.setBackground(new java.awt.Color(0, 153, 102));
+        sideBtn_collectExpense.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_collectExpense.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_collectExpenseMouseClicked(evt);
+            }
+        });
+        sideBtn_collectExpense.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_exp.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_exp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_exp.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_exp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Paycheque_22px_1.png"))); // NOI18N
+        lbl_exp.setText("Collect Expense");
+        lbl_exp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_exp.setIconTextGap(20);
+        sideBtn_collectExpense.add(lbl_exp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+        sideBtn_collectExpense.add(ind_collectEx, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+
+        pnl_sideBar.add(sideBtn_collectExpense, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 40));
+
+        sideBtn_editMeal.setBackground(new java.awt.Color(51, 51, 51));
+        sideBtn_editMeal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_editMeal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_editMealMouseClicked(evt);
+            }
+        });
+        sideBtn_editMeal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_fff.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_fff.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_fff.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_fff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Edit_Property_22px_1.png"))); // NOI18N
+        lbl_fff.setText("Edit Meal Details");
+        lbl_fff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_fff.setIconTextGap(20);
+        lbl_fff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_fffMouseClicked(evt);
+            }
+        });
+        sideBtn_editMeal.add(lbl_fff, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+
+        pnl_sideBar.add(sideBtn_editMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 200, 40));
+
+        sideBtn_report.setBackground(new java.awt.Color(0, 153, 102));
+        sideBtn_report.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_report.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_reportMouseClicked(evt);
+            }
+        });
+        sideBtn_report.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_rr.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_rr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_rr.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_rr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Report_Card_22px_3.png"))); // NOI18N
+        lbl_rr.setText("View Report");
+        lbl_rr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_rr.setIconTextGap(20);
+        sideBtn_report.add(lbl_rr, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+        sideBtn_report.add(ind_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+
+        pnl_sideBar.add(sideBtn_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 200, 40));
+
+        sideBtn_addmmeber.setBackground(new java.awt.Color(0, 153, 102));
+        sideBtn_addmmeber.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sideBtn_addmmeber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addmmeberMouseClicked(evt);
+            }
+        });
+        sideBtn_addmmeber.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_ccc.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_ccc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_ccc.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ccc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Member_22px_1.png"))); // NOI18N
+        lbl_ccc.setText("Add Member");
+        lbl_ccc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_ccc.setIconTextGap(20);
+        sideBtn_addmmeber.add(lbl_ccc, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
+        sideBtn_addmmeber.add(ind_addMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+
+        pnl_sideBar.add(sideBtn_addmmeber, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 200, 40));
+
+        getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 650));
+
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
@@ -346,15 +490,6 @@ public class StopMealView extends javax.swing.JFrame {
         }
         new MealDetailsView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_nextMouseClicked
-
-    private void sideBtn_stopMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_stopMealMouseClicked
-        // TODO add your handling code here:
-        new StartMealView(manager).setVisible(true);
-    }//GEN-LAST:event_sideBtn_stopMealMouseClicked
-
-    private void sideBtn_startMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_startMealMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sideBtn_startMealMouseClicked
     String flag = "Uncertain";
     private void btn_stopParticularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_stopParticularActionPerformed
         // TODO add your handling code here:
@@ -434,6 +569,50 @@ public class StopMealView extends javax.swing.JFrame {
         // TODO add your handling code here:
         new StartMealView(manager).setVisible(true);
     }//GEN-LAST:event_sideBtn_backMouseClicked
+
+    private void lbl_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homeMouseClicked
+        // TODO add your handling code here:
+        new ManagerDashboard(manager).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lbl_homeMouseClicked
+
+    private void sideBtn_prePareMonthMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_prePareMonthMouseClicked
+        // TODO add your handling code here:
+        new PrepareMonthView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_prePareMonthMouseClicked
+
+    private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
+        // TODO add your handling code here:
+
+        new StartMealView(manager).setVisible(true);
+
+    }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
+
+    private void sideBtn_collectExpenseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_collectExpenseMouseClicked
+        // TODO add your handling code here:
+
+        new MonthlyExpenseView(manager).setVisible(true);
+
+    }//GEN-LAST:event_sideBtn_collectExpenseMouseClicked
+
+    private void lbl_fffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_fffMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_fffMouseClicked
+
+    private void sideBtn_editMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMealMouseClicked
+        // TODO add your handling code here:
+        new EditMealDetailsView(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_editMealMouseClicked
+
+    private void sideBtn_reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_reportMouseClicked
+        // TODO add your handling code here:
+        new MonthlyReport(manager).setVisible(true);
+    }//GEN-LAST:event_sideBtn_reportMouseClicked
+
+    private void sideBtn_addmmeberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeberMouseClicked
+        // TODO add your handling code here:
+        new Addmember().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
 
     private void addToTable(int cardNo, JTable tbl_name) {
         DefaultTableModel model = (DefaultTableModel) tbl_name.getModel();
@@ -625,12 +804,15 @@ public class StopMealView extends javax.swing.JFrame {
     private javax.swing.JButton btn_stopParticular;
     private javax.swing.JComboBox<String> com_uncertain;
     private com.toedter.calendar.JDateChooser date_endDate;
+    private javax.swing.JLabel ind_addMember;
+    private javax.swing.JLabel ind_collectEx;
+    private javax.swing.JLabel ind_editMeal;
+    private javax.swing.JLabel ind_home;
+    private javax.swing.JLabel ind_prepMonth;
+    private javax.swing.JLabel ind_report;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JSeparator jSeparator1;
@@ -640,20 +822,32 @@ public class StopMealView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel lbl_bg;
+    private javax.swing.JLabel lbl_ccc;
     private javax.swing.JLabel lbl_dateInStopMeal;
     private javax.swing.JLabel lbl_dayInStopMeal;
+    private javax.swing.JLabel lbl_ddd;
     private javax.swing.JLabel lbl_endDateTitle;
+    private javax.swing.JLabel lbl_exp;
+    private javax.swing.JLabel lbl_fff;
+    private javax.swing.JLabel lbl_home;
     private javax.swing.JLabel lbl_moreTheanOne;
     private javax.swing.JLabel lbl_nextBtnmsgs;
     private javax.swing.JLabel lbl_particularStop;
+    private javax.swing.JLabel lbl_rr;
+    private javax.swing.JLabel lbl_sss;
     private javax.swing.JLabel lbl_stopedToday;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_title1;
     private javax.swing.JPanel pnl_sideBar;
+    private javax.swing.JPanel sideBtn_addmmeber;
     private javax.swing.JLabel sideBtn_back;
+    private javax.swing.JPanel sideBtn_collectExpense;
+    private javax.swing.JPanel sideBtn_editMeal;
+    private javax.swing.JPanel sideBtn_home;
+    private javax.swing.JPanel sideBtn_manageMeals;
     private javax.swing.JLabel sideBtn_next;
-    private javax.swing.JLabel sideBtn_startMeal;
-    private javax.swing.JLabel sideBtn_stopMeal;
+    private javax.swing.JPanel sideBtn_prePareMonth;
+    private javax.swing.JPanel sideBtn_report;
     private javax.swing.JTextField t_cardNoToStopMoreThan;
     private javax.swing.JTextField t_cardNoToStopOneDay;
     // End of variables declaration//GEN-END:variables

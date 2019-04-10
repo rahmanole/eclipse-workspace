@@ -42,7 +42,11 @@ public class LogingPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbl_logMsgs = new javax.swing.JLabel();
         t_pass = new javax.swing.JPasswordField();
+        lbl_passs = new javax.swing.JLabel();
+        lbl_user = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
 
         jLabel2.setText("jLabel2");
 
@@ -55,9 +59,9 @@ public class LogingPage extends javax.swing.JFrame {
         t_email.setBorder(null);
         t_email.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         t_email.setOpaque(false);
-        getContentPane().add(t_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 200, 30));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 250, 10));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 250, 11));
+        getContentPane().add(t_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 200, 30));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, 260, 10));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 260, 11));
 
         btn_login.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_login.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,10 +92,25 @@ public class LogingPage extends javax.swing.JFrame {
         t_pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         t_pass.setBorder(null);
         t_pass.setOpaque(false);
-        getContentPane().add(t_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 200, 30));
+        getContentPane().add(t_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 200, 30));
 
-        lbl_bg.setIcon(new javax.swing.ImageIcon("C:\\Users\\OLEE\\Desktop\\asset\\Untitled Export\\251850.jpg")); // NOI18N
-        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+        lbl_passs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Password_22px.png"))); // NOI18N
+        getContentPane().add(lbl_passs, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 30, 30));
+
+        lbl_user.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Email_22px_2.png"))); // NOI18N
+        getContentPane().add(lbl_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 30, 30));
+
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
+        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 550));
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -189,11 +208,15 @@ public class LogingPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbl_bg;
     private javax.swing.JLabel lbl_logMsgs;
+    private javax.swing.JLabel lbl_passs;
+    private javax.swing.JLabel lbl_user;
     private javax.swing.JTextField t_email;
     private javax.swing.JPasswordField t_pass;
     // End of variables declaration//GEN-END:variables

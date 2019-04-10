@@ -40,6 +40,7 @@ public class AddSummaryView extends javax.swing.JFrame {
 
     public AddSummaryView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         t_cardNo.setBackground(new Color(0, 0, 0, 0));
         t_offDays.setBackground(new Color(0, 0, 0, 0));
         t_onDays.setBackground(new Color(0, 0, 0, 0));
@@ -100,7 +101,7 @@ public class AddSummaryView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -241,6 +242,7 @@ public class AddSummaryView extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 70, 30));
 
         lbl_bg.setBackground(new java.awt.Color(51, 0, 51));
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 

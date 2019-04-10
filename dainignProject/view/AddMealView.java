@@ -44,6 +44,7 @@ public class AddMealView extends javax.swing.JFrame {
     public AddMealView(Manager manager) {
 
         initComponents();
+        this.setLocationRelativeTo(null);
         monthName = manager.getMonthName();
         year = manager.getYear();
         this.manager = manager;
@@ -222,6 +223,7 @@ public class AddMealView extends javax.swing.JFrame {
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
         pack();

@@ -32,6 +32,7 @@ public class AddDeptView extends javax.swing.JFrame {
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
     public AddDeptView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         t_name.setBackground(new Color(0,0,0,0));
         pnl_sideBar.setBackground(new Color(0,0,0,100));
         
@@ -163,6 +164,8 @@ public class AddDeptView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbl_deptNames);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 130, 420));
+
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
         pack();

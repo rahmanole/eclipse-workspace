@@ -42,6 +42,7 @@ public class AddMealDetailsView extends javax.swing.JFrame {
     public AddMealDetailsView(Manager manager) {
 
         initComponents();
+        this.setLocationRelativeTo(null);
         monthName = manager.getMonthName();
         year = manager.getYear();      
         this.manager = manager;
@@ -135,14 +136,6 @@ public class AddMealDetailsView extends javax.swing.JFrame {
         com_type = new javax.swing.JComboBox<>();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
-        drpDown_member1 = new javax.swing.JPanel();
-        btn_addMember1 = new javax.swing.JLabel();
-        btn_editMember1 = new javax.swing.JLabel();
-        btn_removeMember1 = new javax.swing.JLabel();
-        drpDown_member = new javax.swing.JPanel();
-        btn_addMember = new javax.swing.JLabel();
-        btn_editMember = new javax.swing.JLabel();
-        btn_removeMember = new javax.swing.JLabel();
         lbl_title1 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
@@ -367,102 +360,6 @@ public class AddMealDetailsView extends javax.swing.JFrame {
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 10, 420));
 
-        btn_addMember1.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMember1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMember1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMember1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMember1.setText("Add Meal Details");
-        btn_addMember1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMember1.setOpaque(true);
-
-        btn_editMember1.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMember1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMember1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMember1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMember1.setText("Edit Meal Details");
-        btn_editMember1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMember1.setOpaque(true);
-
-        btn_removeMember1.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMember1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMember1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMember1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMember1.setText("Remove a Meal");
-        btn_removeMember1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMember1.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_member1Layout = new javax.swing.GroupLayout(drpDown_member1);
-        drpDown_member1.setLayout(drpDown_member1Layout);
-        drpDown_member1Layout.setHorizontalGroup(
-            drpDown_member1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_member1Layout.createSequentialGroup()
-                .addGroup(drpDown_member1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMember1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMember1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMember1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_member1Layout.setVerticalGroup(
-            drpDown_member1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_member1Layout.createSequentialGroup()
-                .addComponent(btn_addMember1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMember1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_removeMember1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_member1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 130, 130));
-
-        btn_addMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_addMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_addMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_addMember.setText("Add Member");
-        btn_addMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_addMember.setOpaque(true);
-
-        btn_editMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_editMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_editMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_editMember.setText("Edit Info");
-        btn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_editMember.setOpaque(true);
-
-        btn_removeMember.setBackground(new java.awt.Color(51, 0, 153));
-        btn_removeMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_removeMember.setForeground(new java.awt.Color(255, 255, 255));
-        btn_removeMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btn_removeMember.setText("Remove Member");
-        btn_removeMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_removeMember.setOpaque(true);
-
-        javax.swing.GroupLayout drpDown_memberLayout = new javax.swing.GroupLayout(drpDown_member);
-        drpDown_member.setLayout(drpDown_memberLayout);
-        drpDown_memberLayout.setHorizontalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addGroup(drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        drpDown_memberLayout.setVerticalGroup(
-            drpDown_memberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drpDown_memberLayout.createSequentialGroup()
-                .addComponent(btn_addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(drpDown_member, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 130, 180));
-
         lbl_title1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_title1.setForeground(new java.awt.Color(255, 255, 255));
         lbl_title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -473,6 +370,7 @@ public class AddMealDetailsView extends javax.swing.JFrame {
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
@@ -653,17 +551,9 @@ public class AddMealDetailsView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btn_addMember;
-    private javax.swing.JLabel btn_addMember1;
-    private javax.swing.JLabel btn_editMember;
-    private javax.swing.JLabel btn_editMember1;
-    private javax.swing.JLabel btn_removeMember;
-    private javax.swing.JLabel btn_removeMember1;
     private javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> com_depts;
     private javax.swing.JComboBox<String> com_type;
-    private javax.swing.JPanel drpDown_member;
-    private javax.swing.JPanel drpDown_member1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

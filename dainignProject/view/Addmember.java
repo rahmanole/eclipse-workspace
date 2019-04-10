@@ -36,10 +36,11 @@ public class Addmember extends javax.swing.JFrame {
     
     Manager manager = null;
 
-    public Addmember(Manager manager) {
+    public Addmember() {
 
         initComponents();
         this.manager = manager;
+        this.setLocationRelativeTo(null);
         this.setTitle("Registrar Memebr");
         t_name.setBackground(new Color(0, 0, 0, 0));
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
@@ -58,9 +59,7 @@ public class Addmember extends javax.swing.JFrame {
         }
     }
     
-    public Addmember() {
-    
-    }
+
 
     private void designTable(JTable tableName) {
         tableName.getTableHeader().setForeground(new Color(255, 255, 255));
@@ -315,6 +314,7 @@ public class Addmember extends javax.swing.JFrame {
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
@@ -367,7 +367,7 @@ public class Addmember extends javax.swing.JFrame {
 
     private void sideBtn_editMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMemberMouseClicked
         // TODO add your handling code here:
-        new EditMemberView(manager).setVisible(true);
+        new EditMemberView().setVisible(true);
     }//GEN-LAST:event_sideBtn_editMemberMouseClicked
 
     private void sideBtn_addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdminMouseClicked

@@ -18,6 +18,7 @@ public class MonthlyExpensessServices {
     SummaryService summaryService = new SummaryService();
     MealHistoryServices mealHistoryServices = new MealHistoryServices();
     MealManageService mealManageService = new MealManageService();
+    MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
     List<Integer> cardListInHistoyAndSummaryTbl = summaryService.getCardList();
 
     public void createMontlyExpenseTable(Manager manager) {
@@ -68,7 +69,7 @@ public class MonthlyExpensessServices {
 
         List<Integer> cardList = new ArrayList<>();
 
-        double balance = 0;
+       
 
         Connection conn = null;
         try {
@@ -90,5 +91,12 @@ public class MonthlyExpensessServices {
         }
         return cardList;
     }
-
+    
+    public double getTotalCollectedExpense(Manager manager){
+        return getCardList(manager).size()*monthDetailsServices.getTotalExpense(manager);
+    }
+    
+    public String isPayemntPaid(int cardNo,Manager manager){
+        return getCardList(manager).contains(cardNo)?"Paid":"Not paid";
+    }
 }

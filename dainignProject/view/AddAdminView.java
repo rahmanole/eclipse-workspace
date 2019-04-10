@@ -31,6 +31,7 @@ public class AddAdminView extends javax.swing.JFrame {
 
     public AddAdminView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         t_eamil.setBackground(new Color(0, 0, 0, 0));
         com_role.setBackground(new Color(0, 0, 0, 0));
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
@@ -203,6 +204,7 @@ public class AddAdminView extends javax.swing.JFrame {
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
         lbl_bg.setBackground(new java.awt.Color(51, 0, 51));
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 

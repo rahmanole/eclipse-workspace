@@ -78,7 +78,9 @@ public class MonthReportService {
             
             int OffMealsOfADay = totalOnOffMealCount(manager, colName, "off");
             totalOffMeal += 2*OffMealsOfADay;
-            if (mealType.equals("Normal")) {
+            if(mealType==null){
+                continue;
+            }else if (mealType.equals("Normal")) {
 
                 totalNormalOffMeal += 2 * OffMealsOfADay;
 

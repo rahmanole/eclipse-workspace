@@ -30,11 +30,12 @@ public class AddManager extends javax.swing.JFrame {
 
     public AddManager() {
         initComponents();
+        this.setLocationRelativeTo(null);
         t_cardNo.setBackground(new Color(0, 0, 0, 0));
         t_eamil.setBackground(new Color(0, 0, 0, 0));
         com_month.setBackground(new Color(0, 0, 0, 0));
         com_year.setBackground(new Color(0, 0, 0, 0));
-        pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
+        pnl_sideBar1.setBackground(new Color(0, 0, 0, 100));
 
         designTable(tbl_managerList);
     }
@@ -83,11 +84,22 @@ public class AddManager extends javax.swing.JFrame {
         t_cardNo = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        pnl_sideBar = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        sideBtn_addManager = new javax.swing.JLabel();
-        sideBtn_addAdmin = new javax.swing.JLabel();
+        pnl_sideBar1 = new javax.swing.JPanel();
+        sideBtn_home = new javax.swing.JPanel();
+        eeee1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        sideBtn_addManager1 = new javax.swing.JPanel();
+        lblgg1 = new javax.swing.JLabel();
+        sideBtn_summary1 = new javax.swing.JPanel();
+        www1 = new javax.swing.JLabel();
+        sideBtn_monthlyReport1 = new javax.swing.JPanel();
+        eeee2 = new javax.swing.JLabel();
+        sideBtn_addAdmin1 = new javax.swing.JPanel();
+        dddd1 = new javax.swing.JLabel();
+        sideBtn_addDept1 = new javax.swing.JPanel();
+        sdd1 = new javax.swing.JLabel();
+        sideBtn_addmmeber1 = new javax.swing.JPanel();
+        sss1 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -193,46 +205,150 @@ public class AddManager extends javax.swing.JFrame {
         jLabel5.setText("Email");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 70, 30));
 
-        pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
-        pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnl_sideBar1.setBackground(new java.awt.Color(0, 0, 0));
+        pnl_sideBar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel11.setOpaque(true);
-        pnl_sideBar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
-
-        sideBtn_addManager.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addManager.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addManager.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addManager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addManager.setText("Add Manager");
-        sideBtn_addManager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addManager.setOpaque(true);
-        sideBtn_addManager.addMouseListener(new java.awt.event.MouseAdapter() {
+        sideBtn_home.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_home.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addManagerMouseClicked(evt);
+                sideBtn_homeMouseClicked(evt);
             }
         });
-        pnl_sideBar.add(sideBtn_addManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
+        sideBtn_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sideBtn_addAdmin.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addAdmin.setText("Add Admin");
-        sideBtn_addAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addAdmin.setOpaque(true);
-        sideBtn_addAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addAdminMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
+        eeee1.setBackground(new java.awt.Color(51, 0, 153));
+        eeee1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        eeee1.setForeground(new java.awt.Color(255, 255, 255));
+        eeee1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Home_22px_3.png"))); // NOI18N
+        eeee1.setText("Home");
+        eeee1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eeee1.setIconTextGap(20);
+        sideBtn_home.add(eeee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
 
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setOpaque(true);
-        pnl_sideBar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
+        sideBtn_home.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
 
-        getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
+        pnl_sideBar1.add(sideBtn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 190, 40));
+
+        sideBtn_addManager1.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_addManager1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addManager1MouseClicked(evt);
+            }
+        });
+        sideBtn_addManager1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblgg1.setBackground(new java.awt.Color(51, 0, 153));
+        lblgg1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblgg1.setForeground(new java.awt.Color(255, 255, 255));
+        lblgg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Manager_22px.png"))); // NOI18N
+        lblgg1.setText("Add Manager");
+        lblgg1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblgg1.setIconTextGap(20);
+        sideBtn_addManager1.add(lblgg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar1.add(sideBtn_addManager1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 190, 40));
+
+        sideBtn_summary1.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_summary1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_summary1MouseClicked(evt);
+            }
+        });
+        sideBtn_summary1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        www1.setBackground(new java.awt.Color(51, 0, 153));
+        www1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        www1.setForeground(new java.awt.Color(255, 255, 255));
+        www1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Brief_22px.png"))); // NOI18N
+        www1.setText("Add Summary");
+        www1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        www1.setIconTextGap(20);
+        sideBtn_summary1.add(www1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar1.add(sideBtn_summary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 190, 40));
+
+        sideBtn_monthlyReport1.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_monthlyReport1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_monthlyReport1MouseClicked(evt);
+            }
+        });
+        sideBtn_monthlyReport1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eeee2.setBackground(new java.awt.Color(51, 0, 153));
+        eeee2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        eeee2.setForeground(new java.awt.Color(255, 255, 255));
+        eeee2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Report_Card_22px_3.png"))); // NOI18N
+        eeee2.setText("Monthly Report");
+        eeee2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eeee2.setIconTextGap(20);
+        sideBtn_monthlyReport1.add(eeee2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar1.add(sideBtn_monthlyReport1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 190, 40));
+
+        sideBtn_addAdmin1.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_addAdmin1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addAdmin1MouseClicked(evt);
+            }
+        });
+        sideBtn_addAdmin1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dddd1.setBackground(new java.awt.Color(51, 0, 153));
+        dddd1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dddd1.setForeground(new java.awt.Color(255, 255, 255));
+        dddd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Admin_Settings_Male_22px_1.png"))); // NOI18N
+        dddd1.setText("Add Admin");
+        dddd1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        dddd1.setIconTextGap(20);
+        sideBtn_addAdmin1.add(dddd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar1.add(sideBtn_addAdmin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 190, 40));
+
+        sideBtn_addDept1.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_addDept1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addDept1MouseClicked(evt);
+            }
+        });
+        sideBtn_addDept1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        sdd1.setBackground(new java.awt.Color(51, 0, 153));
+        sdd1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sdd1.setForeground(new java.awt.Color(255, 255, 255));
+        sdd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Department_22px.png"))); // NOI18N
+        sdd1.setText("Add Department");
+        sdd1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sdd1.setIconTextGap(20);
+        sideBtn_addDept1.add(sdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar1.add(sideBtn_addDept1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 190, 40));
+
+        sideBtn_addmmeber1.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_addmmeber1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_addmmeber1MouseClicked(evt);
+            }
+        });
+        sideBtn_addmmeber1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        sss1.setBackground(new java.awt.Color(51, 0, 153));
+        sss1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sss1.setForeground(new java.awt.Color(255, 255, 255));
+        sss1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Member_22px_1.png"))); // NOI18N
+        sss1.setText("Add Member");
+        sss1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sss1.setIconTextGap(20);
+        sideBtn_addmmeber1.add(sss1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar1.add(sideBtn_addmmeber1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 190, 40));
+
+        getContentPane().add(pnl_sideBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
         lbl_bg.setBackground(new java.awt.Color(51, 0, 51));
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 
@@ -294,10 +410,64 @@ public class AddManager extends javax.swing.JFrame {
         new AddManager().setVisible(true);
     }//GEN-LAST:event_sideBtn_addManagerMouseClicked
 
+    private void sideBtn_summaryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_summaryMouseClicked
+        // TODO add your handling code here:
+        new AddSummaryView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_summaryMouseClicked
+
+    private void sideBtn_monthlyReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_monthlyReportMouseClicked
+        // TODO add your handling code here:
+        new MonthlyReportForMonth().setVisible(true);
+    }//GEN-LAST:event_sideBtn_monthlyReportMouseClicked
+
     private void sideBtn_addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdminMouseClicked
         // TODO add your handling code here:
         new AddAdminView().setVisible(true);
     }//GEN-LAST:event_sideBtn_addAdminMouseClicked
+
+    private void sideBtn_addDeptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addDeptMouseClicked
+        // TODO add your handling code here:
+        new AddDeptView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addDeptMouseClicked
+
+    private void sideBtn_addmmeberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeberMouseClicked
+        // TODO add your handling code here:
+        new Addmember().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
+
+    private void sideBtn_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_homeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sideBtn_homeMouseClicked
+
+    private void sideBtn_addManager1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addManager1MouseClicked
+        // TODO add your handling code here:
+        new AddManager().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addManager1MouseClicked
+
+    private void sideBtn_summary1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_summary1MouseClicked
+        // TODO add your handling code here:
+        new AddSummaryView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_summary1MouseClicked
+
+    private void sideBtn_monthlyReport1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_monthlyReport1MouseClicked
+        // TODO add your handling code here:
+        new MonthlyReportForMonth().setVisible(true);
+    }//GEN-LAST:event_sideBtn_monthlyReport1MouseClicked
+
+    private void sideBtn_addAdmin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdmin1MouseClicked
+        // TODO add your handling code here:
+        new AddAdminView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addAdmin1MouseClicked
+
+    private void sideBtn_addDept1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addDept1MouseClicked
+        // TODO add your handling code here:
+        new AddDeptView().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addDept1MouseClicked
+
+    private void sideBtn_addmmeber1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeber1MouseClicked
+        // TODO add your handling code here:
+        new Addmember().setVisible(true);
+    }//GEN-LAST:event_sideBtn_addmmeber1MouseClicked
 
     private String generatePin() {
         String pin = "";
@@ -381,6 +551,11 @@ public class AddManager extends javax.swing.JFrame {
     private javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> com_month;
     private javax.swing.JComboBox<String> com_year;
+    private javax.swing.JLabel dddd;
+    private javax.swing.JLabel dddd1;
+    private javax.swing.JLabel eeee;
+    private javax.swing.JLabel eeee1;
+    private javax.swing.JLabel eeee2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -396,11 +571,31 @@ public class AddManager extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel lbl_bg;
     private javax.swing.JLabel lbl_oprtnFeedbck;
+    private javax.swing.JLabel lblgg;
+    private javax.swing.JLabel lblgg1;
     private javax.swing.JPanel pnl_sideBar;
-    private javax.swing.JLabel sideBtn_addAdmin;
-    private javax.swing.JLabel sideBtn_addManager;
+    private javax.swing.JPanel pnl_sideBar1;
+    private javax.swing.JLabel sdd;
+    private javax.swing.JLabel sdd1;
+    private javax.swing.JPanel sideBtn_addAdmin;
+    private javax.swing.JPanel sideBtn_addAdmin1;
+    private javax.swing.JPanel sideBtn_addDept;
+    private javax.swing.JPanel sideBtn_addDept1;
+    private javax.swing.JPanel sideBtn_addManager;
+    private javax.swing.JPanel sideBtn_addManager1;
+    private javax.swing.JPanel sideBtn_addmmeber;
+    private javax.swing.JPanel sideBtn_addmmeber1;
+    private javax.swing.JPanel sideBtn_home;
+    private javax.swing.JPanel sideBtn_monthlyReport;
+    private javax.swing.JPanel sideBtn_monthlyReport1;
+    private javax.swing.JPanel sideBtn_summary;
+    private javax.swing.JPanel sideBtn_summary1;
+    private javax.swing.JLabel sss;
+    private javax.swing.JLabel sss1;
     private javax.swing.JTextField t_cardNo;
     private javax.swing.JTextField t_eamil;
     private javax.swing.JTable tbl_managerList;
+    private javax.swing.JLabel www;
+    private javax.swing.JLabel www1;
     // End of variables declaration//GEN-END:variables
 }

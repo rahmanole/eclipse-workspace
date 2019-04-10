@@ -50,6 +50,7 @@ public class UpdateMonthView extends javax.swing.JFrame {
     public UpdateMonthView(Manager manager) {
 
         initComponents();
+        this.setLocationRelativeTo(null);
         this.manager = manager;
         monthName = manager.getMonthName();
         year = manager.getYear();
@@ -496,6 +497,7 @@ public class UpdateMonthView extends javax.swing.JFrame {
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
         getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
 

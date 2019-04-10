@@ -296,7 +296,9 @@ public class MealHistoryServices {
         for (Date date : allDateOfThisMonth) {
             
             String status = getMealStatus(cardNo, date, manager);
-            if (status.equals("on")) {
+            if(status == null){
+                continue;
+            }else if (status.equals("on")) {
                 totalMeals++;
                 totalOnMeal++;
             } else if (status.equals("off")) {
@@ -312,13 +314,11 @@ public class MealHistoryServices {
                     bumping += (normalMealRate + fridayMealRate);
 
                 } else if (type.equals("Friday & Feast")) {
-                    System.out.println("Feast off");
                     fridayOff++;
                     normalOff++;
                     wasFestOn = true;
                     bumping += (normalMealRate + fridayMealRate + feastMealRate);
                 } else {
-                    System.out.println("Feast off");
                     wasFestOn = true;
                     normalOff += 2;
                     bumping += (2 * normalMealRate + feastMealRate);
