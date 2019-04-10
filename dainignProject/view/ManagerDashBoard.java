@@ -2,12 +2,9 @@ package view;
 
 import controller.pojo.Manager;
 import controller.pojo.MonthReport;
-import controller.pojo.Summary;
 import java.awt.Color;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -28,6 +25,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
     MonthReportService monthReportService = new MonthReportService();
     MonthlyExpensessServices monthlyExpensessServices = new MonthlyExpensessServices();
     MealDetailsServices mealDetailsServices = new MealDetailsServices();
+    MonthDetailsServices monthDetailsServices = new MonthDetailsServices();
 
     ArrayList<String> deptNames = (ArrayList<String>) deptNmaesServices.getDepartmentList();
     LogingPage logingPage = new LogingPage();
@@ -42,38 +40,36 @@ public class ManagerDashboard extends javax.swing.JFrame {
         this.setTitle("Dashboard");
         lbl_bg.setBackground(new Color(0, 0, 0, 0));
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
-        
+
         sideBtn_prePareMonth.setBackground(new Color(0, 0, 0, 0));
         sideBtn_addmmeber.setBackground(new Color(0, 0, 0, 0));
         sideBtn_collectExpense.setBackground(new Color(0, 0, 0, 0));
         sideBtn_editMeal.setBackground(new Color(0, 0, 0, 0));
         sideBtn_manageMeals.setBackground(new Color(0, 0, 0, 0));
         sideBtn_report.setBackground(new Color(0, 0, 0, 0));
-                
 
         designTable(tbl_report);
 
         List<Manager> managerList = managerService.getManagerByMonthYear(manager.getMonthName(), manager.getYear());
 
-       
-            if (monthReportService.isMonthExists(manager.getMonthName(), manager.getYear())) {
-                MonthReport report = monthReportService.getMonthReport(managerList, manager.getYear());
-                
-                double collectedExpenes = monthlyExpensessServices.getTotalCollectedExpense(manager);
-                double spentExpense = mealDetailsServices.getSpentExpense(manager);
-                double balance = collectedExpenes - spentExpense;
-                Object[][] values = {{"TotalMember", report.getTotalMember()}, {"Total On Meal", report.getTotalOnMeal()}, {"Total off Meal", report.getTotalOffMeal()},
-                {"Normal Off Meal", report.getTotalNormalOffMeal()}, {"Friday Off Meals", report.getTotalFridayOffMeal()}, {"Feast Off", report.getTotalFeastOffMeal()},
-                {"Total Expense Collected", collectedExpenes}, {"Total Spent expense", spentExpense},
-                {"Balance", balance}, {"Manager One", report.getManagerOneCardNo()}, {"Manager Two", report.getManagerTwoCardNo()}};
+        if (monthReportService.isMonthExists(manager.getMonthName(), manager.getYear())) {
+            MonthReport report = monthReportService.getMonthReport(managerList, manager.getYear());
 
-                DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
-                model.setRowCount(0);
-                for (Object[] value : values) {
-                    addToTable(value);
-                }
+            double collectedExpenes = monthlyExpensessServices.getTotalCollectedExpense(manager);
+            double spentExpense = mealDetailsServices.getSpentExpense(manager);
+            double balance = collectedExpenes - spentExpense;
+            Object[][] values = {{"TotalMember", report.getTotalMember()}, {"Total On Meal", report.getTotalOnMeal()}, {"Total off Meal", report.getTotalOffMeal()},
+            {"Normal Off Meal", report.getTotalNormalOffMeal()}, {"Friday Off Meals", report.getTotalFridayOffMeal()}, {"Feast Off", report.getTotalFeastOffMeal()},
+            {"Total Expense Collected", collectedExpenes}, {"Total Spent expense", spentExpense},
+            {"Balance", balance}, {"Manager One", report.getManagerOneCardNo()}, {"Manager Two", report.getManagerTwoCardNo()}};
 
+            DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
+            model.setRowCount(0);
+            for (Object[] value : values) {
+                addToTable(value);
             }
+
+        }
 
     }
 
@@ -109,7 +105,6 @@ public class ManagerDashboard extends javax.swing.JFrame {
 
         jSeparator1 = new javax.swing.JSeparator();
         lbl_title1 = new javax.swing.JLabel();
-        lbl_sideBarErrMsgs = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_report = new javax.swing.JTable();
         lbl_isManagerNull = new javax.swing.JLabel();
@@ -152,11 +147,6 @@ public class ManagerDashboard extends javax.swing.JFrame {
         lbl_title1.setText("Manager Dashboard");
         getContentPane().add(lbl_title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 280, 30));
 
-        lbl_sideBarErrMsgs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_sideBarErrMsgs.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_sideBarErrMsgs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lbl_sideBarErrMsgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 170, 30));
-
         tbl_report.setBackground(new java.awt.Color(51, 51, 51));
         tbl_report.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbl_report.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,8 +173,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
 
         lbl_isManagerNull.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_isManagerNull.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_isManagerNull.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lbl_isManagerNull, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 250, 30));
+        getContentPane().add(lbl_isManagerNull, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 230, 30));
 
         pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
         pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -295,11 +284,6 @@ public class ManagerDashboard extends javax.swing.JFrame {
         lbl_fff.setText("Edit Meal Details");
         lbl_fff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_fff.setIconTextGap(20);
-        lbl_fff.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_fffMouseClicked(evt);
-            }
-        });
         sideBtn_editMeal.add(lbl_fff, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
         sideBtn_editMeal.add(ind_mealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
 
@@ -373,11 +357,6 @@ public class ManagerDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lbl_fffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_fffMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_lbl_fffMouseClicked
-
     private void lbl_homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homeMouseClicked
         // TODO add your handling code here:
         new ManagerDashboard(manager).setVisible(true);
@@ -396,20 +375,29 @@ public class ManagerDashboard extends javax.swing.JFrame {
 
     private void sideBtn_addmmeberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addmmeberMouseClicked
         // TODO add your handling code here:
-         new Addmember().setVisible(true);
+        new Addmember().setVisible(true);
     }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
 
     private void sideBtn_editMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMealMouseClicked
         // TODO add your handling code here:
+        System.out.println("edit meal");
         new EditMealDetailsView(manager).setVisible(true);
+
     }//GEN-LAST:event_sideBtn_editMealMouseClicked
 
     private void sideBtn_manageMealsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_manageMealsMouseClicked
         // TODO add your handling code here:
         try {
-            new StartMealView(manager).setVisible(true);
+            if (monthDetailsServices.isMonthExists(manager)) {
+                new StartMealView(manager).setVisible(true);
+            } else {
+                lbl_isManagerNull.setText("Create your month first");
+                lbl_isManagerNull.setBackground(Color.red);
+            }
+
         } catch (Exception e) {
-            lbl_isManagerNull.setText("Create your month first");
+            lbl_isManagerNull.setText("Your period is over");
+            lbl_isManagerNull.setBackground(Color.red);
         }
     }//GEN-LAST:event_sideBtn_manageMealsMouseClicked
 
@@ -417,6 +405,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (manager == null) {
             lbl_isManagerNull.setText("Manager null");
+            lbl_isManagerNull.setBackground(Color.red);
         } else {
             new MonthlyExpenseView(manager).setVisible(true);
         }
@@ -431,15 +420,15 @@ public class ManagerDashboard extends javax.swing.JFrame {
         obj[1] = values[1];
         model.addRow(obj);
     }
-    
-    private void setColor(JPanel panel,JLabel lbl){
+
+    private void setColor(JPanel panel, JLabel lbl) {
         lbl.setOpaque(true);
-        panel.setBackground(new Color(51,51,51));
+        panel.setBackground(new Color(51, 51, 51));
     }
-    
-    private void resetColor(JPanel panel,JLabel lbl){
+
+    private void resetColor(JPanel panel, JLabel lbl) {
         lbl.setOpaque(false);
-        panel.setBackground(new Color(0,0,0,0));
+        panel.setBackground(new Color(0, 0, 0, 0));
     }
 
 //    private void addToTable(Member member) {
@@ -2558,7 +2547,6 @@ public class ManagerDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_home;
     private javax.swing.JLabel lbl_isManagerNull;
     private javax.swing.JLabel lbl_rr;
-    private javax.swing.JLabel lbl_sideBarErrMsgs;
     private javax.swing.JLabel lbl_sss;
     private javax.swing.JLabel lbl_title1;
     private javax.swing.JLabel lbl_title2;

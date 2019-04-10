@@ -417,7 +417,7 @@ public class AddManager extends javax.swing.JFrame {
 
     private void sideBtn_monthlyReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_monthlyReportMouseClicked
         // TODO add your handling code here:
-        new MonthlyReportForMonth().setVisible(true);
+        new AdminDashboard().setVisible(true);
     }//GEN-LAST:event_sideBtn_monthlyReportMouseClicked
 
     private void sideBtn_addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdminMouseClicked
@@ -451,7 +451,7 @@ public class AddManager extends javax.swing.JFrame {
 
     private void sideBtn_monthlyReport1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_monthlyReport1MouseClicked
         // TODO add your handling code here:
-        new MonthlyReportForMonth().setVisible(true);
+        new AdminDashboard().setVisible(true);
     }//GEN-LAST:event_sideBtn_monthlyReport1MouseClicked
 
     private void sideBtn_addAdmin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdmin1MouseClicked

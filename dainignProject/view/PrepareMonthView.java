@@ -500,11 +500,6 @@ public class PrepareMonthView extends javax.swing.JFrame {
         lbl_fff.setText("Edit Meal Details");
         lbl_fff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_fff.setIconTextGap(20);
-        lbl_fff.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_fffMouseClicked(evt);
-            }
-        });
         sideBtn_editMeal.add(lbl_fff, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 150, 40));
         sideBtn_editMeal.add(ind_mealDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
 
@@ -609,10 +604,13 @@ public class PrepareMonthView extends javax.swing.JFrame {
             MonthDetails monthDetails = new MonthDetails(monthName, year, employee_fees, totalDays, totalFridays, friDayMealRate, numberOfNormalDaymeals, normalMealRate, feastMealRate, totalCost, feastDate, startDate, endDate);
             lbl_msgs.setText("Wait...");
             lbl_msgs.setForeground(Color.red);
+            if(monthDetailsServices.isMonthExists(manager)){
+                lbl_msgs.setText("You alreday svaed this month info");
+                lbl_msgs.setForeground(Color.red);
+                return;
+            }
+            
             if (monthDetailsServices.save(monthDetails) > 0) {
-                
-                
-                
                 MealDetailsServices.createMealDetailsTable(monthName, year,manager);
                 mealHistoryServices.createMealHistoryTable(monthName, year,startDate, endDate);
                 monthlyExpensessServices.createMontlyExpenseTable(manager);
@@ -679,11 +677,6 @@ public class PrepareMonthView extends javax.swing.JFrame {
             new MonthlyExpenseView(manager).setVisible(true);
         }
     }//GEN-LAST:event_sideBtn_collectExpenseMouseClicked
-
-    private void lbl_fffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_fffMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_lbl_fffMouseClicked
 
     private void sideBtn_editMealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMealMouseClicked
         // TODO add your handling code here:

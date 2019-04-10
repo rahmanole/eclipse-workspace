@@ -50,6 +50,7 @@ public class Addmember extends javax.swing.JFrame {
         t_session.setBackground(new Color(0, 0, 0, 0));
         t_cardNo.setBackground(new Color(0, 0, 0, 0));
         com_depts.setBackground(new Color(0, 0, 0, 0));
+        
         com_type.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));

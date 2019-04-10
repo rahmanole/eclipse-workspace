@@ -319,5 +319,31 @@ public class MonthDetailsServices {
 
         return monthDetails;
     }
+    
+    
+    public boolean isMonthExists(Manager manager){
+        String sql = "select * from month_details where month_name=? and year=?";
 
+        Connection conn = null;
+        try {
+            conn = ConnectionForDB.connect();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, manager.getMonthName());
+            ps.setString(2, manager.getYear());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return true;               
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AssignedMonthsServices.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
 }

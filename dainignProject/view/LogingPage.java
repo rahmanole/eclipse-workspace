@@ -60,8 +60,8 @@ public class LogingPage extends javax.swing.JFrame {
         t_email.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         t_email.setOpaque(false);
         getContentPane().add(t_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 200, 30));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, 260, 10));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 260, 11));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 260, 10));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 260, 11));
 
         btn_login.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_login.setForeground(new java.awt.Color(255, 255, 255));
@@ -74,7 +74,7 @@ public class LogingPage extends javax.swing.JFrame {
                 btn_loginActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 86, 28));
+        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, 86, 40));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 330, 11));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -101,7 +101,7 @@ public class LogingPage extends javax.swing.JFrame {
         getContentPane().add(lbl_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 30, 30));
 
         lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
-        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 550));
+        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 570));
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
