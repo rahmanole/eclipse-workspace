@@ -9,16 +9,16 @@ import model.conn.ConnectionForDB;
 public class TableCreateServices {
 
     public static void main(String[] args) {
-//        createTable(DeptNmaesServices.tblCrtStmt);
-//        createTable(ManagerService.tblCrtStmt);
-//        createTable(MemberServices.tblCrtStmt);
-//        createTable(PersonalInfoServices.tblCrtStmt);
-//        createTable(RoleServices.tblCrtStmt);
-//        createTable(MonthDetailsServices.tblCrtStmt);
-//        createTable(SummaryService.createTblStmt);
-//        createTable(MealStopService.offCardTbl);
+        createTable(DeptNmaesServices.tblCrtStmt);
+        createTable(ManagerService.tblCrtStmt);
+        createTable(MemberServices.tblCrtStmt);
+        createTable(PersonalInfoServices.tblCrtStmt);
+        createTable(RoleServices.tblCrtStmt);
+        createTable(MonthDetailsServices.tblCrtStmt);
+        createTable(SummaryService.createTblStmt);
+        createTable(MealStopService.offCardTbl);
         createTable(MealManageService.crtCMSTbl);
-//        createTable(MealDayAndDateServices.createTableDayWithDate);
+        createTable(MealDayAndDateServices.createTableDayWithDate);
     }
 
     public static void createTable(String sql) {

@@ -85,7 +85,7 @@ public class LogingPage extends javax.swing.JFrame {
         lbl_logMsgs.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lbl_logMsgs.setForeground(new java.awt.Color(153, 0, 0));
         lbl_logMsgs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lbl_logMsgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, 187, 30));
+        getContentPane().add(lbl_logMsgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 187, 30));
 
         t_pass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         t_pass.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,7 +101,7 @@ public class LogingPage extends javax.swing.JFrame {
         getContentPane().add(lbl_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 30, 30));
 
         lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
-        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 570));
+        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 610));
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };

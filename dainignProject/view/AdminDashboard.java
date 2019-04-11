@@ -2,12 +2,9 @@ package view;
 
 import controller.pojo.Manager;
 import controller.pojo.MonthReport;
-import controller.pojo.Summary;
 import java.awt.Color;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -103,6 +100,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         sdd = new javax.swing.JLabel();
         sideBtn_addmmeber = new javax.swing.JPanel();
         sss = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,7 +122,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         lbl_msgs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_msgs.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_msgs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lbl_msgs, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 250, 30));
 
         btn_details.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -141,7 +138,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         getContentPane().add(btn_details, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 100, 40));
 
         tbl_report.setBackground(new java.awt.Color(51, 51, 51));
-        tbl_report.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tbl_report.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbl_report.setForeground(new java.awt.Color(255, 255, 255));
         tbl_report.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,10 +156,10 @@ public class AdminDashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_report.setRowHeight(30);
+        tbl_report.setRowHeight(40);
         jScrollPane1.setViewportView(tbl_report);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 90, 360, 420));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 400, 470));
 
         lbl_isManagerNull.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_isManagerNull.setForeground(new java.awt.Color(255, 255, 255));
@@ -329,13 +326,21 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, -1, -1));
+
         lbl_bg.setBackground(new java.awt.Color(0, 102, 102));
         lbl_bg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_bg.setForeground(new java.awt.Color(255, 255, 255));
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
-        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
+        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -405,6 +410,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Addmember().setVisible(true);
     }//GEN-LAST:event_sideBtn_addmmeberMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void addToTable(Object[] values) {
         DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
@@ -2520,6 +2530,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel dddd;
     private javax.swing.JLabel eeee;
     private javax.swing.JLabel eeee1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

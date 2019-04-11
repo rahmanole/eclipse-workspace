@@ -50,27 +50,31 @@ public class ManagerDashboard extends javax.swing.JFrame {
 
         designTable(tbl_report);
 
-        List<Manager> managerList = managerService.getManagerByMonthYear(manager.getMonthName(), manager.getYear());
+        try {
+            List<Manager> managerList = managerService.getManagerByMonthYear(manager.getMonthName(), manager.getYear());
 
-        if (monthReportService.isMonthExists(manager.getMonthName(), manager.getYear())) {
-            MonthReport report = monthReportService.getMonthReport(managerList, manager.getYear());
+            if (monthReportService.isMonthExists(manager.getMonthName(), manager.getYear())) {
+                MonthReport report = monthReportService.getMonthReport(managerList, manager.getYear());
 
-            double collectedExpenes = monthlyExpensessServices.getTotalCollectedExpense(manager);
-            double spentExpense = mealDetailsServices.getSpentExpense(manager);
-            double balance = collectedExpenes - spentExpense;
-            Object[][] values = {{"TotalMember", report.getTotalMember()}, {"Total On Meal", report.getTotalOnMeal()}, {"Total off Meal", report.getTotalOffMeal()},
-            {"Normal Off Meal", report.getTotalNormalOffMeal()}, {"Friday Off Meals", report.getTotalFridayOffMeal()}, {"Feast Off", report.getTotalFeastOffMeal()},
-            {"Total Expense Collected", collectedExpenes}, {"Total Spent expense", spentExpense},
-            {"Balance", balance}, {"Manager One", report.getManagerOneCardNo()}, {"Manager Two", report.getManagerTwoCardNo()}};
+                double collectedExpenes = monthlyExpensessServices.getTotalCollectedExpense(manager);
+                double spentExpense = mealDetailsServices.getSpentExpense(manager);
+                double balance = collectedExpenes - spentExpense;
+                Object[][] values = {{"TotalMember", report.getTotalMember()}, {"Total On Meal", report.getTotalOnMeal()}, {"Total off Meal", report.getTotalOffMeal()},
+                {"Normal Off Meal", report.getTotalNormalOffMeal()}, {"Friday Off Meals", report.getTotalFridayOffMeal()}, {"Feast Off", report.getTotalFeastOffMeal()},
+                {"Total Expense Collected", collectedExpenes}, {"Total Spent expense", spentExpense},
+                {"Balance", balance}, {"Manager One", report.getManagerOneCardNo()}, {"Manager Two", report.getManagerTwoCardNo()}};
 
-            DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
-            model.setRowCount(0);
-            for (Object[] value : values) {
-                addToTable(value);
+                DefaultTableModel model = (DefaultTableModel) tbl_report.getModel();
+                model.setRowCount(0);
+                for (Object[] value : values) {
+                    addToTable(value);
+                }
+
             }
 
+        } catch (Exception e) {
+            
         }
-
     }
 
     public ManagerDashboard() {
@@ -148,7 +152,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
         getContentPane().add(lbl_title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 280, 30));
 
         tbl_report.setBackground(new java.awt.Color(51, 51, 51));
-        tbl_report.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tbl_report.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbl_report.setForeground(new java.awt.Color(255, 255, 255));
         tbl_report.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,7 +170,7 @@ public class ManagerDashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_report.setRowHeight(30);
+        tbl_report.setRowHeight(40);
         jScrollPane1.setViewportView(tbl_report);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 160, 360, 370));
@@ -336,7 +340,6 @@ public class ManagerDashboard extends javax.swing.JFrame {
         lbl_title3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_title3.setForeground(new java.awt.Color(255, 255, 255));
         lbl_title3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_title3.setText("Personal Information");
         getContentPane().add(lbl_title3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 170, 30));
 
         lbl_title2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

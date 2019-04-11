@@ -54,6 +54,8 @@ public class Addmember extends javax.swing.JFrame {
         com_type.setBackground(new Color(0, 0, 0, 0));
 
         pnl_sideBar.setBackground(new Color(0, 0, 0, 100));
+        sideBtn_dltMmbr.setBackground(new Color(0, 0, 0, 0));
+        sideBtn_editMmbr.setBackground(new Color(0, 0, 0, 0));
         Collections.sort(deptNames);
         for (String deptNames : deptNames) {
             com_depts.addItem(deptNames);
@@ -118,10 +120,13 @@ public class Addmember extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         pnl_sideBar = new javax.swing.JPanel();
+        sideBtn_editMmbr = new javax.swing.JPanel();
+        eeee1 = new javax.swing.JLabel();
+        sideBtn_dltMmbr = new javax.swing.JPanel();
+        lblgg = new javax.swing.JLabel();
+        sideBtn_addmmbr = new javax.swing.JPanel();
+        dddd = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        sideBtn_editMember = new javax.swing.JLabel();
-        sideBtn_addAdmin = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         lbl_bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -275,39 +280,61 @@ public class Addmember extends javax.swing.JFrame {
         pnl_sideBar.setBackground(new java.awt.Color(0, 0, 0));
         pnl_sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        sideBtn_editMmbr.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_editMmbr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_editMmbrMouseClicked(evt);
+            }
+        });
+        sideBtn_editMmbr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eeee1.setBackground(new java.awt.Color(51, 0, 153));
+        eeee1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        eeee1.setForeground(new java.awt.Color(255, 255, 255));
+        eeee1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Edit_Property_22px_1.png"))); // NOI18N
+        eeee1.setText("Edit Member");
+        eeee1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eeee1.setIconTextGap(20);
+        sideBtn_editMmbr.add(eeee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar.add(sideBtn_editMmbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 190, 40));
+
+        sideBtn_dltMmbr.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_dltMmbr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sideBtn_dltMmbrMouseClicked(evt);
+            }
+        });
+        sideBtn_dltMmbr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblgg.setBackground(new java.awt.Color(51, 0, 153));
+        lblgg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblgg.setForeground(new java.awt.Color(255, 255, 255));
+        lblgg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Manager_22px.png"))); // NOI18N
+        lblgg.setText("Delete Member");
+        lblgg.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblgg.setIconTextGap(20);
+        sideBtn_dltMmbr.add(lblgg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        pnl_sideBar.add(sideBtn_dltMmbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 190, 40));
+
+        sideBtn_addmmbr.setBackground(new java.awt.Color(102, 102, 102));
+        sideBtn_addmmbr.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dddd.setBackground(new java.awt.Color(51, 0, 153));
+        dddd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dddd.setForeground(new java.awt.Color(255, 255, 255));
+        dddd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8_Member_22px_1.png"))); // NOI18N
+        dddd.setText("Add Member");
+        dddd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        dddd.setIconTextGap(20);
+        sideBtn_addmmbr.add(dddd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 160, 40));
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setOpaque(true);
-        pnl_sideBar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 10, 40));
+        sideBtn_addmmbr.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
 
-        sideBtn_editMember.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_editMember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_editMember.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_editMember.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_editMember.setText("Edit Member");
-        sideBtn_editMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_editMember.setOpaque(true);
-        sideBtn_editMember.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_editMemberMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_editMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 180, 40));
-
-        sideBtn_addAdmin.setBackground(new java.awt.Color(51, 0, 153));
-        sideBtn_addAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sideBtn_addAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        sideBtn_addAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sideBtn_addAdmin.setText("Delete Member");
-        sideBtn_addAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        sideBtn_addAdmin.setOpaque(true);
-        sideBtn_addAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sideBtn_addAdminMouseClicked(evt);
-            }
-        });
-        pnl_sideBar.add(sideBtn_addAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 180, 40));
-
-        jLabel12.setOpaque(true);
-        pnl_sideBar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 10, 40));
+        pnl_sideBar.add(sideBtn_addmmbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 190, 40));
 
         getContentPane().add(pnl_sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 650));
 
@@ -317,7 +344,7 @@ public class Addmember extends javax.swing.JFrame {
         lbl_bg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/251850.jpg"))); // NOI18N
         lbl_bg.setOpaque(true);
-        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 650));
+        getContentPane().add(lbl_bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -366,15 +393,14 @@ public class Addmember extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_saveActionPerformed
 
-    private void sideBtn_editMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMemberMouseClicked
+    private void sideBtn_editMmbrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_editMmbrMouseClicked
         // TODO add your handling code here:
         new EditMemberView().setVisible(true);
-    }//GEN-LAST:event_sideBtn_editMemberMouseClicked
+    }//GEN-LAST:event_sideBtn_editMmbrMouseClicked
 
-    private void sideBtn_addAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_addAdminMouseClicked
+    private void sideBtn_dltMmbrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sideBtn_dltMmbrMouseClicked
         // TODO add your handling code here:
-        new AddAdminView().setVisible(true);
-    }//GEN-LAST:event_sideBtn_addAdminMouseClicked
+    }//GEN-LAST:event_sideBtn_dltMmbrMouseClicked
 //
 //    private void addToTable(Member member) {
 //        //DefaultTableModel model = (DefaultTableModel) tbl_pInfo.getModel();
@@ -437,9 +463,10 @@ public class Addmember extends javax.swing.JFrame {
     private javax.swing.JButton btn_save;
     private javax.swing.JComboBox<String> com_depts;
     private javax.swing.JComboBox<String> com_type;
+    private javax.swing.JLabel dddd;
+    private javax.swing.JLabel eeee1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -460,9 +487,11 @@ public class Addmember extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lbl_bg;
     private javax.swing.JLabel lbl_msgs;
+    private javax.swing.JLabel lblgg;
     private javax.swing.JPanel pnl_sideBar;
-    private javax.swing.JLabel sideBtn_addAdmin;
-    private javax.swing.JLabel sideBtn_editMember;
+    private javax.swing.JPanel sideBtn_addmmbr;
+    private javax.swing.JPanel sideBtn_dltMmbr;
+    private javax.swing.JPanel sideBtn_editMmbr;
     private javax.swing.JTextField t_cardNo;
     private javax.swing.JTextField t_cntNum;
     private javax.swing.JTextField t_email;
