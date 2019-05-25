@@ -11,6 +11,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.minhaz.model.User;
+
 import static org.hibernate.cfg.Environment.*;
 
 @Configuration
@@ -45,7 +48,7 @@ public class AppConfig {
 		props.put(C3P0_MAX_STATEMENTS, env.getProperty("hibernate.c3p0.max_statements"));
 
 		localSessionFactoryBean.setHibernateProperties(props);
-//		localSessionFactoryBean.setAnnotatedClasses(User.class);
+		localSessionFactoryBean.setAnnotatedClasses(User.class);
 
 		return localSessionFactoryBean;
 	}
