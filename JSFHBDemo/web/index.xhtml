@@ -1,162 +1,115 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <!-- Adding BootStrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link href="css/cutom.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form id="myform" >
+            <div class="container-fluid bg-primary">
+                This is Container for Header
+            </div>
 
-    <f:view contentType="text/html">
-
-        <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
-            </f:facet>
-            <link rel="stylesheet"  href="bootstrap.css"/>
-        </h:head>
-
-        <h:body>
-            Welcome to PrimeFaces
-            <h:form>
-                <table>
-                    <tr>
-                        <td>
-                    <p:outputLabel value="ID"/>
-                    </td>
-                    <td>
-                    <p:inputText value="#{studentController.student.id}"/> 
-                    </td>
-
-                    </tr>
-                    <tr>
-                        <td>
-                    <p:outputLabel value="Student Name"/>
-
-                    </td>
-                    <td>
-                    <p:inputText value="#{studentController.student.studentName}"/>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                    <p:outputLabel value="Gender"/>
-                    </td>
-                    <td>
-                    <p:selectOneRadio id="gender" value="#{studentController.student.gender}" >
-                        <f:selectItem itemLabel="Male" itemValue="m" />
-                        <f:selectItem itemLabel="Female" itemValue="f" />                         
-                    </p:selectOneRadio>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                    <p:outputLabel value="Round"/>
-
-                    </td>
-                    <td>
-                    <p:selectOneMenu id="Round" value="#{studentController.student.round}" style="width:125px">
-                        <f:selectItem itemLabel="Select Round" itemValue="" />
-                        <f:selectItem itemLabel="Round-37" itemValue="Round-37" />
-                        <f:selectItem itemLabel="Round-38" itemValue="Round-38" />
-                        <f:selectItem itemLabel="Round-39" itemValue="Round-39" />
-                        <f:selectItem itemLabel="Round-40" itemValue="Round-40" />
-                    </p:selectOneMenu>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                    <p:outputLabel value="Status"/>
-
-
-                    </td>
-                    <td>
-                    <p:selectOneRadio id="status" value="#{studentController.student.courseStatus}" >
-                        <f:selectItem itemLabel="Going On" itemValue="m" />
-                        <f:selectItem itemLabel="Complete" itemValue="f" />                         
-                    </p:selectOneRadio>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                    <p:outputLabel value="Joining Date"/>              
-                    </td>
-                    <td>
-                    <p:calendar value="#{studentController.student.courseStartDate}"/>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                    <p:outputLabel value="Completed Course"/>
-
-                    </td>
-                    <td>
-                    <p:selectManyCheckbox id="cc" value="#{studentController.student.completedCourse}">
-                        <f:selectItem itemLabel="HTML" itemValue="HTML" />
-                        <f:selectItem itemLabel="JAVA" itemValue="Java" />
-                        <f:selectItem itemLabel="Swing" itemValue="Swing" />
-                        <f:selectItem itemLabel="Oracle" itemValue="Oracle" />
-                    </p:selectManyCheckbox> 
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                    <p:outputLabel value="Note"/>
-
-                    </td>
-                    <td>
-                    <p:inputTextarea value="#{studentController.student.note}"/>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                   
-
-                    </td>
-                    <td>
-                    <p:commandButton class="btn-primary" action="#{studentController.save()}" value="Add Student" />
-                    </td>
-                    </tr>
-
-                </table>
+            <div class="container" id="cont">
+                <p:outputLabel id="Messages" value="#{personController.person.id}" />
+                <p:messages id="mssg" autoUpdate="true" />
+                    <div class="col-6">
+                        <div class="form-group">
+                            <p:outputLabel id="NameLbl" value="Name*:" />
+                            <p:inputText id="NameTxt" class="form-control" value="#{personController.person.name}" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <p:outputLabel id="HomeTelLable" value="Home Tel*:" />
+                            <p:inputText id="HomeTelTxm" class="form-control" value="#{personController.person.homeTel}" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <p:outputLabel id="OfficeTelLable" value="Office Tel*:" />
+                            <p:inputText id="OfficeTelTxt" class="form-control" value="#{personController.person.officeTel}" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <p:outputLabel id="EmailLable" value="Email*:" />
+                            <p:inputText id="OfficeTelLableTxt" class="form-control" value="#{personController.person.email}" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <p:outputLabel id="CityLable" value="City*:" />
+                            <p:inputText id="CityTxt" class="form-control" value="#{personController.person.city}" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <p:outputLabel id="HomeAddressLabel" value="Home Address*:" />
+                            <p:inputText id="HomeAddressTxt" class="form-control" value="#{personController.person.homeAddress}" />
+                        </div>
+                    </div>
+                <div class="col-6">
+                        <div class="form-group">
+                            <p:outputLabel id="OfficeAddressLabel" value="Office Address*:" />
+                            <p:inputText id="OfficeAddressTxt" class="form-control" value="#{personController.person.officeAddress}" />
+                        </div>
+                    </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="btn-group">
+                            <p:commandButton id="btn1" type="Submit" class="btn bg-primary" value="Submit" action="#{personController.savePerson()}" update="Messages datatable">
+                            
+                            
+                            </p:commandButton>
+                            <p:commandButton id="btn2" type="reset" class="btn bg-primary" value="Reset" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="card">
+            <div class="card-header">
+                All Records
+            </div>
+            <div class="body">
+                <p:dataTable id="datatable" var="p" value="${addressBean.findall()}">
                 
-            </h:form>
-
-
-
-            <hr/>
-            <p:dataTable var="stu" value="#{studentController.students}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{stu.id}" />
-                </p:column>
-                <p:column headerText="Student Name">
-                    <h:outputText value="#{stu.studentName}" />
-                </p:column>
-
-                <p:column headerText="Gender">
-                    <h:outputText value="#{stu.gender}" />
-                </p:column>
-
-                <p:column headerText="Round">
-                    <h:outputText value="#{stu.round}" />
-                </p:column>
-                <p:column headerText="Status">
-                    <h:outputText value="#{stu.courseStatus}" />
-                </p:column>
-                <p:column headerText="Couse Completed">
-                    <p:dataList value="#{stu.completedCourse}" var="c" type="ordered">
-                        <h:outputText value="#{c}" /></p:dataList>
-
-                </p:column>
-
-                <p:column headerText="Joining Date">
-                    <h:outputText value="#{stu.courseStartDate}" >
-                        <f:convertDateTime pattern="dd-MM-yyyy" />
-                    </h:outputText>
-                </p:column>
-            </p:dataTable>
-
-        </h:body>
-
-    </f:view>
+                    <p:column headerText="Person ID">
+                        <p:outputLabel id="PID" value="${p.personID}" />
+                    </p:column>
+                      <p:column headerText="Name">
+                          <p:outputLabel id="Name" value="${p.PERSONNAME}" />
+                    </p:column>
+                      <p:column headerText="Address">
+                          <p:outputLabel id="pAddress" value="${p.PERSONADDRESS}" />
+                    </p:column>
+                      <p:column headerText="Email">
+                          <p:outputLabel id="pEmail" value="${p.PERSONEMAIL}" />
+                    </p:column>
+                      <p:column headerText="City">
+                          <p:outputLabel id="pCity" value="${p.PERSONCON}" />
+                    </p:column>
+                    <p:column headerText="actions">
+                        <p:commandButton id="delbtn" value="delete" class="btn bg-danger" action="${addressBean.DeletFun(p.personID)}" />
+                    </p:column>
+                
+                </p:dataTable>
+            </div>
+        </div>
+        </h:form>
+       
+        
+    </h:body>
 </html>
+
