@@ -16,42 +16,22 @@
         <!--        <link href="css/cutom.css" rel="stylesheet" type="text/css"/>-->
     </h:head>
     <h:body>
-        <div class="container-fluid mainBody">
-            <div class="row " style="margin-bottom: 10px">
-                <div class="col-lg-3">
-
-                </div>
-                <div class="col-lg-6">
-
-                    <h:outputText value="Search all fields:" />
-                    <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
-
-                    <button onclick="window.location.href = '';" class="btn">Add New</button>
-                </div>
-
-                <div class="col-lg-3">
-
-                </div>
+        <div class="container mainBody">
+            <div class="row">
+                
             </div>
-            <div class="row ">
-                <div class="col-lg-3">
-
-                </div>
-                <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-4">
                     <p:dataTable id="datatable" var="p" value="#{personController.persons}">
                         <div class="card-body">
                             <p:column headerText="Name">
                                 <p:outputLabel id="Name" value="${p.name}" />
                             </p:column>
-                            <p:column headerText="Circle">
-                                <p:outputLabel id="pEmail" value="${p.circle}" />
+                            <p:column headerText="Email">
+                                <p:outputLabel id="pEmail" value="${p.email}" />
                             </p:column>
-
                         </div>
                     </p:dataTable>
-                </div>
-                <div class="col-lg-3">
-
                 </div>
             </div>
         </div>
@@ -89,10 +69,6 @@
                 <p:column headerText="actions">
                     <p:commandButton id="delbtn" value="delete" class="btn bg-primary" action="${addressBean.DeletFun(p.personID)}" />
                 </p:column>
-
-                <p:column>  
-                    <h:commandButton action="#{personController.viewPerson}" value="View.." class="btn btn-primary"/>  
-                </p:column>  
 
             </p:dataTable>
         </div>
