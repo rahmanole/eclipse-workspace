@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<h1>{{res}}</h1>
+		</div>
+	</body>
+	
+	<script>
+		var app = angular.module('myApp',[]);
+		app.service('myService',function(){
+			this.toDecimal = function(x){
+				return x.toString(16);
+			}
+		});
+		
+		app.controller('myCtrl',function($scope,myService){
+			$scope.res = myService.toDecimal(35);
+		});
+	</script>
+</html>

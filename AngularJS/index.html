@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body ng-app="myApp" >
+
+<div ng-controller="myCtrl">
+<input type="text" ng-model="name"/><br/>
+<p ng-repeat="x in names">{{x}}</p>
+</div>
+
+<h1 ng-repeat="x in names">{{x}}</h1>
+
+<script>
+	var app = angular.module("myApp",[]);
+	
+	app.controller("myCtrl",function($scope){
+		$scope.names = ["Minhaz","Yasin","Rony","Showkat"];
+	});
+	
+	app.run(function($rootScope){
+		$rootScope.names=["Devid","Peter","John","Xarvis"];
+	});
+</script>
+</body>
+</html>
