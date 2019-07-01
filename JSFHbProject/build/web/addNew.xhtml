@@ -7,22 +7,29 @@
     <h:head>
         <title>Facelet Title</title>
         <!-- Adding BootStrap -->
-        <link rel="stylesheet" href="bootstrap.min.css" />
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>        
+        <link rel="stylesheet" href="bootstrap.css" />
+        <!--        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>        -->
     </h:head>
     <h:body>
-        <a href="/JSFHbProject/faces/list.xhtml">List</a>
-        <h:form  >
-            <div class="container-fluid bg-primary">
-                This is Container for Header
-            </div>
+        <a href="/JSFHbProject/faces/index.xhtml">List</a>
+
+        <h:form>
+
+
 
             <div class="container" id="cont">
-                <p:outputLabel id="Messages" value="#{personController.person.id}" />
-                <p:messages id="mssg" autoUpdate="true" />
+
+                <div class="btn-group">
+                    <p:commandButton type="Submit" class="btn bg-primary" value="Home" action="#{personController.save()}"/>
+                    <p:commandButton type="Submit" class="btn bg-primary" value="Search" />
+                </div>
                 <div class="col-6">
+                    <div class="form-group">
+                        <p:outputLabel  value="ID*:" />
+<!--                        <p:inputText class="form-control" value="#{personController.person.id}" />-->
+                    </div>
                     <div class="form-group">
                         <p:outputLabel id="NameLbl" value="Name*:" />
                         <p:inputText id="NameTxt" class="form-control" value="#{personController.person.name}" />
@@ -66,13 +73,15 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <p:outputLabel value="Select Circle*:" />
-                        <p:selectOneMenu id="round" value="#{personController.person.circle}">
-                            <f:selectItem itemLabel="Select Circle" itemValue="" />
-                            <f:selectItem itemLabel="Friend" itemValue="friend" />
-                            <f:selectItem itemLabel="Family" itemValue="family" />
-                            <f:selectItem itemLabel="Coleague" itemValue="Round 39" />
-                        </p:selectOneMenu>
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                            <p:outputLabel value="Select Circle*:" />
+                            <p:selectOneMenu  value="#{personController.person.circle}" style="width:225px">
+                                <f:selectItem itemLabel="Select Circle" itemValue="" />
+                                <f:selectItem itemLabel="Friend" itemValue="friend" />
+                                <f:selectItem itemLabel="Family" itemValue="family" />
+                                <f:selectItem itemLabel="Coleague" itemValue="coleague" />
+                            </p:selectOneMenu>
+                        </h:panelGrid>                       
                     </div>
                 </div>
                 <div class="form-row">

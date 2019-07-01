@@ -14,100 +14,83 @@
         <link href="css/cutom.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        <h:form id="myform" >
-            <div class="container-fluid bg-primary">
-                This is Container for Header
+        <div class="container-fluid" >
+
+
+            <div class="col-lg-3">
+
+            </div>
+            <div class="col-6">
+
+                <h:form >
+                    
+                    
+                    <p:messages id="mssg" autoUpdate="true" />
+
+                    <div class="form-group">
+                        <p:outputLabel id="NameLbl" value="Name*:" />
+                        <p:inputText id="NameTxt" class="form-control" value="#{personController.person.name}" />
+                    </div>
+
+                    <div class="form-group">
+                        <p:outputLabel id="HomeTelLable" value="Home Tel*:" />
+                        <p:inputText id="HomeTelTxm" class="form-control" value="#{personController.person.homeTel}" />
+                    </div>
+                    <div class="form-group">
+                        <p:outputLabel id="OfficeTelLable" value="Office Tel*:" />
+                        <p:inputText id="OfficeTelTxt" class="form-control" value="#{personController.person.officeTel}" />
+                    </div>
+                    <div class="form-group">
+                        <p:outputLabel id="EmailLable" value="Email*:" />
+                        <p:inputText id="OfficeTelLableTxt" class="form-control" value="#{personController.person.email}" />
+                    </div>
+                    <div class="form-group">
+                        <p:outputLabel id="CityLable" value="City*:" />
+                        <p:inputText id="CityTxt" class="form-control" value="#{personController.person.city}" />
+                    </div>
+
+                    <div class="form-group">
+                        <p:outputLabel id="HomeAddressLabel" value="Home Address*:" />
+                        <p:inputText id="HomeAddressTxt" class="form-control" value="#{personController.person.homeAddress}" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <p:outputLabel id="OfficeAddressLabel" value="Office Address*:" />
+                        <p:inputText id="OfficeAddressTxt" class="form-control" value="#{personController.person.officeAddress}" />
+                    </div>
+                    <div class="form-group">
+                        <p:outputLabel value="Select Circle*:" />
+                        <p:selectOneMenu id="round" value="#{personController.person.circle}">
+                            <f:selectItem itemLabel="Select Circle" itemValue="" />
+                            <f:selectItem itemLabel="Friend" itemValue="friend" />
+                            <f:selectItem itemLabel="Family" itemValue="family" />
+                            <f:selectItem itemLabel="Coleague" itemValue="Round 39" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="btn-group">
+                            <p:commandButton type="Submit" class="btn bg-primary" value="Update" action="#{personController.save()}">
+
+
+                            </p:commandButton>
+                            <p:commandButton type="reset" class="btn bg-primary" value="Reset" />
+                        </div>
+
+                    </div>
+                </h:form>
+
+
+
+            </div>
+            <div class="col-lg-3">
+
             </div>
 
-            <div class="container" id="cont">
-                <p:outputLabel id="Messages" value="#{personController.person.id}" />
-                <p:messages id="mssg" autoUpdate="true" />
-                    <div class="col-6">
-                        <div class="form-group">
-                            <p:outputLabel id="NameLbl" value="Name*:" />
-                            <p:inputText id="NameTxt" class="form-control" value="#{personController.person.name}" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <p:outputLabel id="HomeTelLable" value="Home Tel*:" />
-                            <p:inputText id="HomeTelTxm" class="form-control" value="#{personController.person.homeTel}" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <p:outputLabel id="OfficeTelLable" value="Office Tel*:" />
-                            <p:inputText id="OfficeTelTxt" class="form-control" value="#{personController.person.officeTel}" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <p:outputLabel id="EmailLable" value="Email*:" />
-                            <p:inputText id="OfficeTelLableTxt" class="form-control" value="#{personController.person.email}" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <p:outputLabel id="CityLable" value="City*:" />
-                            <p:inputText id="CityTxt" class="form-control" value="#{personController.person.city}" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <p:outputLabel id="HomeAddressLabel" value="Home Address*:" />
-                            <p:inputText id="HomeAddressTxt" class="form-control" value="#{personController.person.homeAddress}" />
-                        </div>
-                    </div>
-                <div class="col-6">
-                        <div class="form-group">
-                            <p:outputLabel id="OfficeAddressLabel" value="Office Address*:" />
-                            <p:inputText id="OfficeAddressTxt" class="form-control" value="#{personController.person.officeAddress}" />
-                        </div>
-                    </div>
-                <div class="form-row">
-                    <div class="col">
-                        <div class="btn-group">
-                            <p:commandButton id="btn1" type="Submit" class="btn bg-primary" value="Submit" action="#{personController.save()}" update="Messages datatable">
-                            
-                            
-                            </p:commandButton>
-                            <p:commandButton id="btn2" type="reset" class="btn bg-primary" value="Reset" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="card">
-            <div class="card-header">
-                All Records
-            </div>
-            <div class="body">
-                <p:dataTable id="datatable" var="p" value="${addressBean.findall()}">
-                
-                    <p:column headerText="Person ID">
-                        <p:outputLabel id="PID" value="${p.personID}" />
-                    </p:column>
-                      <p:column headerText="Name">
-                          <p:outputLabel id="Name" value="${p.PERSONNAME}" />
-                    </p:column>
-                      <p:column headerText="Address">
-                          <p:outputLabel id="pAddress" value="${p.PERSONADDRESS}" />
-                    </p:column>
-                      <p:column headerText="Email">
-                          <p:outputLabel id="pEmail" value="${p.PERSONEMAIL}" />
-                    </p:column>
-                      <p:column headerText="City">
-                          <p:outputLabel id="pCity" value="${p.PERSONCON}" />
-                    </p:column>
-                    <p:column headerText="actions">
-                        <p:commandButton id="delbtn" value="delete" class="btn bg-danger" action="${addressBean.DeletFun(p.personID)}" />
-                    </p:column>
-                
-                </p:dataTable>
-            </div>
+
+
         </div>
-        </h:form>
     </h:body>
 </html>
 

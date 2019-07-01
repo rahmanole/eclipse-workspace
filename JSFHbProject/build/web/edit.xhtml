@@ -13,7 +13,7 @@
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>        -->
     </h:head>
     <h:body>
-        <a href="/JSFHbProject/faces/index.xhtml">List</a>
+        <a href="/JSFHbProject/faces/list.xhtml">List</a>
 
         <h:form>
 
@@ -26,10 +26,6 @@
                     <p:commandButton type="Submit" class="btn bg-primary" value="Search" />
                 </div>
                 <div class="col-6">
-                    <div class="form-group">
-                        <p:outputLabel  value="ID*:" />
-<!--                        <p:inputText class="form-control" value="#{personController.person.id}" />-->
-                    </div>
                     <div class="form-group">
                         <p:outputLabel id="NameLbl" value="Name*:" />
                         <p:inputText id="NameTxt" class="form-control" value="#{personController.person.name}" />
@@ -87,8 +83,8 @@
                 <div class="form-row">
                     <div class="col">
                         <div class="btn-group">
-                            <p:commandButton type="Submit" class="btn bg-primary" value="Submit" action="#{personController.save()}"/>
-                            <p:commandButton id="btn2" type="reset" class="btn bg-primary" value="Reset" />
+                            <p:commandButton type="Submit" class="btn bg-primary" value="Update" action="#{personController.save()}"/>
+                            
                         </div>
                     </div>
                 </div>

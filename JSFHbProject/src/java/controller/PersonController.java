@@ -80,6 +80,10 @@ public class PersonController {
         this.personView = personView;
     }
     
+     public void deletePerson(Person person) {
+        personService.deletePerswon(person);
+    }
+    
     
 
 }

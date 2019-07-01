@@ -14,7 +14,7 @@ public class PersonServiceImp {
         SessionFactory sessionFactory = NewHibernateUtil.getSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         Transaction tnx = session.beginTransaction();
-        session.saveOrUpdate(person);
+        session.save(person);
         tnx.commit();
     }
 
@@ -36,5 +36,14 @@ public class PersonServiceImp {
         person = (Person) session.get(Person.class, id);
         tr.commit();
         return person;
+    }
+     
+    public void deletePerswon(Person person) {
+        person = new Person();
+        SessionFactory sessionFactory = NewHibernateUtil.getSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tr=session.beginTransaction();
+        session.delete(person);
+        tr.commit();
     }
 }
