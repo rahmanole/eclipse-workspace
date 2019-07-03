@@ -1,9 +1,12 @@
 package main;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,18 +14,25 @@ import org.jsoup.select.Elements;
 
 public class ProthomAlo {
 
-	public void createPsot() throws IOException {
+	public List<Post> createPsot() throws IOException {
+		List<Post> postList = new ArrayList();
 		String publisher = "prothomAlo";
 		String newPaperUrl = "https://www.prothomalo.com";
 		HashSet<String> postId = findPostIds();
 		System.out.println("Number of posts:"+postId.size());
 
 		for (String id : postId) {
+			Post post = new Post();
+			
 			String completeArticleUrl = newPaperUrl + id;
 			//Finding post category
-			System.out.println("Category:"+findPostCat(id));
-			System.out.println("Time:"+new Date());
-			System.out.println(completeArticleUrl);
+//			System.out.println("Category:"+findPostCat(id));
+//			System.out.println("Time:"+);
+//			System.out.println(completeArticleUrl);
+			
+			post.setCat(findPostCat(id));
+			post.setDateTime(new Date());
+			post.setUrl(completeArticleUrl);
 			
 			Document document = Jsoup.connect(completeArticleUrl).get();
 			Element body = document.body();
@@ -30,41 +40,52 @@ public class ProthomAlo {
 
 			// Finding header of the post
 			Elements heading = body.getElementsByTag("h1");
-			System.out.println("Heading:"+heading.text());
+//			System.out.println("Heading:"+heading.text());
+			
+			post.setHeading(heading.text());
 
 			// ---------end-------
 			
 			String postFeatureImgUrl = featureImgUrl(body);
-			System.out.println("Feature Image:"+postFeatureImgUrl);
+//			System.out.println("Feature Image:"+postFeatureImgUrl);
+			post.setFtrImg(postFeatureImgUrl);
 			
-			
-			System.out.println("Publisher:"+publisher);
-			
+//			System.out.println("Publisher:"+publisher);
+			post.setPublisher(publisher);
 			//This portion for article paras
 			Elements articleParas = body.getElementsByTag("p");
 			articleParas.outerHtml();
-
+			
+			post.setPostBody(psotBody(articleParas));
+			
 			System.out.println("------------end------------------");
 			// break;
-
+			
+			postList.add(post);
+			
 		}
-
+		
+		
+		return postList;
 	}
 	
 	//This for finding article body.It would be Map type
-	public void psotBody(Elements articleParas) {
-		String articleBody = "";
+	public List<Para> psotBody(Elements articleParas) {
+		List<Para> allParas = new ArrayList();
 		for (int i = 1; i < articleParas.size() - 2; i++) {
-
-			if(findImgUrlAndCaption(articleParas.get(i)).equals("")){
-				articleBody += articleParas.get(i).text()+"newPara";
+			Para para = new Para();
+			if(findImgUrl(articleParas.get(i)).equals("")){
+				para.setDescription(articleParas.get(i).text());
 			}else {
-				articleBody += findImgUrlAndCaption(articleParas.get(i))+"desc"+
-						articleParas.get(i).text()+"newPara";
+				para.setImgUrl(findImgUrl(articleParas.get(i)));
+				para.setImgCaption(findImgCaption(articleParas.get(i)));
+				para.setDescription(articleParas.get(i).text());
 			}
+			
+			allParas.add(para);
 
 		}
-		System.out.println(articleBody);
+		return allParas;
 	}
 	//----------end-----------
 	
@@ -76,34 +97,46 @@ public class ProthomAlo {
 	}
 
 	// method for finding image url
-	private String findImgUrl(Element articleParas) {
-		String imgUrl = null;
-		String caption = null;
-
-		// start and end index for image url
-		int startIndex = articleParas.outerHtml().indexOf("src=") + 5;
-		int endIndex = articleParas.outerHtml().indexOf('>', startIndex) - 1;
-		imgUrl = articleParas.outerHtml().substring(startIndex, endIndex);
-		if (startIndex > 5) {
-			//System.out.println(imgUrl);
-			System.out.println(findImgUrlAndCaption(articleParas));
-		}
-
-		return imgUrl;
-	}
+//	private String findImgUrl(Element articleParas) {
+//		String imgUrl = null;
+//		String caption = null;
+//
+//		// start and end index for image url
+//		int startIndex = articleParas.outerHtml().indexOf("src=") + 5;
+//		int endIndex = articleParas.outerHtml().indexOf('>', startIndex) - 1;
+//		imgUrl = articleParas.outerHtml().substring(startIndex, endIndex);
+//		if (startIndex > 5) {
+//			//System.out.println(imgUrl);
+//			System.out.println(findImgUrlAndCaption(articleParas));
+//		}
+//
+//		return imgUrl;
+//	}
 	// ---------------end-----------
 	
-	//---------------Finding image caption--------
-	private String findImgUrlAndCaption(Element articleParas) {
+	//---------------Finding image URL--------
+	private String findImgUrl(Element articleParas) {
 		HashMap<String, String> imgUrlAndCaptin = new HashMap<String, String>();
 		Element imgTag = articleParas.select("img").first();
 		if(imgTag != null) {
-			return (imgTag.attr("src")+"--*--"+imgTag.attr("alt"));
+			return imgTag.attr("src");
 		}else {
 			return "";
 		}
 	}
 	//----------------end--------------
+	
+	//---------------Finding image caption--------
+		private String findImgCaption(Element articleParas) {
+			HashMap<String, String> imgUrlAndCaptin = new HashMap<String, String>();
+			Element imgTag = articleParas.select("img").first();
+			if(imgTag != null) {
+				return imgTag.attr("alt");
+			}else {
+				return "";
+			}
+		}
+		//----------------end--------------
 	
 	// method for finding artcile url
 	public static HashSet<String> findPostIds() throws IOException {
