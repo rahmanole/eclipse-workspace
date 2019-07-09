@@ -7,13 +7,15 @@ import java.util.List;
 public class Post {
     private int id;
     private String cat;
+    private String subCat;
     private Date dateTime;
     private String url;
     private String heading;
     private String ftrImg;
     private List<Para> postBody;
     private String publisher;
-
+    
+    
     public int getId() {
         return id;
     }
@@ -78,5 +80,13 @@ public class Post {
         this.publisher = publisher;
     }
 
+	public String getSubCat() {
+		return subCat;
+	}
 
+	public void setSubCat(String subCat) {
+		this.subCat = subCat;
+	}
+
+    
 }

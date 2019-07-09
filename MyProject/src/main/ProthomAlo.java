@@ -14,11 +14,11 @@ import org.jsoup.select.Elements;
 
 public class ProthomAlo {
 
-	public List<Post> createPsot() throws IOException {
+	public List<Post> createPsot(String[] catUrlCatSubcat) throws IOException {
 		List<Post> postList = new ArrayList();
 		String publisher = "prothomAlo";
 		String newPaperUrl = "https://www.prothomalo.com";
-		HashSet<String> postId = findPostIds();
+		HashSet<String> postId = findPostIds(catUrlCatSubcat[0]);
 		System.out.println("Number of posts:"+postId.size());
 
 		for (String id : postId) {
@@ -30,7 +30,8 @@ public class ProthomAlo {
 //			System.out.println("Time:"+);
 //			System.out.println(completeArticleUrl);
 			
-			post.setCat(findPostCat(id));
+			post.setCat(catUrlCatSubcat[1]);
+			post.setSubCat(catUrlCatSubcat[2]);
 			post.setDateTime(new Date());
 			post.setUrl(completeArticleUrl);
 			
@@ -139,18 +140,24 @@ public class ProthomAlo {
 		//----------------end--------------
 	
 	// method for finding artcile url
-	public static HashSet<String> findPostIds() throws IOException {
+	public static HashSet<String> findPostIds(String catWiseUrl) throws IOException {
 		HashSet<String> postId = new HashSet<String>();
-		Document document = Jsoup.connect("https://www.prothomalo.com/archive").get();
+		Document document = Jsoup.connect(catWiseUrl).get();
 		Element body = document.body();
 		
-		Element posts = body.getElementById("widget_56292");
-		Elements postUrls = posts.getElementsByTag("a");
-		for (Element post : postUrls) {
-			String link = post.attr("href");
+//		Element posts = body.getElementById("widget_52557");
+		Elements posts = body.getElementsByClass("each");
+//		Element postUrls = posts.first().getElementsByTag("a").first();
+		for(int i=0;i<5;i++) {
+			String link = posts.get(i).getElementsByTag("a").first().attr("href");
 			if (link.length() > 100)
 				postId.add(link.substring(0, link.indexOf('%')));
 		}
+//		for (Element post : postUrls) {
+//			String link = post.attr("href");
+//			if (link.length() > 100)
+//				postId.add(link.substring(0, link.indexOf('%')));
+//		}
 
 		return postId;
 	}
